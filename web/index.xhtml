@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="slider">
+                <div class="slideshow">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9 ">
+
+                <div class="homeslider">
+                    <div id="owl-slider" class="owl-carousel owl-carousel-banner">
+                            <div class="item">
+                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(0).sessionId)}">
+                                    <img src="${index_SessionBean.sessionHappening.get(0).avatar}" style="width: 100%;height: 400px" alt="1"/>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(1).sessionId)}">
+                                    <img src="${index_SessionBean.sessionHappening.get(1).avatar}" alt="2" style="width: 100%;height: 400px"/>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(2).sessionId)}">
+                                    <img src="${index_SessionBean.sessionHappening.get(2).avatar}" style="width: 100%;height: 400px" alt="3"/>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+            </ui:define>
+            <ui:define name="adv">
+                <div class="adv">
+                    <section id="service">
+                        <div class="container m-b-30">
+                            <div class="row">
+                                <div id="service_home" class="clearfix">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xxs-12 text-center m-b-xs-10">
+                                        <div class="service_item">
+                                            <div class="icon icon_product">
+                                                <img src="assets/100004/images/icon_142e7.png?v=582" alt=""/>
+                                            </div>
+                                            <div class="description_icon">
+                                                <span class="large-text">
+                                                    Miễn phí giao hàng
+                                                </span>
+                                                <span class="small-text">
+                                                    Cho hóa đơn từ 450,000đ
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xxs-12 text-center m-b-xs-10">
+                                        <div class="service_item">
+                                            <div class="icon icon_product">
+                                                <img src="assets/100004/images/icon_242e7.png?v=582" alt=""/>
+                                            </div>
+                                            <div class="description_icon">
+                                                <span class="large-text">
+                                                    Giao hàng trong ngày
+                                                </span>
+                                                <span class="small-text">
+                                                    Với tất cả đơn hàng
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center m-b-xs-10">
+                                        <div class="service_item">
+                                            <div class="icon icon_product">
+                                                <img src="assets/100004/images/icon_342e7.png?v=582" alt=""/>
+                                            </div>
+                                            <div class="description_icon">
+                                                <span class="large-text">
+                                                    Sản phẩm an toàn
+                                                </span>
+                                                <span class="small-text">
+                                                    Cam kết chất lượng
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--Begin-->
+                    <!--End-->
+            </div>
+            </ui:define>
+            <ui:define name="main">
+                <div class="main">
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-md-3">
+
+                                  
+                                    <script type="text/javascript">
+                                        window.AdvMenus = [{"Id":5695,"ShopId":2005,"AdvType":1,"AdvTypeName":"Menu 2 bên","Name":"1","Image":"/Uploads/shop2005/images/adv/banner_sidebar_img_1.jpg","ImageThumbnai":"/Uploads/shop2005/_thumbs/images/adv/banner_sidebar_img_1.jpg","Link":"#","IsVideo":false,"Index":1,"Inactive":false,"Timestamp":"AAAAAAAoh7c="},{"Id":5696,"ShopId":2005,"AdvType":1,"AdvTypeName":"Menu 2 bên","Name":"2","Image":"/Uploads/shop2005/images/adv/banner_sidebar_img_2.jpg","ImageThumbnai":"/Uploads/shop2005/_thumbs/images/adv/banner_sidebar_img_2.jpg","Link":"#","IsVideo":false,"Index":2,"Inactive":false,"Timestamp":"AAAAAAAoh7Y="}];
+                                    </script>
+                        <!-- Blog sidebar -->
+                                            <div class="sidebar_blogs">
+                                                <h3 title="bài viết mới" class="sidebar_title">
+                                                    Sản Phẩm nổi bật
+                                                </h3>
+                                                <div class="blog_content">
+                                                    <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                                       <div class="article_item">
+                                                            <div class="article_img">
+                                                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                                    <img src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="${index_SessionBean.sessionHappening.get(p).productName}" title="${index_SessionBean.sessionHappening.get(p).productName}"/>
+                                                                </a>
+                                                            </div>
+                                                            <div class="article_content clearfix">
+                                                                <div class="title">
+                                                                    <h4 style="text-align: center;line-height: 46px"><a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}" 
+                                                                           title="${index_SessionBean.sessionHappening.get(p).productName}">${index_SessionBean.sessionHappening.get(p).productName}</a></h4>
+                                                                </div>
+                                                                <div class="article_meta">
+                                                                    <div class="article_created">
+                                                                        <i class="fa fa-calendar" aria-hidden="true"></i> <span class="clock">${index_SessionBean.sessionHappening.get(p).endTime}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="des">
+                                                                    <p class="compact">${index_SessionBean.sessionHappening.get(p).productInformation}</p>
+
+                                                                </div>
+                                                                <a class="readmore" href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">Chi tiết<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </div>
+                                                     </c:forEach>  
+                                                        
+                                                </div>
+                                            </div>
+                        <!-- End blog sidebar -->
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="product_home">
+                        <div class="product_home_image">
+                            <a href="#">
+                                <img src="Uploads/shop2005/images/slide/image-product-home-1.jpg" alt="T&#244;m"/>
+                                <div class="figcaption"></div>
+                            </a>
+                        </div>
+                        <div class="clearfix">
+                            <div class="section-heading">
+                                <h2 title="T&#244;m">
+                                    <span>Đang diễn ra</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="product-list">
+                                <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
+                                        <div class="product-block product-resize">
+                                            <div class="product-image image-resize">
+                                                    <div class="sold-out">Hot</div>
+                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
+                                                            </h:commandLink>
+                                                    </h:form>
+<!--                                                <a href="san-pham/tom-mu-ni-song.html">
+                                                    <img class="first-img" src="Uploads/shop2005/images/product/tom_mu_ni_new_1_master.jpg" alt="T&#244;m mũ ni sống"/>
+                                                </a>-->
+                                                <div class="product-actions hidden-xs">
+                                                        <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
+                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    <div class="btn_quickview">
+                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                               <i class="fa fa-eye"></i>
+                                                            </h:commandLink>
+                                                    </h:form>
+<!--                                                        <h:link class="quickview" outcome="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                            <i class="fa fa-eye"></i></h:link>-->
+<!--                                                        <a class="quickview" href="san-pham/%20tom-mu-ni-song.html"><i class="fa fa-eye"></i></a>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info text-center m-t-xxs-20">
+                                                <h3 class="pro-name">
+                                                    <a href="#" title="T&#244;m mũ ni sống" style="line-height: 37px">${index_SessionBean.sessionHappening.get(p).productName}</a>
+                                                </h3>
+                                                <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
+                                                        <div class="pro-prices">
+                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </c:forEach>
+                            </div>
+                        </div>
+                        <div class="show_more">
+                            Mời bạn <a href="san-pham/tom-33806.html">Xem thêm các sản phẩm đang diễn ra đấu giá</a> khác
+                        </div>
+                    </div>
+                                    <div class="product_home">
+                        <div class="product_home_image">
+                            <a href="#">
+                                <img src="Uploads/shop2005/images/slide/image-product-home-3.jpg" alt="Cua nghẹ"/>
+                                <div class="figcaption"></div>
+                            </a>
+                        </div>
+                        <div class="clearfix">
+                            <div class="section-heading">
+                                <h2 title="Cua nghẹ">
+                                    <span>Sắp diễn ra</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="product-list">
+                                    <c:forEach var="p" begin="0" end="${index_SessionBean.sessionUpComing.size()-1}" step="1">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
+                                        <div class="product-block product-resize">
+                                            <div class="product-image image-resize">
+                                                    <div class="sold-out">Hot</div>
+                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail(index_SessionBean.sessionUpComing.get(p).sessionId)}">
+                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionUpComing.get(p).avatar}" alt="" />
+                                                            </h:commandLink>
+                                                    </h:form>
+<!--                                                <a href="san-pham/tom-mu-ni-song.html">
+                                                    <img class="first-img" src="Uploads/shop2005/images/product/tom_mu_ni_new_1_master.jpg" alt="T&#244;m mũ ni sống"/>
+                                                </a>-->
+                                                <div class="product-actions hidden-xs">
+                                                        <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
+                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    <div class="btn_quickview">
+                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail(index_SessionBean.sessionUpComing.get(p).sessionId)}">
+                                                               <i class="fa fa-eye"></i>
+                                                            </h:commandLink>
+                                                    </h:form>
+<!--                                                        <h:link class="quickview" outcome="${detailProduct_SessionBean.detail(index_SessionBean.sessionUpComing.get(p).sessionId)}">
+                                                            <i class="fa fa-eye"></i></h:link>-->
+<!--                                                        <a class="quickview" href="san-pham/%20tom-mu-ni-song.html"><i class="fa fa-eye"></i></a>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info text-center m-t-xxs-20">
+                                                <h3 class="pro-name">
+                                                    <a href="#" title="T&#244;m mũ ni sống" style="line-height: 37px">${index_SessionBean.sessionUpComing.get(p).productName}</a>
+                                                </h3>
+                                                <p class="clock">${index_SessionBean.sessionUpComing.get(p).startTime}</p>
+                                                        <div class="pro-prices">
+                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionUpComing.get(p).startPrice}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                  
+                            </div>
+                        </div>
+                        <div class="show_more">
+                            Mời bạn <a href="san-pham/cua-nghe-33809.html">Xem thêm các sản phẩm sắp diễn ra đấu giá</a> khác
+                        </div>
+                    </div>
+                                    <div class="product_home">
+                        <div class="product_home_image">
+                            <a href="#">
+                                <img src="Uploads/shop2005/images/slide/image-product-home-2.jpg" alt="Sứa"/>
+                                <div class="figcaption"></div>
+                            </a>
+                        </div>
+                        <div class="clearfix">
+                            <div class="section-heading">
+                                <h2 title="Mới kết thúc">
+                                    <span>Mới kết thúc</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="product-list">
+                                <c:forEach var="p" begin="0" end="${index_SessionBean.sessionDone.size()-1}" step="1">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
+                                        <div class="product-block product-resize">
+                                            <div class="product-image image-resize">
+                                                    <div class="sold-out">Hot</div>
+                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail(index_SessionBean.sessionDone.get(p).sessionId)}">
+                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionDone.get(p).avatar}" alt="" />
+                                                            </h:commandLink>
+                                                    </h:form>
+                                                <div class="product-actions hidden-xs">
+                                                        <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
+                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    <div class="btn_quickview">
+                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail(index_SessionBean.sessionDone.get(p).sessionId)}">
+                                                               <i class="fa fa-eye"></i>
+                                                            </h:commandLink>
+                                                    </h:form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info text-center m-t-xxs-20">
+                                                <h3 class="pro-name">
+                                                    <a href="#" title="T&#244;m mũ ni sống" style="line-height: 37px">${index_SessionBean.sessionDone.get(p).productName}</a>
+                                                </h3>
+                                                <p>Đã Kết Thúc</p>
+                                                        <div class="pro-prices">
+                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionDone.get(p).startPrice}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>  
+                                 
+                            </div>
+                        </div>
+                        <div class="show_more">
+                            Mời bạn <a href="san-pham/sua-33810.html">Xem thêm các sản phẩm đã kết thúc đấu giá</a> khác
+                        </div>
+                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>  
+            </ui:define>
+            <ui:define name="partner">
+                <div class="partner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <!--Blog-->
+                                <section id="blog_index" class="container m-b-20">
+                                    <div class="row">
+                                        <div class="col-md-12 col-xs-12">
+                                            <div class="section-heading">
+                                                <h2 title="tư vấn món ngon">
+                                                    <span>Sản phẩm nổi bật</span>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div id="blog_index_list" class="owl-carousel">
+                                                
+                                            <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                                <div class="article_item">
+                                                    <div class="article_img">
+                                                        <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                            <img style="height: 280px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="${index_SessionBean.sessionHappening.get(p).productName}" title="${index_SessionBean.sessionHappening.get(p).productName}"/>
+                                                        </a>
+                                                        <div class="sold-out">Hot</div>
+                                                    </div>
+                                                    <div class="article_content clearfix">
+                                                        <div class="title">
+                                                            <h4 style="text-align: center;line-height: 46px">
+                                                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}" 
+                                                                   title="${index_SessionBean.sessionHappening.get(p).productName}">${index_SessionBean.sessionHappening.get(p).productName}
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="article_meta">
+                                                            <div class="article_created">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i> <span class="clock">${index_SessionBean.sessionHappening.get(p).endTime}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="des">
+                                                            <p class="compact">${index_SessionBean.sessionHappening.get(p).productInformation}</p>
+
+                                                        </div>
+                                                        <a class="readmore" href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">Chi tiết <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                         
+                                             
+                                               
+                                        </div>
+                                    </div>
+                                </section>
+                                <!--EndBlog-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                               
+                                 var countDownDate=[];
+                                       var a =  document.getElementsByClassName('clock');
+                                        for (var i = 0, max = a.length; i &lt; max; i++) {
+                                            countDownDate.push(new Date(a[i].innerHTML).getTime());
+                                    }
+
+
+                                        // Update the count down every 1 second
+                                        var x = setInterval(function() {
+
+                                            // Get todays date and time
+                                            var now = new Date().getTime();
+
+                                            // Find the distance between now an the count down date
+                                            for (var i = 0, max = a.length; i &lt; max; i++) {
+                                                    var distance = countDownDate[i] - now;
+
+                                                    // Time calculations for days, hours, minutes and seconds
+                                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                                    // Output the result in an element with id="demo"
+                                                    document.getElementsByClassName('clock')[i].innerHTML = days + "d " + hours + "h "
+                                                    + minutes + "m " + seconds + "s ";
+
+                                                    // If the count down is over, write some text 
+                                                    if (distance &lt; 0) {
+                                                        clearInterval(x);
+                                                        document.getElementsByClassName('clock')[i].innerHTML = "Đã Kết Thúc";
+                                                    }
+                                            }
+
+                                        }, 1000);     
+
+
+
+                                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

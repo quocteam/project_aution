@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                        <div class="breadcrumb clearfix">
+                            <ul>
+                                <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                                    <a title="Đến trang chủ" href="/" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                </li>
+                                <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="category17 icon-li">
+                                    <div class="link-site-more">
+                                        <a title="" href="/san-pham/tom-33806" itemprop="url">
+                                            <span itemprop="title">${detailProduct_SessionBean.session.productType}</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="productname icon-li"><strong>${detailProduct_SessionBean.session.productName}</strong> </li>
+                            </ul>
+                        </div>
+                        
+                        <script type="text/javascript">
+                            $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+                        </script>
+                     
+                        
+                        <div class="product-detail clearfix relative ng-scope">
+                                <!--Begin-->
+                                <div class="clearfix">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 product-image clearfix">
+                                            
+                                            <div class="sp-wrap sp-non-touch" style="display: inline-block;">
+                                                <div class="sp-large">
+                                                    <a href="${detailProduct_SessionBean.images[0]}">
+                                                        <img src="${detailProduct_SessionBean.images[0]}"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix">
+                                            <h1 class="name m-b-5 ng-binding">${detailProduct_SessionBean.session.productName}</h1>
+                                            <div class="product_price p-b-10 ng-scope">
+                                               <div class="ng-scope">
+                                                    Giá gốc : <h:outputText value="${detailProduct_SessionBean.session.startPrice}">
+                                                            <f:convertNumber pattern="#####,000 VND"></f:convertNumber>
+                                                       </h:outputText>
+                                               </div>
+                                            </div>
+                                            <div class="product-code p-b-10 ng-binding">Người đăng : ${detailProduct_SessionBean.session.userCreateID}</div>
+                                            <div>Còn <strong><span class="clock">${detailProduct_SessionBean.session.endTime}</span></strong> cho đến khi kết thúc</div>
+                                            
+                                            <div id="add-item-form" class="variants clearfix m-b-10 p-b-10">
+                                                <div class="call">
+                                                    <p class="title">Đặt giá bạn muốn mua : </p>
+                                                    <div class="input">
+                                                        <div class="input-group">
+                                                            <h:form>
+                                                                <span style="float: left">
+                                                                    <h:inputText id="inputPrice" a:type="number" class="form-control" value="${detailProduct_SessionBean.price}" >
+                                                                </h:inputText>
+                                                                   
+                                                                </span>
+                                                                
+                                                                <span class="input-group-btn" style="float: left">
+                                                                    <h:commandLink a:type="button" class="btn btn-primary" a:data-toggle="modal" a:data-target="#myModal">
+                                                                    <i class='fa fa-check'></i> Đặt Giá<f:ajax execute="inputPrice" render="outputMessage" />
+                                                                    </h:commandLink>
+                                                                </span>
+                                                            </h:form>
+<!--                                                            <input class="form-control" type="text"/>
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-primary" type="button" ng-click="callMe()"><i class="fa fa-check"></i> Đặt Giá</button>
+                                                            </span>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="social">
+                                                <div class="addthis_toolbox addthis_default_style">
+                                                    <a class="addthis_button_facebook_like at300b" style="float: left">
+                                                        <div class="fb-like fb_iframe_widget" data-layout="button_count" data-show_faces="false" data-share="true" data-action="like"
+                                                             data-width="90" data-height="25" data-font="arial" data-href="http://runecom04.runtime.vn/san-pham/%20coi-so-diep.html"
+                                                             data-send="false" style="height: 25px;" fb-xfbml-state="rendered" 
+                                                             fb-iframe-plugin-query="action=like&amp;app_id=172525162793917&amp;container_width=0&amp;font=arial&amp;height=25&amp;href=http%3A%2F%2Frunecom04.runtime.vn%2Fsan-pham%2F%2520coi-so-diep.html&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=false&amp;width=90">
+                                                                <span style="vertical-align: bottom; width: 121px; height: 20px;">
+                                                                    <iframe name="f376dd08daa6fa8" width="90px" height="25px" frameborder="0" allowtransparency="true" 
+                                                                            allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" 
+                                                                        src="https://www.facebook.com/v2.6/plugins/like.php?action=like&amp;app_id=172525162793917&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FXBwzv5Yrm_1.js%3Fversion%3D42%23cb%3Df2ed54804c277a8%26domain%3Drunecom04.runtime.vn%26origin%3Dhttp%253A%252F%252Frunecom04.runtime.vn%252Ff49321277f3cf%26relation%3Dparent.parent&amp;container_width=0&amp;font=arial&amp;height=25&amp;href=http%3A%2F%2Frunecom04.runtime.vn%2Fsan-pham%2F%2520coi-so-diep.html&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=false&amp;width=90" 
+                                                                        style="border: none; visibility: visible; width: 121px; height: 20px;" class="">
+                                                                    </iframe>
+                                                                </span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="addthis_button_google_plusone at300b" style="float: left; margin-left: 10px">
+                                                        <div class="google_plusone_iframe_widget" style="width: 90px; height: 25px;">
+                                                            <span>
+                                                                <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none;
+                                                                     float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;">
+                                                                    <iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px;
+                                                                            width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%"
+                                                                            id="I0_1501833062326" name="I0_1501833062326" 
+                                                                            src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Frunecom04.runtime.vn&amp;url=http%3A%2F%2Frunecom04.runtime.vn%2Fsan-pham%2F%2520coi-so-diep.html&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.RrPOCURbOtE.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPIYiFmWgopgZ3HsIImtLOM_7GXsQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1501833062326&amp;parent=http%3A%2F%2Frunecom04.runtime.vn&amp;pfname=&amp;rpctoken=29788848" data-gapiattached="true" title="G+">
+                                                                                
+                                                                    </iframe>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                <div class="atclear"></div></div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="product_description product-tabs panel-group">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" ng-class="{'active':$index==0}" ng-repeat="item in ProductTabs" class="ng-scope active">
+                                            <a data-toggle="tab" href="#tab1" role="tab" class="ng-binding">Chi tiết sản phẩm</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in ng-scope active" id="tab1">
+                                            ${detailProduct_SessionBean.session.productInformation}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End-->
+                        </div>
+                        <!-- Modal -->
+                        <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thông Báo</h4>
+                              </div>
+                              <div class="modal-body">
+                                  <p><h:outputText id="outputMessage" value="#{detailProduct_SessionBean.verify}"></h:outputText></p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="product-content product-other">
+                            <h1 title="products" class="page_heading ">
+                                Sản phẩm liên quan
+                            </h1>
+                            <div class="product_list grid clearfix">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow" style="visibility: hidden; animation-name: none;">
+                                        <div class="product-block product-resize m-b-20 fixheight" style="height: 295px;">
+                                            <div class="product-image image-resize" style="height: 208px;">
+                                                    <div class="sold-out">Hot</div>
+                                                <a href="/san-pham/ tom-mu-ni-song.html">
+                                                    <img class="first-img" src="${detailProduct_SessionBean.images[0]}" alt="Tôm mũ ni sống"/>
+                                                </a>
+                                                <div class="product-actions hidden-xs">
+                                                        <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
+                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    <div class="btn_quickview">
+                                                        <a class="quickview" href="/san-pham/ tom-mu-ni-song.html"><i class="fa fa-eye"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info text-center m-t-xxs-20">
+                                                <h3 class="pro-name">
+                                                    <a href="/san-pham/tom-mu-ni-song.html" title="Tôm mũ ni sống">Tôm mũ ni sống</a>
+                                                </h3>
+                                                        <div class="pro-prices">
+                                                                <span class="pro-price">1.100.000&nbsp;₫</span>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow" style="visibility: hidden; animation-name: none;">
+                                        <div class="product-block product-resize m-b-20 fixheight" style="height: 295px;">
+                                            <div class="product-image image-resize" style="height: 208px;">
+                                                <a href="/san-pham/ tom-tit-be-be-song.html">
+                                                    <img class="first-img" src="${detailProduct_SessionBean.images[0]}" alt="Tôm tít (Bề Bề) sống"/>
+                                                </a>
+                                                <div class="product-actions hidden-xs">
+                                                        <div class="btn-add-to-cart" onclick="AddToCard(46491,1)">
+                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    <div class="btn_quickview">
+                                                        <a class="quickview" href="/san-pham/ tom-tit-be-be-song.html"><i class="fa fa-eye"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info text-center m-t-xxs-20">
+                                                <h3 class="pro-name">
+                                                    <a href="/san-pham/tom-tit-be-be-song.html" title="Tôm tít (Bề Bề) sống">Tôm tít (Bề Bề) sống</a>
+                                                </h3>
+                                                        <div class="pro-prices">
+                                                                <span class="pro-price">700.000&nbsp;₫</span>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>                    
+                    </div>
+                <div class="col-md-3">
+                        <div id="mb_verticle_menu" class="menu-quick-selectx">
+                            <div class="title_block">
+                                <span>Top Đặt Giá Cao Nhất</span>
+                            </div>
+                            <div id="menuverti" class="block_content navbar_menuvertical" style="position: static">
+                                <ul class='nav_verticalmenu' id="menu_left">
+                                    <c:forEach var="p" items="${detailProduct_SessionBean.listBet}" >
+                                    <li class="has-child level0"><a class='' href='#'>
+                                            <span>${p.userBetId}</span></a>
+                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='#'><span>${p.value}</span></a></li>
+                                        </ul>
+                                    </li>
+                                    </c:forEach>
+                                </ul>
+                         
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                $(document).ready(function () {
+                    var str = location.href.toLowerCase();
+                    $("ul.menu li a").each(function () {
+                        if (str.indexOf(this.href.toLowerCase()) >= 0) {
+                            $("ul.menu li").removeClass("active");
+                            $(this).parent().addClass("active");
+                        }
+                    });
+                });
+            </script>
+                    
+                    
+    <!--Begin-->
+    <div class="box-sale-policy ng-scope" style="padding-top: 5px;clear: both">
+                        <h3><span>Chính sách bán hàng</span></h3>
+                        <div class="sale-policy-block">
+                            <ul>
+                                <li>Giao hàng TOÀN QUỐC</li>
+                                <li>Thanh toán khi nhận hàng</li>
+                                <li>Đổi trả trong <span>15 ngày</span></li>
+                                <li>Hoàn ngay tiền mặt</li>
+                                <li>Chất lượng đảm bảo</li>
+                                <li>Miễn phí vận chuyển:<span>Đơn hàng từ 3 món trở lên</span></li>
+                            </ul>
+                        </div>
+                        <div class="buy-guide">
+                            <h3>Hướng Dẫn Mua Hàng</h3>
+                            <ul>
+                                <li>
+                                    Mua hàng trực tiếp tại website
+                                    <b class="ng-binding"> http://www.runtime.vn</b>
+                                </li>
+                                <li>
+                                    Gọi điện thoại <strong class="ng-binding">
+                                        0908 77 00 95
+                                    </strong> để mua hàng
+                                </li>
+                                <li>
+                                    Mua tại Trung tâm CSKH:<br/>
+                                    <strong class="ng-binding">5/12A Quang Trung, P.14, Q.Gò Vấp, Tp.HCM</strong>
+                                    <a href="/ban-do.html" rel="nofollow" target="_blank">Xem Bản Đồ</a>
+                                </li>
+                                <li>
+                                    Mua sỉ/buôn xin gọi <strong class="ng-binding">
+                                        0908 77 00 95
+                                    </strong> để được
+                                    hỗ trợ.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+    <!--End-->
+                    <script type="text/javascript">
+                        window.Shop = {"Name":"CÔNG TY TNHH PHÁT TRIỂN CÔNG NGHỆ RUNTIME","Email":"runecom04@runtime.vn","Phone":"(08) 66 85 85 38","Logo":"/Uploads/shop2005/images/logo.png","Fax":"(08) 66 85 85 38","Website":"http://www.runtime.vn","Hotline":"0908 77 00 95","Address":"5/12A Quang Trung, P.14, Q.Gò Vấp, Tp.HCM","Fanpage":"https://www.facebook.com/runtime.vn","Google":null,"Facebook":null,"Youtube":null,"Twitter":null,"IsBanner":false,"IsFixed":false,"BannerImage":""};
+                    </script>
+                    <div class="box-product widget_block_sidebar">
+                        <div class="title_product_related widget_title_sidebar">
+                            <h3>
+                                Sản phẩm Hot
+                            </h3>
+                        </div>
+                        <ul class="list_product_related widget_list_sidebar clearfix">
+                                <li class="pro-loop clearfix">
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <a href="/san-pham/coi-so-diep.html" title="Cồi sò điệp">
+                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Cồi sò điệp"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <a href="/san-pham/coi-so-diep.html" title="Cồi sò điệp">
+                                            <h3 class="product_related_name">
+                                                Cồi sò điệp
+                                            </h3>
+                                                    <p class="product_related_price">
+                                                            <span class="product_related_price">160.000&nbsp;₫</span>
+                                                    </p>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="pro-loop clearfix">
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <a href="/san-pham/hau-sua.html" title="Hàu sữa">
+                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Hàu sữa"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <a href="/san-pham/hau-sua.html" title="Hàu sữa">
+                                            <h3 class="product_related_name">
+                                                Hàu sữa
+                                            </h3>
+                                                    <p class="product_related_price">
+                                                            <span class="product_related_price">120.000&nbsp;₫</span>
+                                                    </p>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="pro-loop clearfix">
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <a href="/san-pham/ngao-2-coi.html" title="Ngao 2 cồi">
+                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Ngao 2 cồi"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <a href="/san-pham/ngao-2-coi.html" title="Ngao 2 cồi">
+                                            <h3 class="product_related_name">
+                                                Ngao 2 cồi
+                                            </h3>
+                                                    <p class="product_related_price">
+                                                            <span class="product_related_price">190.000&nbsp;₫</span>
+                                                    </p>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="pro-loop clearfix">
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <a href="/san-pham/oc-mong-tay.html" title="Ốc móng tay">
+                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Ốc móng tay"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <a href="/san-pham/oc-mong-tay.html" title="Ốc móng tay">
+                                            <h3 class="product_related_name">
+                                                Ốc móng tay
+                                            </h3>
+                                                    <p class="product_related_price">
+                                                            <span class="product_related_price">370.000&nbsp;₫</span>
+                                                    </p>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="pro-loop clearfix">
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <a href="/san-pham/so-diep.html" title="Sò điệp">
+                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Sò điệp"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <a href="/san-pham/so-diep.html" title="Sò điệp">
+                                            <h3 class="product_related_name">
+                                                Sò điệp
+                                            </h3>
+                                                    <p class="product_related_price">
+                                                            <span class="product_related_price">100.000&nbsp;₫</span>
+                                                            <span class="product_related_old_price">150.000&nbsp;₫</span>
+                                                    </p>
+                                        </a>
+                                    </div>
+                                </li>
+                        </ul>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script>
+                <script>
+                               
+                                 var countDownDate=[];
+                                       var a =  document.getElementsByClassName('clock');
+                                        for (var i = 0, max = a.length; i &lt; max; i++) {
+                                            countDownDate.push(new Date(a[i].innerHTML).getTime());
+                                    }
+
+
+                                        // Update the count down every 1 second
+                                        var x = setInterval(function() {
+
+                                            // Get todays date and time
+                                            var now = new Date().getTime();
+
+                                            // Find the distance between now an the count down date
+                                            for (var i = 0, max = a.length; i &lt; max; i++) {
+                                                    var distance = countDownDate[i] - now;
+
+                                                    // Time calculations for days, hours, minutes and seconds
+                                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                                    // Output the result in an element with id="demo"
+                                                    document.getElementsByClassName('clock')[i].innerHTML = days + "d " + hours + "h "
+                                                    + minutes + "m " + seconds + "s ";
+
+                                                    // If the count down is over, write some text 
+                                                    if (distance &lt; 0) {
+                                                        clearInterval(x);
+                                                        document.getElementsByClassName('clock')[i].innerHTML = "Đã Kết Thúc";
+                                                    }
+                                            }
+
+                                        }, 1000);     
+
+
+
+                                </script>
+            </ui:define>
+        </ui:composition>    
+    </h:body>
+</html>
+

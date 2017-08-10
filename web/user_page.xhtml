@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ck="http://code.google.com/ck-jsf-editor"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                <div class="main">
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-md-3">
+                                        <div class="menu-account">
+                                            <h3>
+                                                <span>
+                                                    Tài khoản
+                                                </span>
+                                            </h3>
+                                                <ul>
+                                                    <li class="active"><a href="#tab1" data-toggle="tab"><i class="glyphicon glyphicon-user"></i> Thông tin tài khoản</a></li>
+                                                    <li><a href="#tab2" data-toggle="tab"><i class="glyphicon glyphicon-list-alt"></i> Đăng ký đấu giá</a></li>
+                                                    <li><a href="#tab3" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart"></i> Lịch sử đấu giá</a></li>
+                                                    <li><a href="#tab4" data-toggle="tab"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
+                                                    <li><a><i class="glyphicon glyphicon-log-out"></i>Thoát</a></li>
+                                                </ul>
+<!--                                            <ul>
+                                                <li><h:link outcome="dang-nhap.xhtml"><i class="fa fa-sign-in"></i> Đăng nhập</h:link></li>
+                                                <li><h:link outcome="dang-ky.xhtml"><i class="fa fa-key"></i> Đăng ký</h:link></li>
+                                                <li><h:link outcome="index.xhtml"><i class="fa fa-key"></i> Quên mật khẩu</h:link></li>
+                                            </ul>-->
+                                        </div>                    
+                                </div>
+                            <div class="tab-content">
+                                <div class="col-md-9 tab-pane fade in active" id="tab1">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Đăng ký tài khoản</strong> </li>
+                                        </ul>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+                                    </script>
+                                  
+                                    <div class="register-content clearfix">
+                                        <h1 class="title"><span>Thông tin tài khoản</span></h1>
+                                        <p:messages id="messages" class="alert" showDetail="true" autoUpdate="true" closable="true" />
+                                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                            <h:form class="form-horizontal">
+                                                <h2><span>Thông tin tài khoản</span></h2>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder="Enter your username"  value="#{login_Register_UserBean.userName}">
+                                                         
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email" class="col-sm-3 control-label">Email<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="email"  class="form-control" a:placeholder="Enter your email"  value="#{login_Register_UserBean.email}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Password" class="col-sm-3 control-label">Mật khẩu<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="password" class="form-control" a:placeholder="Enter your password"  value="#{login_Register_UserBean.passWord}">
+                                                           
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <h2>Thông tin cá nhân</h2>
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-3 control-label">Họ và tên<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder="Enter your fullname"  value="#{login_Register_UserBean.fullName}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Giới tính</label>
+                                                    <div class="col-sm-9">
+                                                        <h:selectOneMenu class="form-control" value = "#{login_Register_UserBean.sex}" >                     
+                                                                                <f:selectItem itemValue = "Nam" itemLabel = "Nam" />
+                                                                                <f:selectItem itemValue = "Nữ" itemLabel = "Nữ" />
+                                                                            </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-inline">
+                                                    <label class="col-sm-3 control-label">Ngày sinh</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control datepicker" a:placeholder="Ngày tháng năm sinh"  value="#{login_Register_UserBean.dob}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Điện thoại</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="number" a:placeholder="Số điện thoại"  value="#{login_Register_UserBean.phoneNumber}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Địa chỉ</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="text" a:placeholder="Địa chỉ"  value="#{login_Register_UserBean.address}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <h:commandLink value="Cập nhật" style="color: white" class="btn btn-primary" action="${login_Register_UserBean.updateUserInfo()}"/>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+<!--     tab2    -->
+                                <div class="col-md-9 tab-pane fade" id="tab2">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Đăng ký sản phẩm đấu giá</strong> </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                    <div class="register-content clearfix" >
+                                        <h1 class="title"><span>Đăng ký sản phẩm đấu giá</span></h1>
+     
+                                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                            <h:form class="form-horizontal" enctype="multipart/form-data">
+                                                <h2><span>Thông tin sản phẩm</span></h2>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Tên Sản Phẩm<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder="Tên Sản Phẩm"  value="#{add_Product_SessionBean.productName}">
+                                                           
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email" class="col-sm-3 control-label">Loại Sản Phẩm<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:selectOneMenu class="form-control" value = "#{add_Product_SessionBean.productType}" >                     
+                                                                                <f:selectItem itemValue = "Thời Trang Nam" itemLabel = "Thời Trang Nam" />
+                                                                                <f:selectItem itemValue = "Thời Trang Nữ" itemLabel = "Thời Trang Nữ" />
+                                                                                <f:selectItem itemValue = "Điện Thoại Và Phụ kiện" itemLabel = "Điện Thoại Và Phụ kiện" />
+                                                                                <f:selectItem itemValue = "Mẹ Và Bé" itemLabel = "Mẹ Và Bé" />
+                                                                                <f:selectItem itemValue = "Thiết Bị Điện Tử" itemLabel = "Thiết Bị Điện Tử" />
+                                                                                <f:selectItem itemValue = "Nhà Cửa Và Đời Sống" itemLabel = "Nhà Cửa Và Đời Sống" />
+                                                                                <f:selectItem itemValue = "Máy Tính Và Laptop" itemLabel = "Máy Tính Và Laptop" />
+                                                                                <f:selectItem itemValue = "Sức Khỏe Và Sắc Đẹp" itemLabel = "Sức Khỏe Và Sắc Đẹp" />
+                                                                                <f:selectItem itemValue = "Máy Ảnh Và Máy Quay Phim" itemLabel = "Máy Ảnh Và Máy Quay Phim" />
+                                                                            </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Password" class="col-sm-3 control-label">Mô Tả Sản Phẩm<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputTextarea a:type="textarea" class="form-control" a:placeholder=""  value="#{add_Product_SessionBean.productInformation}">
+                                                            
+                                                        </h:inputTextarea>
+                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-3 control-label">Giá Khởi Điểm<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="number" class="form-control" a:placeholder=""  value="#{add_Product_SessionBean.startPrice}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Bước Giá</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="number" class="form-control" a:placeholder=""  value="#{add_Product_SessionBean.stepPrice}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Thời Gian Bắt Đầu</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control datepicker1" a:placeholder="Thời Gian Bắt Đầu"  value="#{add_Product_SessionBean.startTime}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Ảnh mô tả</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputFile id="kv-explorer" value="${add_Product_SessionBean.images}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <h:commandLink value="Đăng ký" class="btn btn-primary" action="${add_Product_SessionBean.addNew()}"/>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+<!--     tab3    -->
+                                <div class="col-md-9 tab-pane fade" id="tab3">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Đăng ký sản phẩm đấu giá</strong> </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                    <div class="register-content clearfix" >
+                                        <h1 class="title"><span>Lịch sử đấu giá</span></h1>
+                                        <h:form>
+                                            <p:dataTable class="table" var="bet" value="#{detailProduct_SessionBean.arrBet}" rows="5"
+                                                             paginator="true"
+                                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                             rowsPerPageTemplate="5,10,15">
+                                            <p:column headerText="Id" sortBy="#{bet.id}">
+                                                <h:outputText value="#{bet.id}" />
+                                            </p:column>
+
+                                            <p:column headerText="Year">
+                                                <h:outputText value="#{bet.sessionId}" />
+                                            </p:column>
+
+                                            <p:column headerText="Brand" filterBy="#{bet.userBetId}">
+                                                <h:outputText value="#{bet.userBetId}" />
+                                            </p:column>
+
+                                            <p:column headerText="Color">
+                                                <h:outputText value="#{bet.value}" />
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                    </div>
+                                </div>
+<!--     tab4    -->
+                                <div class="col-md-9 tab-pane fade" id="tab4">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Thay đổi mật khẩu</strong> </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                    <div class="register-content clearfix" >
+                                        <h1 class="title"><span>Thay đổi mật khẩu</span></h1>
+     
+                                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                            <h:form class="form-horizontal" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Mật Khẩu Cũ</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                           
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Mật Khẩu Mới</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                           
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Nhập Lại Mật Khẩu</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                           
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <h:commandLink value="Đăng ký" class="btn btn-primary" action="${login_Register_UserBean.register()}"/>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

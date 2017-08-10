@@ -1,0 +1,607 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta charset="UTF-8" />
+    <title>FPT-Auction</title>
+    <link href="Uploads/shop2005/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <link rel="stylesheet" href="assets/100004/js/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/100004/fonts/font-awesome/css/font-awesome.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="assets/100004/fonts/fonts-master/roboto.css"/>
+    <!--JS-->
+    <script src="assets/100004/js/plugin42e7.js?v=582"></script>
+    <script src="assets/100004/js/option_selection.js"></script>
+    <script src="assets/100004/js/api.jquery.js"></script>
+    <!-- Đặt thẻ này vào phần đầu hoặc ngay trước thẻ đóng phần nội dung của bạn. -->
+    
+    <script async="" defer="defer" data-target=".product-resize" data-parent=".products-resize" data-img-box=".image-resize" src="assets/100004/js/fixheightproductv242e7.js?v=582"></script>
+    <script src="assets/100004/js/scripts42e7.js?v=582"></script>
+    <link href="static.runtime.vn/App_Themes/RUN004/style.css" rel="stylesheet" type="text/css" />
+    <link href="static.runtime.vn/App_Themes/RUN004/responsive.css" rel="stylesheet" type="text/css" />
+          
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+  <script src="js/moment.js"></script>
+  <script src="js/bootstrap-datetimepicker.min.js"></script>
+  <style>
+        .loader_overlay {
+            position: fixed;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: #fff;
+            -webkit-transition: all .1s ease;
+            -o-transition: all .1s ease;
+            transition: all .1s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+            .loader_overlay.loaded {
+                opacity: 0;
+                visibility: hidden;
+                z-index: -2;
+            }
+           
+            .kv-file-upload{
+            display: none;
+
+            }
+            .file-drop-zone{
+                overflow: scroll;
+                height: 300px;
+
+            }
+            .fileinput-upload-button{
+                display: none;
+            }
+            .kv-main{
+                width: 100%;
+            }
+            .compact{
+                line-height: 1.5em;
+                height: 3em;
+                overflow: hidden;
+            }
+    </style>
+<!--CSS-->
+  <script>
+  $( function() {
+    $( ".datepicker" ).datepicker({ changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2013',
+            dateFormat: 'yy-mm-dd',
+            defaultDate: '1950-01-01' });
+        $( ".datepicker1" ).datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            minDate: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+ (new Date().getDate()+1)
+            
+           
+});
+  } );
+  </script>
+<!--  upload image-->
+  <link href="css/fileinput.css" rel="stylesheet" type="text/css" />
+  <link href="css/theme.css" rel="stylesheet" type="text/css" />
+  <script src="js/fileinput.js"></script>
+  <script src="js/theme.js"></script>
+<!--  bootstrap table-->
+  <link href="assets/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
+  <script src="assets/bootstrap-table/bootstrap-table.js"></script>
+  <script src="assets/bootstrap-table/bootstrap-table-filter-control.js"></script>
+    </h:head>
+    <h:body>
+       <div class="header">
+        
+            <section class="top-link clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav navbar-nav topmenu-contact pull-left">
+                                <li><i class="fa fa-phone"></i> <span>Hotline:0908 77 00 95</span></li>
+                            </ul>
+                                <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
+                                    <li class="order-check"><a href="kiem-tra-don-hang.html"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
+                                    <li class="order-cart"><a href="gio-hang.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                    <c:choose>
+                                        <c:when test="${session.getAttribute('user')!=null}">
+                                            <li><h:form>
+                                                <h:commandLink class="pull-left" style="padding-top: 4px" action="${login_Register_UserBean.userPage()}" value="hi,${session.getAttribute('user').userName}"></h:commandLink>
+                                                <h:commandLink class="pull-left" style="padding-top: 4px" action="${login_Register_UserBean.LogOut()}" value="[Thoát]"></h:commandLink></h:form>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><h:link class="logo pull-left"  outcome="dang-nhap.xhtml"><i class="fa fa-sign-in"></i> Đăng nhập </h:link></li>
+                                            <li><h:link class="logo pull-left"  outcome="dang-ky.xhtml"><i class="fa fa-key"></i> Đăng ký </h:link></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            <div class="show-mobile hidden-lg hidden-md">
+                                <div class="quick-user">
+                                    <div class="quickaccess-toggle">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="inner-toggle">
+                                            <ul class="login links">
+                                                <c:choose>
+                                                    <c:when test="${session.getAttribute('user') != null}">
+                                                        <li>
+                                                            <h:link  value="hi,${session.getAttribute('user').userName}" outcome="user_page.xhtml"></h:link>
+                                                            <h:form><h:commandLink class="logo pull-left" action="${login_Register_UserBean.LogOut()}" value="[Thoát]"></h:commandLink></h:form>
+
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li>
+                                                            <h:link class="logo pull-left" outcome="dang-ky.xhtml"><i class="fa fa-sign-in"></i>Đăng ký</h:link>
+                                                        </li>
+                                                        <li>
+                                                            <h:link class="logo pull-left" outcome="dang-nhap.xhtml"><i class="fa fa-key"></i> Đăng nhập</h:link>
+                                                        </li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                
+                                            </ul>
+                                    </div>
+                                </div>
+                                <div class="quick-access">
+                                    <div class="quickaccess-toggle">
+                                        <i class="fa fa-list"></i>
+                                    </div>
+                                    <div class="inner-toggle">
+                                        <ul class="links">
+                                            <li><a id="mobile-wishlist-total" href="kiem-tra-don-hang.html" class="wishlist"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
+                                            <li><a href="gio-hang.html" class="shoppingcart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <header id="header">
+                <div id="header_main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-8">
+                                <!--logo-->
+
+                                <h1 class="pull-left">
+                                        <h:link class="logo" outcome="index.xhtml">
+                                            <img src="Uploads/shop2005/images/logo.png" alt="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME" title="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME"/>
+                                        </h:link>
+                                </h1>
+
+                                <!-- end logo -->
+                            </div>
+                            <div class="col-lg-6 col-md-5 col-sm-4 hidden-xs">
+                                <!-- Search -->
+                                <div class="search_box">
+                                    <div class="search_wrapper">
+                                        <input type="text" name="search" class="index_input_search" id="txtsearch" onblur="if(this.value=='')this.value='Nhập từ khóa tìm kiếm...'"
+                                               onfocus="if(this.value=='Nhập từ khóa tìm kiếm...')this.value=''" value="Nhập từ kh&#243;a t&#236;m kiếm..." />
+                                        <button class="btn_search_submit btn " type="button" id="btnsearch"><span>Tìm ngay</span></button>
+                                    </div>
+                                </div>
+                                <!-- End Search -->
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                <!-- Cart -->
+                                <div class="cart_header">
+                                    <a href="gio-hang.html" title="Giỏ hàng">
+                                        <span class="cart_header_icon"></span>
+                                        <span class="box_text">
+                                            <strong class="cart_header_count">Giỏ hàng <span>(0)</span></strong>
+                                            <span class="cart_price">0₫</span>
+                                        </span>
+                                    </a>
+                                    <div class="cart_clone_box">
+                                        <div class="cart_box_wrap hidden">
+                                            <div class="cart_item original clearfix">
+                                                <div class="cart_item_image"></div>
+                                                <div class="cart_item_info">
+                                                    <p class="cart_item_title"><a href="#" title=""></a></p>
+                                                    <span class="cart_item_quantity"></span>
+                                                    <span class="cart_item_price"></span>
+                                                    <span class="remove"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="cart_header_top_box">
+                                            <div class="cart_empty">Giỏ hàng của bạn vẫn chưa có sản phẩm nào.</div>
+                                        </div>
+                                </div>
+                                <!-- End Cart -->
+                                <!-- Account -->
+                                <c:choose>
+                                        <c:when test="${session.getAttribute('user') != null}">
+                                            
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="user_login">
+                                                <div class="user_login_icon"></div>
+                                                <div class="box_text">
+                                                    <strong>Tài khoản</strong>
+                                                    <!--<span class="cart_price">Đăng nhập, đăng ký</span>-->
+                                                </div>
+                                                <div class="user_box">
+                                                    <ul>
+                                                        <li><h:link outcome="dang-nhap.xhtml">Đăng nhập</h:link></li>
+                                                        <li><h:link outcome="dang-ky.xhtml">Đăng ký</h:link></li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                <!-- End account -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="header_mobile">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Menu mobile -->
+                            <button type="button" class="navbar-toggle collapsed" id="trigger_click_mobile">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a href="../index.xhtml"></a>
+                            <div id="mobile_wrap_menu" class="visible-xs visible-sm">
+                                <div class="user_mobile">
+                                    <div class="icon_user_mobile">
+                                        <img src="assets/100004/images/user_mobile.png" alt="account"/>
+                                    </div>
+                                    <div class="login_mobile">
+                                        <a href="dang-nhap.html" class="login-btn">Đăng nhập </a><a href="dang-ky.html" class="login-btn"> / Đăng ký</a>
+                                    </div>
+                                    <div class="close_menu"></div>
+                                </div>
+                                <div class="content_menu">
+                                    <ul><li class="level0"><h:link outcome="index.xhtml"><span>Trang chủ</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đang diễn ra</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Sắp diễn ra</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đã kết thúc</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Thắng nhiều nhất</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link></li>
+                                        <li class="level10"><h:link  value="hi,${session.getAttribute('user').userName}" outcome="user_page.xhtml"></h:link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End menu mobile -->
+                            <div class="pull-right mobile-menu-icon-wrapper">
+                                <!-- Logo mobile -->
+                                <div class="logo logo-mobile">
+                                    <a href="index.html" title="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME">
+                                        <img src="Uploads/shop2005/images/logo.png" alt="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME"/>
+                                    </a>
+                                </div>
+                                <!-- End Logo mobile -->
+                                <!-- Cart mobile -->
+                                <div class="cart_header" id="cart-target">
+                                    <a href="gio-hang.html" title="Giỏ hàng">
+                                        <div class="cart_header_icon"></div>
+                                        <div class="box_text">
+                                            <strong class="cart_header_count"><span>0</span></strong>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- End Cart mobile -->
+                            </div>
+                            <div class="clearfix"></div>
+                            <!-- Search mobile -->
+                            <div class="search_mobile col-md-12">
+                                <div class="search_box">
+                                    <div class="search_wrapper">
+                                        <input type="text" name="search" class="index_input_search" id="txtsearch2" onblur="if(this.value=='')this.value='Nhập từ khóa tìm kiếm...'"
+                                               onfocus="if(this.value=='Nhập từ khóa tìm kiếm...')this.value=''" value="Nhập từ kh&#243;a t&#236;m kiếm..." />
+                                        <button class="btn_search_submit btn " type="button" id="btnsearch2"><span><i class="fa fa-search"></i></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End search mobile -->
+                        </div>
+                    </div>
+                </div>
+            </header>
+        <!-- End header -->
+    <script type="text/javascript">
+        $("#btnsearch").click(function () {
+            SearchProduct();
+        });
+        $("#btnsearch2").click(function () {
+            SearchProduct2();
+        });
+        $("#txtsearch").keydown(function (event) {
+            if (event.keyCode == 13) {
+                SearchProduct();
+            }
+        });
+        $("#txtsearch2").keydown(function (event) {
+            if (event.keyCode == 13) {
+                SearchProduct2();
+            }
+        });
+        function SearchProduct() {
+            var key = $('#txtsearch').val();
+            if (key == '' || key == 'Tìm kiếm...') {
+                $('#txtsearch').focus();
+                return;
+            }
+            window.location = 'tim-kiem08e2.html?key=' + key;
+        }
+        function SearchProduct2() {
+            var key = $('#txtsearch2').val();
+            if (key == '' || key == 'Tìm kiếm...') {
+                $('#txtsearch2').focus();
+                return;
+            }
+            window.location = 'tim-kiem08e2.html?key=' + key;
+        }
+    </script>
+
+
+    <!-- Main menu -->
+    <nav class="navbar-main">
+        <div id="mb_mainnav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12 vertical_menu">
+                        <div id="mb_verticle_menu" class="menu-quick-select">
+                            <div class="title_block">
+                                <span>Danh mục sản phẩm</span>
+                            </div>
+                            <div id="menuverti" class="block_content navbar_menuvertical">
+                                <ul class='nav_verticalmenu' id="menu_left">
+                                    <li class="has-child level0"><a class='' href='list_product.xhtml'><img class='icon-menu' src='Uploads/shop2005/images/icon/s1.png' alt='Nghao - Sò - Ốc'/> 
+                                            <span>Điện Tử</span></a>
+                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>ĐIỆN THOẠI &amp; MÁY TÍNH BẢNG</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>MÁY TÍNH &amp; LAPTOP</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>MÁY ẢNH &amp; MÁY QUAY PHIM</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>TV, VIDEO, ÂM THANH, GAME &amp; THIẾT BỊ SỐ</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>PHỤ KIỆN CÔNG NGHỆ</span></a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                    <li class="has-child level0"><a class='' href='list_product.xhtml'><img class='icon-menu' src='Uploads/shop2005/images/icon/s2.png' alt='Bào ngư'/>
+                                            <span>Thời trang</span></a>
+                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>THỜI TRANG NAM</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>THỜI TRANG NỮ</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-child level0"><a class='' href='list_product.xhtml'><img class='icon-menu' src='Uploads/shop2005/images/icon/s3.png' alt='Tôm'/> <span>Nhà cửa &amp; đời sống</span></a>
+                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>ĐỒ GIA DỤNG</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>ĐỒ NỘI THẤT &amp; TRANG TRÍ NHÀ CỬA</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-child level0"><a class='' href='list_product.xhtml'><img class='icon-menu' src='Uploads/shop2005/images/icon/s4.png' alt='Mực'/> <span>Phương tiện</span></a>
+                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>Ô tô</span></a></li>
+                                            <li class="level1"><a class='' href='list_product.xhtml'><span>Xe máy</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="level0"><a class='' href='list_product.xhtml'>
+                                            <img class='icon-menu' src='Uploads/shop2005/images/icon/s9.png' alt='Sản phẩm khác'/> <span>Sản phẩm khác</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="col-md-9 col-sm-12 col-xs-12 p-l-0">
+                        <ul class='menu nav navbar-nav menu_hori'>
+                                        <li><h:link outcome="index.xhtml"><span>Trang chủ</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đang diễn ra</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Sắp diễn ra</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đã kết thúc</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Thắng nhiều nhất</span></h:link></li>
+                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </nav>
+            <!-- End main menu -->
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    var str = location.href.toLowerCase();
+                    $("ul.menu li a").each(function () {
+                        if (str.indexOf(this.href.toLowerCase()) >= 0) {
+                            $("ul.menu li").removeClass("active");
+                            $(this).parent().addClass("active");
+                        }
+                    });
+                });
+            </script>
+        </div>
+<!--        end header-->
+        <ui:insert name="slider">
+        </ui:insert>
+        
+        <ui:insert name="adv">
+        </ui:insert>
+        
+        <ui:insert name="main">
+        </ui:insert>
+        
+        <ui:insert name="partner">
+        </ui:insert>
+
+        <div class="footer">
+          
+                <footer class="footer-content">
+                    <div class="footer_top">
+                        <div class="container">
+                            <div class="footer_top_wrap">
+                                <div class="row">
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <!-- footer col 1 -->
+                                            <div class="footer_block">
+                                                <h4 class="footer_block_title">
+                                                    Về ch&#250;ng t&#244;i
+                                                </h4>
+                                                <div class="block_content">
+                                                        <ul>
+                                                                            <li class="item">
+                                                                                <a href="gioi-thieu.html">
+                                                                                    Giới thiệu
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="item">
+                                                                                <a href="content/giao-hang-doi-tra.html">
+                                                                                    Giao h&#224;ng - Đổi trả
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="item">
+                                                                                <a href="content/chinh-sach-bao-mat.html">
+                                                                                    Ch&#237;nh s&#225;ch bảo mật
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="item">
+                                                                                <a href="lien-he.html">
+                                                                                    Li&#234;n hệ
+                                                                                </a>
+                                                                            </li>
+                                                        </ul>
+                                                </div>
+                                            </div>
+                                            <!-- End footer col 1 -->
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <!-- footer col 1 -->
+                                            <div class="footer_block">
+                                                <h4 class="footer_block_title">
+                                                    Trợ gi&#250;p
+                                                </h4>
+                                                <div class="block_content">
+                                                        <ul>
+                                                                            <li class="item">
+                                                                                <a href="content/huong-dan-mua-hang.html">
+                                                                                    Hướng dẫn mua h&#224;ng
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="item">
+                                                                                <a href="content/huong-dan-thanh-toan.html">
+                                                                                    Hướng dẫn thanh to&#225;n
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="item">
+                                                                                <a href="content/tai-khoan-giao-dich.html">
+                                                                                    T&#224;i khoản giao dịch
+                                                                                </a>
+                                                                            </li>
+                                                        </ul>
+                                                </div>
+                                            </div>
+                                            <!-- End footer col 1 -->
+                                        </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <!-- footer col 3 -->
+                                        <div class="footer_block">
+                                            <h4 class="footer_block_title">
+                                                Đăng ký nhận bản tin
+                                            </h4>
+                                            <div class="block_content" ng-controller="moduleController" ng-init="initController()">
+                                                <div class="des_newsletter_form">
+                                                    Đăng Ký Thành Viên Để Nhận Bản Tin Mỗi Ngày:
+                                                </div>
+                                                <form id="newsletter_form" ng-submit="registerNewsletter()" class="m-b-20 contact-form">
+                                                    <div class="newsletter_wrap">
+                                                        <input ng-model="newsletter.Email" required="" id="contact_email" autocomplete="off" type="email"/>
+                                                        <label>Email của bạn </label>
+                                                        <button class="btn-newsletter" type="submit">
+                                                            <span><i class="fa fa-paper-plane-o"></i></span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- End footer col 3 -->
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <!-- footer col 4 -->
+                                        <div class="footer_block">
+                                            <h4 class="footer_block_title">
+                                                Theo dõi trên Fanpage
+                                            </h4>
+                                            <div class="block_content">
+                                                <div class="fb-page" data-small-header="true" data-href="https://www.facebook.com/runtime.vn" data-tabs="message" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+                                            </div>
+                                        </div>
+                                        <!-- End footer col 4 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_bottom">
+                        <div class="container">
+                            <div class="footer_bottom_wrap">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="footer_address">
+                                            <p><span>C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME</span></p>
+                                            <p><span>Địa chỉ: 5/12A Quang Trung, P.14, Q.G&#242; Vấp, Tp.HCM</span></p>
+                                            <p><span>Số điện thoại: (08) 66 85 85 38</span></p>
+                                            <p><span>Số di động: 0908 77 00 95</span></p>
+                                            <p><span>Email: runecom04@runtime.vn</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 text-right text-center-xs">
+                                        <div class="copy_right">
+                                            <p>
+                                                &copy; 2017. Bản quyền thuộc về <a rel="nofollow" href="http://www.runtime.vn/">SeaFood Store</a>. Powered by <a href="http://www.runtime.vn/">RUNTIME.VN</a>
+                                            </p>
+                                        </div>
+                                        <div class="social_footer">
+                                            <ul>
+                                                <li><a><span><i class="fa fa-facebook"></i></span></a></li>
+                                                <li><a><span><i class="fa fa-twitter"></i></span></a></li>
+                                                <li><a><span><i class="fa fa-google-plus"></i></span></a></li>
+                                                <li><a><span><i class="fa fa-youtube"></i></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                    </div>
+    </h:body>
+    <script type="text/javascript">
+        $(".header-content").css({ "background": '' });
+        $("html").addClass('');
+        $("#kv-explorer").fileinput({
+                'theme': 'explorer',
+                'uploadUrl': '#',
+                overwriteInitial: false,
+                initialPreviewAsData: false,
+                initialPreview: [
+
+                ],
+                initialPreviewConfig: [
+                      
+                ],
+                dropZoneTitle: 'Ấn Browse Để Chọn Ảnh Cần Upload .....'
+            });
+    </script>
+</html>
+    

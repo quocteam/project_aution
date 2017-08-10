@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                <div class="main">
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-md-3">
+                                        <div class="menu-account">
+                                            <h3>
+                                                <span>
+                                                    Tài khoản
+                                                </span>
+                                            </h3>
+                                            <ul>
+                                                <li><h:link outcome="dang-nhap.xhtml"><i class="fa fa-sign-in"></i> Đăng nhập</h:link></li>
+                                                <li><h:link outcome="dang-ky.xhtml"><i class="fa fa-key"></i> Đăng ký</h:link></li>
+                                                <li><h:link outcome="index.xhtml"><i class="fa fa-key"></i> Quên mật khẩu</h:link></li>
+                                            </ul>
+                                        </div>                    
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Đăng ký tài khoản</strong> </li>
+                                        </ul>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+                                    </script>
+                                   
+                                    <div class="register-content clearfix" ng-controller="accountController" ng-init="initRegisterController()">
+                                        <h1 class="title"><span>Đăng ký tài khoản</span></h1>
+<!--                                        <div ng-if="IsError" class="alert alert-danger fade in">
+                                            <button data-dismiss="alert" class="close"></button>
+                                            <i class="fa-fw fa fa-times"></i>
+                                            <strong>Error!</strong>
+                                            <span ng-bind-html="Message"></span>
+                                        </div>
+                                        <div ng-if="IsSuccess" class="alert alert-success fade in">
+                                            <button data-dismiss="alert" class="close"></button>
+                                            <i class="fa-fw fa fa-check"></i>
+                                            <strong>Success!</strong> Đăng ký thành công.
+                                        </div>
+                                        <div ng-if="InValid" class="alert alert-danger fade in">
+                                            <button data-dismiss="alert" class="close"></button>
+                                            <i class="fa-fw fa fa-times"></i>
+                                            <strong>Error!</strong>
+                                            <span ng-bind-html="Message"></span>
+                                        </div>-->
+                                        <p:messages id="messages" class="alert" showDetail="true" autoUpdate="true" closable="true" />
+                                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                            <h:form class="form-horizontal">
+                                                <h2><span>Thông tin tài khoản</span></h2>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder="Enter your username"  value="#{login_Register_UserBean.userName}">
+                                                            <f:validator validatorId="userNameValidator"/>
+                                                        </h:inputText>
+<!--                                                        <input type="text" class="form-control" ng-model="Code" required="true" />-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email" class="col-sm-3 control-label">Email<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="email" class="form-control" a:placeholder="Enter your email"  value="#{login_Register_UserBean.email}"></h:inputText>
+<!--                                                        <input type="email" class="form-control" ng-model="Email" required="true" />-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Password" class="col-sm-3 control-label">Mật khẩu<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="password" class="form-control" a:placeholder="Enter your password"  value="#{login_Register_UserBean.passWord}">
+                                                            <f:validator validatorId="PassWordValidator"/>
+                                                        </h:inputText>
+<!--                                                        <input type="password" class="form-control" ng-model="Password" required="true" />-->
+                                                    </div>
+                                                </div>
+<!--                                                <div class="form-group">
+                                                    <label for="RePassword" class="col-sm-3 control-label">Nhập lại mật khẩu<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="password" class="form-control" ng-model="RePassword" />
+                                                    </div>
+                                                </div>-->
+                                                <h2>Thông tin cá nhân</h2>
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-3 control-label">Họ và tên<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:placeholder="Enter your fullname"  value="#{login_Register_UserBean.fullName}"></h:inputText>
+<!--                                                        <input type="text" class="form-control" ng-model="Name" required="true" />-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Giới tính</label>
+                                                    <div class="col-sm-9">
+                                                        <h:selectOneMenu class="form-control" value = "#{login_Register_UserBean.sex}" >                     
+                                                                                <f:selectItem itemValue = "Nam" itemLabel = "Nam" />
+                                                                                <f:selectItem itemValue = "Nữ" itemLabel = "Nữ" />
+                                                                            </h:selectOneMenu>
+<!--                                                        <select class="form-control" ng-model="GenderId"
+                                                                ng-options="item.Id as item.Name for item in Genders"></select>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-inline">
+                                                    <label class="col-sm-3 control-label">Ngày sinh</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control datepicker" a:placeholder="Ngày tháng năm sinh"  value="#{login_Register_UserBean.dob}"></h:inputText>
+<!--                                                        <select class="col-md-4 form-control" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays" placeholder="Ngày"></select>
+                                                        <select class="col-md-4 form-control" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()" placeholder="Tháng"></select>
+                                                        <select class="col-md-4 form-control" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()" placeholder="Năm"></select>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Điện thoại</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="number" a:placeholder="Số điện thoại"  value="#{login_Register_UserBean.phoneNumber}"></h:inputText>
+<!--                                                        <input type="text" class="form-control" ng-model="Phone" />-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Địa chỉ</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="text" a:placeholder="Địa chỉ"  value="#{login_Register_UserBean.address}"></h:inputText>
+<!--                                                        <input type="text" class="form-control" ng-model="Address" />-->
+                                                    </div>
+                                                </div>
+
+<!--                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Tỉnh/TP</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" ng-model="ProvinceId"
+                                                                ng-options="item.Id as item.Name for item in Provinces" ng-change="getDistricts(ProvinceId)"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Quận/Huyện</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" ng-model="DistrictId"
+                                                                ng-options="item.Id as item.Name for item in Districts"></select>
+                                                    </div>
+                                                </div>-->
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <h:commandLink value="Đăng ký" style="color: white" class="btn btn-primary" action="${login_Register_UserBean.register()}"/>
+<!--                                                        <button type="submit" class="btn btn-primary">Đăng ký</button>-->
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script> 
+            </ui:define>
+        </ui:composition>
+            
+    </h:body>
+</html>
+

@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                <div class="main">
+                        <div class="container">
+                            <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="menu-account">
+                                            <h3>
+                                                <span>
+                                                    Tài khoản
+                                                </span>
+                                            </h3>
+                                            <ul>
+                                                <li><h:link outcome="dang-nhap.xhtml"><i class="fa fa-sign-in"></i> Đăng nhập</h:link></li>
+                                                <li><h:link outcome="dang-ky.xhtml"><i class="fa fa-key"></i> Đăng ký</h:link></li>
+                                                <li><h:link outcome="index.xhtml"><i class="fa fa-key"></i> Quên mật khẩu</h:link></li>
+                                            </ul>
+                                        </div>                    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="breadcrumb clearfix">
+                                            <ul>
+                                                            <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                                                                <h:link outcome="index.xhtml"><span itemprop="title">Trang chủ</span></h:link>
+                                                            </li>
+                                                            <li class="icon-li"><strong>Đăng nhập</strong> </li>
+                                            </ul>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+                                        </script>
+                                       
+                                        <div class="login-content clearfix" ng-controller="accountController" ng-init="initController()">
+                                            <h1 class="title"><span>Đăng nhập hệ thống</span></h1>
+<!--                                            <div ng-if="IsError" class="alert alert-danger fade in">
+                                                <button data-dismiss="alert" class="close"></button>
+                                                <i class="fa-fw fa fa-times"></i>
+                                                <strong>Error!</strong>
+                                                <span ng-bind-html="Message"></span>
+                                            </div>
+                                            <div ng-if="IsSuccess" class="alert alert-success fade in">
+                                                <button data-dismiss="alert" class="close"></button>
+                                                <i class="fa-fw fa fa-check"></i>
+                                                <strong>Success!</strong> Đăng nhập thành công.
+                                            </div>
+                                            <div ng-if="InValid" class="alert alert-danger fade in">
+                                                <button data-dismiss="alert" class="close"></button>
+                                                <i class="fa-fw fa fa-times"></i>
+                                                <strong>Error!</strong>
+                                                <span ng-bind-html="Message"></span>
+                                            </div>-->
+                                            <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                                <h:form class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label for="Username" class="col-sm-4 control-label">Username</label>
+                                                        <div class="col-sm-8">
+                                                            <h:inputText a:type="text" value="${login_Register_UserBean.userName}" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Password" class="col-sm-4 control-label">Mật khẩu</label>
+                                                        <div class="col-sm-8">
+                                                            <h:inputSecret a:type="password" value="${login_Register_UserBean.passWord}" class="form-control"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-4 col-sm-8">
+                                                            <h:commandLink a:type="button" style="color: white" value="Đăng nhập" class="btn btn-primary" action="${login_Register_UserBean.Login()}"/>
+<!--                                                            <button type="submit" class="btn btn-primary">Đăng nhập</button>-->
+                                                            <a href="quen-mat-khau.html">Quên mật khẩu?</a>
+                                                        </div>
+
+                                                    </div>
+                                                </h:form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
