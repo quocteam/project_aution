@@ -179,7 +179,7 @@
 
                                 <h1 class="pull-left">
                                         <h:link class="logo" outcome="index.xhtml">
-                                            <img src="Uploads/shop2005/images/logo.png" alt="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME" title="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME"/>
+                                            <img src="Uploads/logo.png" style="height: 80px; width: 285px" alt="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME" title="C&#212;NG TY TNHH PH&#193;T TRIỂN C&#212;NG NGHỆ RUNTIME"/>
                                         </h:link>
                                 </h1>
 
@@ -278,7 +278,10 @@
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Sắp diễn ra</span></h:link></li>
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đã kết thúc</span></h:link></li>
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Thắng nhiều nhất</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link></li>
+                                        <li class="level0">
+                                            <h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link>
+                                            <h:form><h:commandLink action="${login_Register_UserBean.LogOut()}" ><span>[Thoát]</span></h:commandLink></h:form>
+                                        </li>
                                         <li class="level10"><h:link  value="hi,${session.getAttribute('user').userName}" outcome="user_page.xhtml"></h:link></li>
                                     </ul>
                                 </div>
@@ -407,11 +410,19 @@
                     <nav class="col-md-9 col-sm-12 col-xs-12 p-l-0">
                         <ul class='menu nav navbar-nav menu_hori'>
                                         <li><h:link outcome="index.xhtml"><span>Trang chủ</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đang diễn ra</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Sắp diễn ra</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đã kết thúc</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Thắng nhiều nhất</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link></li>
+                                        <li>
+                                            <h:form style="line-height: 41px"><h:commandLink action="${listProductBean.CurrentSession()}" ><span>Đang Diễn Ra</span></h:commandLink></h:form>
+                                        </li>
+                                        <li class="level0">
+                                            <h:form style="line-height: 41px"><h:commandLink action="${listProductBean.UpcomingSession()}" ><span>Sắp Diễn Ra</span></h:commandLink></h:form>
+                                        </li>
+                                         <li class="level0">
+                                            <h:form style="line-height: 41px"><h:commandLink action="${listProductBean.DoneSession()}" ><span>Đã Kết Thúc</span></h:commandLink></h:form>
+                                        </li>
+                                        <li class="level0"><h:link ><span>Thắng nhiều nhất</span></h:link></li>
+                                        
+                                        
+                                       
                         </ul>
                     </nav>
                 </div>

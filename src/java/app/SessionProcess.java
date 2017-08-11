@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import model.Session;
 import model.User;
 import model.Bet;
+import model.BetHistory;
 
 /**
  *
@@ -334,12 +335,197 @@ public class SessionProcess {
         return result>0;
     }
      
+    public boolean addImages(String sid,String link){
+         int result = 0;
+        String sql="INSERT INTO tbl_image(sid,link) VALUES(?,?)";
+        
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1,sid);
+            prst.setString(2, link);
+            result=prst.executeUpdate();
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+       
+        return result>0;
+    }
+    
+    // lịch sử đặt giá
+    public ArrayList<BetHistory> findBetByUId(String uid){
+        ArrayList<BetHistory> bh = new ArrayList<>();
+         try {
+            String sql = "SELECT tbl_session.sessionId,tbl_session.productName,tbl_bet.value,tbl_session.userWinID FROM tbl_bet,tbl_session"
+                    + " WHERE tbl_session.sessionId=tbl_bet.sessionId AND tbl_bet.userBetId=?";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uid);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                BetHistory b = new BetHistory();
+                b.setSessionId(rs.getString(1));
+                b.setProductName(rs.getString(2));
+                b.setValue(rs.getInt(3));
+                if(rs.getString(4)==null){
+                    b.setBetStatus("Đang diễn ra");
+                    b.setUserStatus("...");
+                }else{
+                    b.setBetStatus("Đã kết thúc");
+                    if(rs.getString(4).equals(uid)){
+                        b.setUserStatus("Thắng");
+                    }else{
+                        b.setUserStatus("Thua");
+                    }
+                }
+                bh.add(b);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return bh;
+    }
+    
+    // Lấy phiên đấu giá mới nhất
+     public ArrayList<Session> getUpcomingProduct(){
+        Date today=new Date(System.currentTimeMillis());
+        SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s=timeFormat.format(today.getTime());
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' ORDER by sessionId DESC";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, s);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setProductInformation(rs.getString(5));
+                ss.setStartPrice(rs.getFloat(6));
+                ss.setStepPrice(rs.getFloat(7));
+                ss.setBid(rs.getInt(8));
+                ss.setStartTime(rs.getString(11));
+                ss.setEndTime(rs.getString(12));
+                ss.setStatus(rs.getString(13));
+                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
+                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
+                prst2.setString(1, rs.getString(1));
+                ResultSet rs2 = prst2.executeQuery();
+                while (rs2.next()) {                    
+                    ss.setAvatar(rs2.getString(3));
+                }
+                rs2.close();
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+     // Lấy 8phiên đấu giá đang diễn ra 
+     public ArrayList<Session> getSessionHappening(){
+        Date today=new Date(System.currentTimeMillis());
+        SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s=timeFormat.format(today.getTime());
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' ORDER by sessionId DESC";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, s);
+            
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setProductInformation(rs.getString(5));
+                ss.setStartPrice(rs.getFloat(6));
+                ss.setStepPrice(rs.getFloat(7));
+                ss.setBid(rs.getInt(8));
+                ss.setStartTime(rs.getString(11));
+                ss.setEndTime(rs.getString(12));
+                ss.setStatus(rs.getString(13));
+                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
+                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
+                prst2.setString(1, rs.getString(1));
+                ResultSet rs2 = prst2.executeQuery();
+                while (rs2.next()) {                    
+                    ss.setAvatar(rs2.getString(3));
+                }
+                rs2.close();
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+     
+     // Lấy phiên đấu giá mới kết thúc 
+     public ArrayList<Session> getSessionDone(){
+        Date today=new Date(System.currentTimeMillis());
+        SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s=timeFormat.format(today.getTime());
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' ORDER by sessionId DESC";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, s);
+            
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setProductInformation(rs.getString(5));
+                ss.setStartPrice(rs.getFloat(6));
+                ss.setStepPrice(rs.getFloat(7));
+                ss.setBid(rs.getInt(8));
+                ss.setStartTime(rs.getString(11));
+                ss.setEndTime(rs.getString(12));
+                ss.setStatus(rs.getString(13));
+                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
+                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
+                prst2.setString(1, rs.getString(1));
+                ResultSet rs2 = prst2.executeQuery();
+                while (rs2.next()) {                    
+                    ss.setAvatar(rs2.getString(3));
+                }
+                rs2.close();
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
      
      public static void main(String[] args) {
-     Date today=new Date(System.currentTimeMillis());
        SessionProcess sp = new SessionProcess();
-       ArrayList<Bet> arr = sp.topBet("sid00003");
-         System.out.println(""+arr.get(0).getValue());
+       ArrayList<BetHistory> arr = sp.findBetByUId("uid00002");
+         for (int i = 0; i < arr.size(); i++) {
+             System.out.println(""+arr.get(i).getBetStatus());
+              System.out.println(""+arr.get(i).getUserStatus());
+              
+         }
+         
     }
     
      

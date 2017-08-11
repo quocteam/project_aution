@@ -18,4 +18,9 @@
         <managed-bean-class>bean.Login_Register_UserBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>listProductBean</managed-bean-name>
+        <managed-bean-class>bean.ListProductBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

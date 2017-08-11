@@ -5,7 +5,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ck="http://code.google.com/ck-jsf-editor"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
@@ -44,7 +43,7 @@
                                                         <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
                                                             <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                                                         </li>
-                                                        <li class="icon-li"><strong>Đăng ký tài khoản</strong> </li>
+                                                        <li class="icon-li"><strong>Thông tin tài khoản</strong> </li>
                                         </ul>
                                     </div>
                                     <script type="text/javascript">
@@ -60,7 +59,7 @@
                                                 <div class="form-group">
                                                     <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder="Enter your username"  value="#{login_Register_UserBean.userName}">
+                                                        <h:inputText class="form-control"  a:placeholder="Enter your username"  value="#{login_Register_UserBean.userName}">
                                                          
                                                         </h:inputText>
                                                     </div>
@@ -167,7 +166,8 @@
                                                 <div class="form-group">
                                                     <label for="Password" class="col-sm-3 control-label">Mô Tả Sản Phẩm<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputTextarea a:type="textarea" class="form-control" a:placeholder=""  value="#{add_Product_SessionBean.productInformation}">
+                                                      
+                                                        <h:inputTextarea a:type="textarea" class="form-control" a:placeholder=""  value="">
                                                             
                                                         </h:inputTextarea>
                                                        
@@ -192,16 +192,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="" class="col-sm-3 control-label">Ảnh mô tả</label>
+                                                    <label for="" class="col-sm-3 control-label">Ảnh đại diện</label>
                                                     <div class="col-sm-9">
-                                                        <h:inputFile id="kv-explorer" value="${add_Product_SessionBean.images}"/>
+                                                        <h:inputFile class="btn btn-default" id="kv-explorer" value="${add_Product_SessionBean.images}"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <h:commandLink value="Đăng ký" class="btn btn-primary" action="${add_Product_SessionBean.addNew()}"/>
+                                                        <h:commandLink value="Đăng ký" style="color: white" class="btn btn-primary" action="${add_Product_SessionBean.addNew()}"/>
                                                     </div>
                                                 </div>
+                                                         
                                             </h:form>
                                         </div>
                                     </div>
@@ -221,24 +222,27 @@
                                     <div class="register-content clearfix" >
                                         <h1 class="title"><span>Lịch sử đấu giá</span></h1>
                                         <h:form>
-                                            <p:dataTable class="table" var="bet" value="#{detailProduct_SessionBean.arrBet}" rows="5"
+                                            <p:dataTable class="table" var="bet" value="#{login_Register_UserBean.arrBet}" rows="5"
                                                              paginator="true"
                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                              rowsPerPageTemplate="5,10,15">
-                                            <p:column headerText="Id" sortBy="#{bet.id}">
-                                                <h:outputText value="#{bet.id}" />
-                                            </p:column>
-
-                                            <p:column headerText="Year">
+                                                <p:column headerText="Mã phiên đấu giá">
                                                 <h:outputText value="#{bet.sessionId}" />
                                             </p:column>
 
-                                            <p:column headerText="Brand" filterBy="#{bet.userBetId}">
-                                                <h:outputText value="#{bet.userBetId}" />
+                                            <p:column headerText="Tên sản phẩm">
+                                                <h:outputText value="#{bet.productName}" />
                                             </p:column>
 
-                                            <p:column headerText="Color">
+                                                <p:column headerText="Giá đặt">
                                                 <h:outputText value="#{bet.value}" />
+                                            </p:column>
+
+                                            <p:column headerText="Tình trạng phiên đấu giá">
+                                                <h:outputText value="#{bet.betStatus}" />
+                                            </p:column>
+                                                <p:column headerText="Trạng thái">
+                                                    <h:outputText value="#{bet.userStatus}" />
                                             </p:column>
                                         </p:dataTable>
                                     </h:form>
@@ -264,7 +268,7 @@
                                                 <div class="form-group">
                                                     <label for="Code" class="col-sm-3 control-label">Mật Khẩu Cũ</label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="">
                                                            
                                                         </h:inputText>
                                                     </div>
@@ -272,7 +276,7 @@
                                                 <div class="form-group">
                                                     <label for="Code" class="col-sm-3 control-label">Mật Khẩu Mới</label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="">
                                                            
                                                         </h:inputText>
                                                     </div>
@@ -280,14 +284,14 @@
                                                 <div class="form-group">
                                                     <label for="Code" class="col-sm-3 control-label">Nhập Lại Mật Khẩu</label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="#{login_Register_UserBean.userName}">
+                                                        <h:inputText class="form-control" a:placeholder=""  value="">
                                                            
                                                         </h:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <h:commandLink value="Đăng ký" class="btn btn-primary" action="${login_Register_UserBean.register()}"/>
+                                                        <h:commandLink value="Đăng ký" class="btn btn-primary"/>
                                                     </div>
                                                 </div>
                                             </h:form>

@@ -57,29 +57,29 @@
                                 </div>
                             </div>
                             <div class="product_list grid clearfix">
-                                <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                <c:forEach var="p" items="${listProductBean.arr}">
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
                                         <div class="product-block product-resize m-b-20">
                                             <div class="product-image image-resize">
-                                                <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(0).sessionId)}">
-                                                    <img class="first-img" src="${index_SessionBean.sessionHappening.get(p).avatar}" style="height: 208px" alt="${index_SessionBean.sessionHappening.get(p).productName}"/>
+                                                <a href="${detailProduct_SessionBean.detail(p.sessionId)}">
+                                                    <img class="first-img" src="${p.avatar}" style="height: 208px" alt="${p.productName}"/>
                                                 </a>
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46493,1)">
                                                             <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <a class="quickview" href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(0).sessionId)}"><i class="fa fa-eye"></i></a>
+                                                        <a class="quickview" href="${detailProduct_SessionBean.detail(p.sessionId)}"><i class="fa fa-eye"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
-                                                    <a href="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(0).sessionId)}" title="${index_SessionBean.sessionHappening.get(p).productName}">${index_SessionBean.sessionHappening.get(p).productName}</a>
+                                                    <a href="${detailProduct_SessionBean.detail(p.sessionId)}" title="${p.productName}">${p.productName}</a>
                                                 </h3>
-                                                <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
+                                                <p class="clock" >${p.endTime}</p>
                                                         <div class="pro-prices">
-                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                                <span class="pro-price"><h:outputText value="${p.startPrice}">
                                                                                                                         <f:convertNumber pattern="#####,000 VND">
                                                                                                                         </f:convertNumber></h:outputText></span>
                                                         </div>

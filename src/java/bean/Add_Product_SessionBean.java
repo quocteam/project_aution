@@ -6,7 +6,6 @@
 package bean;
 
 import app.SessionProcess;
-import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -192,7 +191,7 @@ public class Add_Product_SessionBean {
         if(up.AddNewSession(session)){
             try{
             HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
-            String fileName = up.GetLastID()+"."+images.getContentType();
+            String fileName = getFileName(images);
             String applicationPath = request.getServletContext().getRealPath("");
             String basePath = applicationPath + File.separator + UPLOAD_DIR + File.separator;
             InputStream inputStream = null;
@@ -206,6 +205,7 @@ public class Add_Product_SessionBean {
                 while((read = inputStream.read(bytes)) != -1){
                     outputStream.write(bytes, 0, read);
                 }
+                up.addImages(up.GetLastID(), "images/"+getFileName(images));
             } catch (Exception e) {
                 e.printStackTrace();
                 fileName = "";
@@ -242,19 +242,14 @@ public class Add_Product_SessionBean {
         System.out.println("aa"+part.getContentType());
         for(String content : part.getHeader("content-disposition").split(";")){
             if(content.trim().startsWith("filename")){
-                return "x.png";
+                SessionProcess up = new SessionProcess();
+                String a=part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf("."));
+                return up.GetLastID()+"."+a;
             }
         }
         
         return null;
     }
     
-    public static void main(String[] args) {
-    Gson gson = new Gson();
-    Bet bet = new Bet(0, "okx","okx", 0);
-
-    // 2. Java object to JSON, and assign to a String
-    String jsonInString = gson.toJson(bet);
-        System.out.println(""+jsonInString);
-    }
+  
 }

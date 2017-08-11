@@ -5,19 +5,24 @@
  */
 package bean;
 
+import app.SessionProcess;
 import app.UserProcess;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Bet;
+import model.BetHistory;
 import model.User;
 
 /**
  *
  * @author quoc95
  */
-public class Login_Register_UserBean {
+public class Login_Register_UserBean implements Serializable{
 
     /**
      * Creates a new instance of UserBean
@@ -33,8 +38,17 @@ public class Login_Register_UserBean {
     private String address;
     private String status;
     private String avatars;
-    
     private String message;
+    private ArrayList<BetHistory> arrBet;
+
+    public ArrayList<BetHistory> getArrBet() {
+        return arrBet;
+    }
+
+    public void setArrBet(ArrayList<BetHistory> arrBet) {
+        this.arrBet = arrBet;
+    }
+    
 
     public String getMessage() {
         return message;
@@ -168,6 +182,7 @@ public class Login_Register_UserBean {
             HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            arrBet = new SessionProcess().findBetByUId(userID);
             return "user_page";
         }else{
             this.showAlert = true;
@@ -246,6 +261,7 @@ public class Login_Register_UserBean {
         this.address = user.getAddress();
         this.status = user.getStatus();
         this.avatars = user.getAvatars();
+        arrBet = new SessionProcess().findBetByUId(userID);
         return "user_page";
     }
     

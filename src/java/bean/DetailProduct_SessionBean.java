@@ -6,7 +6,6 @@
 package bean;
 
 import app.SessionProcess;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -29,19 +28,12 @@ public class DetailProduct_SessionBean {
     private Session session;
     private int price;
     private ArrayList<Bet> listBet;
-    private ArrayList<Bet> arrBet= new SessionProcess().topBet("sid00003");
     FacesContext context =  FacesContext.getCurrentInstance();
     HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
     HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
     HttpSession ses = request.getSession();
 
-    public ArrayList<Bet> getArrBet() {
-        return arrBet;
-    }
-
-    public void setArrBet(ArrayList<Bet> arrBet) {
-        this.arrBet = arrBet;
-    }
+   
 
     public FacesContext getContext() {
         return context;
@@ -145,20 +137,7 @@ public class DetailProduct_SessionBean {
                 return "Có lỗi xảy ra";
         }       
     }
-    public String getProduct(){
-        Gson gson = new Gson();
-        ArrayList<Product> arr = new ArrayList<>();
-    Product p = new Product(1, "name", 12);
-    Product c = new Product(2, "name1", 12);
-    Product d = new Product(3, "name2", 12);
-    arr.add(p);
-    arr.add(c);
-    arr.add(d);
-    // 2. Java object to JSON, and assign to a String
-    String jsonInString = gson.toJson(arr);
-        return jsonInString;
-    
-    }
+   
     public static void main(String[] args) {
        
     }
