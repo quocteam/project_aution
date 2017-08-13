@@ -244,7 +244,7 @@ public class Add_Product_SessionBean {
             if(content.trim().startsWith("filename")){
                 SessionProcess up = new SessionProcess();
                 String a=part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf("."));
-                return up.GetLastID()+"."+a;
+                return up.GetLastID()+""+a;
             }
         }
         

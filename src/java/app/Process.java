@@ -21,7 +21,7 @@ public class Process {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String user="root";
-            String pass="";
+            String pass="aassdd";
             String url = "jdbc:mysql://localhost:3306/auction?characterEncoding=utf-8";
             try {
                 conn= (Connection) DriverManager.getConnection(url, user, pass);

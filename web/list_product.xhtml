@@ -57,29 +57,39 @@
                                 </div>
                             </div>
                             <div class="product_list grid clearfix">
-                                <c:forEach var="p" items="${listProductBean.arr}">
+                                <c:forEach var="p" begin="0" end="${listProductBean.arr.size()-1}" step="1">
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
                                         <div class="product-block product-resize m-b-20">
                                             <div class="product-image image-resize">
-                                                <a href="${detailProduct_SessionBean.detail(p.sessionId)}">
-                                                    <img class="first-img" src="${p.avatar}" style="height: 208px" alt="${p.productName}"/>
-                                                </a>
+                                                <h:form>
+                                                    <h:commandLink action="${detailProduct_SessionBean.detail(listProductBean.arr.get(p).sessionId)}">
+                                                        <img class="first-img" src="${listProductBean.arr.get(p).avatar}" style="height: 208px" alt="${listProductBean.arr.get(p).productName}" />
+                                                    </h:commandLink>
+                                                </h:form>
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46493,1)">
                                                             <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <a class="quickview" href="${detailProduct_SessionBean.detail(p.sessionId)}"><i class="fa fa-eye"></i></a>
+                                                        <h:form>
+                                                    <h:commandLink class="quickview" action="index.xhtml">
+                                                        <i class="fa fa-eye"></i>
+                                                    </h:commandLink>
+                                                </h:form>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
-                                                    <a href="${detailProduct_SessionBean.detail(p.sessionId)}" title="${p.productName}">${p.productName}</a>
+                                                <h:form>
+                                                    <h:commandLink action="${detailProduct_SessionBean.detail(p.sessionId)}" title="${listProductBean.arr.get(p).productName}">
+                                                        ${listProductBean.arr.get(p).productName}
+                                                    </h:commandLink>
+                                                </h:form>
                                                 </h3>
-                                                <p class="clock" >${p.endTime}</p>
+                                                <p class="clock" >${listProductBean.arr.get(p).endTime}</p>
                                                         <div class="pro-prices">
-                                                                <span class="pro-price"><h:outputText value="${p.startPrice}">
+                                                                <span class="pro-price"><h:outputText value="${listProductBean.arr.get(p).startPrice}">
                                                                                                                         <f:convertNumber pattern="#####,000 VND">
                                                                                                                         </f:convertNumber></h:outputText></span>
                                                         </div>
@@ -87,6 +97,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
+                               
                                 <div class="icon-loading" style="display: none;">
                                     <div class="uil-ring-css">
                                         <div></div>

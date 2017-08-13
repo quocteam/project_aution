@@ -23,7 +23,7 @@
                                 </li>
                                 <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="category17 icon-li">
                                     <div class="link-site-more">
-                                        <a title="" href="/san-pham/tom-33806" itemprop="url">
+                                        <a title="" href="#" itemprop="url">
                                             <span itemprop="title">${detailProduct_SessionBean.session.productType}</span>
                                         </a>
                                     </div>
@@ -165,57 +165,46 @@
                                 Sản phẩm liên quan
                             </h1>
                             <div class="product_list grid clearfix">
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow" style="visibility: hidden; animation-name: none;">
-                                        <div class="product-block product-resize m-b-20 fixheight" style="height: 295px;">
-                                            <div class="product-image image-resize" style="height: 208px;">
+                                   <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
+                                        <div class="product-block product-resize">
+                                            <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
-                                                <a href="/san-pham/ tom-mu-ni-song.html">
-                                                    <img class="first-img" src="${detailProduct_SessionBean.images[0]}" alt="Tôm mũ ni sống"/>
-                                                </a>
+                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
+                                                            </h:commandLink>
+                                                    </h:form>
+<!--                                                <a href="san-pham/tom-mu-ni-song.html">
+                                                    <img class="first-img" src="Uploads/shop2005/images/product/tom_mu_ni_new_1_master.jpg" alt="T&#244;m mũ ni sống"/>
+                                                </a>-->
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
                                                             <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <a class="quickview" href="/san-pham/ tom-mu-ni-song.html"><i class="fa fa-eye"></i></a>
+                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                               <i class="fa fa-eye"></i>
+                                                            </h:commandLink>
+                                                    </h:form>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
-                                                    <a href="/san-pham/tom-mu-ni-song.html" title="Tôm mũ ni sống">Tôm mũ ni sống</a>
+                                                    <a href="#" title="T&#244;m mũ ni sống" style="line-height: 37px">${index_SessionBean.sessionHappening.get(p).productName}</a>
                                                 </h3>
+                                                <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
                                                         <div class="pro-prices">
-                                                                <span class="pro-price">1.100.000&nbsp;₫</span>
+                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span>
                                                         </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow" style="visibility: hidden; animation-name: none;">
-                                        <div class="product-block product-resize m-b-20 fixheight" style="height: 295px;">
-                                            <div class="product-image image-resize" style="height: 208px;">
-                                                <a href="/san-pham/ tom-tit-be-be-song.html">
-                                                    <img class="first-img" src="${detailProduct_SessionBean.images[0]}" alt="Tôm tít (Bề Bề) sống"/>
-                                                </a>
-                                                <div class="product-actions hidden-xs">
-                                                        <div class="btn-add-to-cart" onclick="AddToCard(46491,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-                                                        </div>
-                                                    <div class="btn_quickview">
-                                                        <a class="quickview" href="/san-pham/ tom-tit-be-be-song.html"><i class="fa fa-eye"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-info text-center m-t-xxs-20">
-                                                <h3 class="pro-name">
-                                                    <a href="/san-pham/tom-tit-be-be-song.html" title="Tôm tít (Bề Bề) sống">Tôm tít (Bề Bề) sống</a>
-                                                </h3>
-                                                        <div class="pro-prices">
-                                                                <span class="pro-price">700.000&nbsp;₫</span>
-                                                        </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                </c:forEach> 
+                                   
                             </div>
                         </div>                    
                     </div>
@@ -225,12 +214,14 @@
                                 <span>Top Đặt Giá Cao Nhất</span>
                             </div>
                             <div id="menuverti" class="block_content navbar_menuvertical" style="position: static">
-                                <ul class='nav_verticalmenu' id="menu_left">
+                                <ul class='nav_verticalmenu' id="menu_left" style="width: 100%">
                                     <c:forEach var="p" items="${detailProduct_SessionBean.listBet}" >
                                     <li class="has-child level0"><a class='' href='#'>
                                             <span>${p.userBetId}</span></a>
                                         <ul class='level1'>
-                                            <li class="level1"><a class='' href='#'><span>${p.value}</span></a></li>
+                                            <li class="level1"><a class='' href='#'><span><h:outputText value="${p.value}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span></a></li>
                                         </ul>
                                     </li>
                                     </c:forEach>
@@ -301,92 +292,32 @@
                             </h3>
                         </div>
                         <ul class="list_product_related widget_list_sidebar clearfix">
-                                <li class="pro-loop clearfix">
+                            <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                    
+                                  <li class="pro-loop clearfix">
                                     <div class="col-md-5 col-sm-5 col-xs-5">
                                         <a href="/san-pham/coi-so-diep.html" title="Cồi sò điệp">
-                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Cồi sò điệp"/>
+                                            <img src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="Cồi sò điệp"/>
                                         </a>
                                     </div>
                                     <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <a href="/san-pham/coi-so-diep.html" title="Cồi sò điệp">
+                                        <a href="#" title="Cồi sò điệp">
                                             <h3 class="product_related_name">
-                                                Cồi sò điệp
+                                                ${index_SessionBean.sessionHappening.get(p).productName}
                                             </h3>
+                                            <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
                                                     <p class="product_related_price">
-                                                            <span class="product_related_price">160.000&nbsp;₫</span>
+                                                            <span class="product_related_price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                                                                                        <f:convertNumber pattern="#####,000 VND">
+                                                                                                                        </f:convertNumber></h:outputText></span>
                                                     </p>
                                         </a>
                                     </div>
                                 </li>
-                                <li class="pro-loop clearfix">
-                                    <div class="col-md-5 col-sm-5 col-xs-5">
-                                        <a href="/san-pham/hau-sua.html" title="Hàu sữa">
-                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Hàu sữa"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <a href="/san-pham/hau-sua.html" title="Hàu sữa">
-                                            <h3 class="product_related_name">
-                                                Hàu sữa
-                                            </h3>
-                                                    <p class="product_related_price">
-                                                            <span class="product_related_price">120.000&nbsp;₫</span>
-                                                    </p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="pro-loop clearfix">
-                                    <div class="col-md-5 col-sm-5 col-xs-5">
-                                        <a href="/san-pham/ngao-2-coi.html" title="Ngao 2 cồi">
-                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Ngao 2 cồi"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <a href="/san-pham/ngao-2-coi.html" title="Ngao 2 cồi">
-                                            <h3 class="product_related_name">
-                                                Ngao 2 cồi
-                                            </h3>
-                                                    <p class="product_related_price">
-                                                            <span class="product_related_price">190.000&nbsp;₫</span>
-                                                    </p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="pro-loop clearfix">
-                                    <div class="col-md-5 col-sm-5 col-xs-5">
-                                        <a href="/san-pham/oc-mong-tay.html" title="Ốc móng tay">
-                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Ốc móng tay"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <a href="/san-pham/oc-mong-tay.html" title="Ốc móng tay">
-                                            <h3 class="product_related_name">
-                                                Ốc móng tay
-                                            </h3>
-                                                    <p class="product_related_price">
-                                                            <span class="product_related_price">370.000&nbsp;₫</span>
-                                                    </p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="pro-loop clearfix">
-                                    <div class="col-md-5 col-sm-5 col-xs-5">
-                                        <a href="/san-pham/so-diep.html" title="Sò điệp">
-                                            <img src="${detailProduct_SessionBean.images[0]}" alt="Sò điệp"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <a href="/san-pham/so-diep.html" title="Sò điệp">
-                                            <h3 class="product_related_name">
-                                                Sò điệp
-                                            </h3>
-                                                    <p class="product_related_price">
-                                                            <span class="product_related_price">100.000&nbsp;₫</span>
-                                                            <span class="product_related_old_price">150.000&nbsp;₫</span>
-                                                    </p>
-                                        </a>
-                                    </div>
-                                </li>
+                                    
+                                </c:forEach>
+                               
+                                
                         </ul>
                     </div>
                     </div>

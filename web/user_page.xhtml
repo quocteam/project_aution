@@ -167,7 +167,7 @@
                                                     <label for="Password" class="col-sm-3 control-label">Mô Tả Sản Phẩm<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
                                                       
-                                                        <h:inputTextarea a:type="textarea" class="form-control" a:placeholder=""  value="">
+                                                        <h:inputTextarea a:type="textarea" class="form-control" value="#{add_Product_SessionBean.productInformation}" a:placeholder="">
                                                             
                                                         </h:inputTextarea>
                                                        
@@ -222,10 +222,7 @@
                                     <div class="register-content clearfix" >
                                         <h1 class="title"><span>Lịch sử đấu giá</span></h1>
                                         <h:form>
-                                            <p:dataTable class="table" var="bet" value="#{login_Register_UserBean.arrBet}" rows="5"
-                                                             paginator="true"
-                                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                             rowsPerPageTemplate="5,10,15">
+                                            <p:dataTable class="table" var="bet" value="#{login_Register_UserBean.arrBet}">
                                                 <p:column headerText="Mã phiên đấu giá">
                                                 <h:outputText value="#{bet.sessionId}" />
                                             </p:column>
