@@ -40,6 +40,17 @@ public class Login_Register_UserBean implements Serializable{
     private String avatars;
     private String message;
     private ArrayList<BetHistory> arrBet;
+    private String newPassWord;
+
+    public String getNewPassWord() {
+        return newPassWord;
+    }
+
+    public void setNewPassWord(String newPassWord) {
+        this.newPassWord = newPassWord;
+    }
+    
+    
 
     public ArrayList<BetHistory> getArrBet() {
         return arrBet;
@@ -221,7 +232,7 @@ public class Login_Register_UserBean implements Serializable{
     
     public String updateUserInfo(){
         UserProcess up = new UserProcess();
-       FacesContext context =  FacesContext.getCurrentInstance();
+        FacesContext context =  FacesContext.getCurrentInstance();
         HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
         HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
         HttpSession session = request.getSession();
@@ -270,5 +281,24 @@ public class Login_Register_UserBean implements Serializable{
         context.getExternalContext().getSessionMap().remove("user");
         return "dang-nhap";
     }
-    
+    public String updatePass(){
+        UserProcess up = new UserProcess();
+        FacesContext context =  FacesContext.getCurrentInstance();
+        HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
+        HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("user");
+        //us.setPassWord(this.passWord);
+        us.setNewPassWord(this.newPassWord);
+        if(up.updatePassWordUser(us)){
+            context.addMessage(null, new FacesMessage("Thay đổi thành công-Bạn phải đăng nhập lại","") );
+            context.getExternalContext().getSessionMap().remove("user");
+            //return "dang-nhap";
+            return "user_page";
+        }      
+        else{
+            context.addMessage(null, new FacesMessage("Thay đổi không thanh công! Thử lại","") );
+        }         
+            return "index";
+    }
 }

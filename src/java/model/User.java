@@ -21,6 +21,7 @@ public class User {
     private String address;
     private String status;
     private String avatars;
+    private String newPassWord;
 
     public User() {
     }
@@ -38,6 +39,15 @@ public class User {
         this.address = address;
         this.status = status;
         this.avatars = avatars;
+        
+    }
+
+    public String getNewPassWord() {
+        return newPassWord;
+    }
+
+    public void setNewPassWord(String newPassWord) {
+        this.newPassWord = newPassWord;
     }
     
 
@@ -130,5 +140,6 @@ public class User {
     public void setAvatars(String avatars) {
         this.avatars = avatars;
     }
+    
     
 }

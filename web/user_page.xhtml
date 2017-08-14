@@ -167,9 +167,9 @@
                                                     <label for="Password" class="col-sm-3 control-label">Mô Tả Sản Phẩm<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
                                                       
-                                                        <h:inputTextarea a:type="textarea" class="form-control" value="#{add_Product_SessionBean.productInformation}" a:placeholder="">
+                                                        <h:inputTextarea  class="form-control" value="#{add_Product_SessionBean.productInformation}" a:placeholder="">
                                                             
-                                                        </h:inputTextarea>
+                                                        </h:inputTextarea>  
                                                        
                                                     </div>
                                                 </div>
@@ -262,33 +262,37 @@
      
                                         <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
                                             <h:form class="form-horizontal" enctype="multipart/form-data">
+                                                
                                                 <div class="form-group">
-                                                    <label for="Code" class="col-sm-3 control-label">Mật Khẩu Cũ</label>
-                                                    <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="">
+                                                    <div class="col-sm-3"><label for="Code" >Mật Khẩu Cũ</label></div>
+                                                    <div class="col-sm-7">
+                                                        <h:inputText a:type="password" class="form-control" value="#{login_Register_UserBean.passWord}" required="true">
                                                            
                                                         </h:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="Code" class="col-sm-3 control-label">Mật Khẩu Mới</label>
-                                                    <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="">
+                                                    <div class="col-sm-3"><label for="Code" >Mật Khẩu Mới</label></div>
+                                                    <div class="col-sm-7">
+                                                        <h:inputText id="password" a:type="password" class="form-control" value="#{login_Register_UserBean.newPassWord}" required="true" requiredMessage="Bạn chưa nhập mật khẩu mới">
                                                            
                                                         </h:inputText>
+                                                        <h:message for="password" style="color: red"  />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="Code" class="col-sm-3 control-label">Nhập Lại Mật Khẩu</label>
-                                                    <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder=""  value="">
-                                                           
+                                                    <div class="col-sm-3"><label for="Code">Nhập Lại Mật Khẩu</label></div>
+                                                    <div class="col-sm-7">
+                                                        <h:inputText id="password2" a:type="password" class="form-control" value="#{login_Register_UserBean.newPassWord}" required="true" requiredMessage="Bạn chưa nhập lại mật khẩu mới">                                                          
                                                         </h:inputText>
+                                                        <h:message for="password2" style="color: red" />
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                               
+                                                   
+                                                <div class="form-group" style="margin-top: 10px">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <h:commandLink value="Đăng ký" class="btn btn-primary"/>
+                                                        <h:commandLink value="Thay đổi" style="color: white" action="#{login_Register_UserBean.updatePass()}" class="btn btn-primary"/>
                                                     </div>
                                                 </div>
                                             </h:form>

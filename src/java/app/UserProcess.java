@@ -89,6 +89,21 @@ public class UserProcess {
        
         return result>0;
     }
+    public boolean updatePassWordUser(User user){
+        int result = 0;
+        String sql="Update tbl_user set passWord =? where userID = ?";
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);  
+            prst.setString(1, user.getNewPassWord());        
+            prst.setString(2, user.getUserID());
+            result=prst.executeUpdate();          
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+       
+        return result>0;
+    }
     
     public boolean checkExistUserName(String userName){
         try {
