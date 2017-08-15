@@ -53,14 +53,20 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12 clearfix">
                                             <h1 class="name m-b-5 ng-binding">${detailProduct_SessionBean.session.productName}</h1>
+                                            <div class="product-code p-b-10 ng-binding">Người đăng : ${detailProduct_SessionBean.session.userCreateID}</div>
                                             <div class="product_price p-b-10 ng-scope">
                                                <div class="ng-scope">
                                                     Giá gốc : <h:outputText value="${detailProduct_SessionBean.session.startPrice}">
                                                             <f:convertNumber pattern="#####,000 VND"></f:convertNumber>
                                                        </h:outputText>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Bước giá : <h:outputText value="${detailProduct_SessionBean.session.stepPrice}">
+                                                            <f:convertNumber pattern="#####,000 VND"></f:convertNumber>
+                                                       </h:outputText>
                                                </div>
+                                                
                                             </div>
-                                            <div class="product-code p-b-10 ng-binding">Người đăng : ${detailProduct_SessionBean.session.userCreateID}</div>
+                                            
                                             <div>Còn <strong><span class="clock">${detailProduct_SessionBean.session.endTime}</span></strong> cho đến khi kết thúc</div>
                                             
                                             <div id="add-item-form" class="variants clearfix m-b-10 p-b-10">
@@ -71,7 +77,7 @@
                                                             <h:form>
                                                                 <span style="float: left">
                                                                     <h:inputText id="inputPrice" a:type="number" class="form-control" value="${detailProduct_SessionBean.price}" >
-                                                                </h:inputText>
+                                                                    </h:inputText>
                                                                    
                                                                 </span>
                                                                 
@@ -170,7 +176,8 @@
                                         <div class="product-block product-resize">
                                             <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
-                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
+                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                             <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
                                                             </h:commandLink>
                                                     </h:form>
@@ -182,7 +189,8 @@
                                                             <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail(index_SessionBean.sessionHappening.get(p).sessionId)}">
+                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
+                                                                <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                <i class="fa fa-eye"></i>
                                                             </h:commandLink>
                                                     </h:form>

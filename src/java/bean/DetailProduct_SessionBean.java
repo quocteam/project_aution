@@ -106,13 +106,20 @@ public class DetailProduct_SessionBean {
     public DetailProduct_SessionBean() {
     }
     
-    public String detail(String sid){
+    public String detail(){
+        String  sid = request.getParameter("id");
        SessionProcess sp = new SessionProcess();
        this.session = sp.getSessionByID(sid);
+       
+        System.out.println("ok     :"+sid);
         ses.setAttribute("sid", sid);
        this.images = sp.getImagesByID(sid);
        this.listBet = sp.topBet(sid);
-        return "product_detail";
+       if(!this.listBet.isEmpty())
+           this.price = (int) (this.listBet.get(0).getValue()+this.session.getStepPrice());
+       else
+           this.price = (int) this.session.getStartPrice();
+        return "/product_detail";
     }
     
     public String getVerify(){
@@ -123,6 +130,8 @@ public class DetailProduct_SessionBean {
         if(us==null){
              return "Bạn Cần Phải Đăng Nhập Để Được Tham Gia Đấu Giá !!!";
         }else{
+            if(us.getUserID().equals(sp.getSessionByID(sid).getUserCreateID()))
+                return "Chủ sản phẩm không được tham gia đấu giá";
             if(maxB.getValue()>=this.price)
                 return "Giá bạn đặt phải cao hơn người đặt trước";
             if(maxB.getUserBetId().equals(us.getUserID()))

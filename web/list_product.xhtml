@@ -4,12 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <ui:composition template="layout/mainlayout.xhtml">
+        <ui:composition template="layout/mainlayout.xhtml">
             <ui:define name="main">   
     <div id="collection">
         <div class="main">
@@ -57,12 +58,13 @@
                                 </div>
                             </div>
                             <div class="product_list grid clearfix">
-                                <c:forEach var="p" begin="0" end="${listProductBean.arr.size()-1}" step="1">
+                                <c:forEach var="p" begin="0" end="6" step="1">
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
                                         <div class="product-block product-resize m-b-20">
                                             <div class="product-image image-resize">
                                                 <h:form>
-                                                    <h:commandLink action="${detailProduct_SessionBean.detail(listProductBean.arr.get(p).sessionId)}">
+                                                    <h:commandLink action="${detailProduct_SessionBean.detail}">
+                                                        <f:param name="id" value="#{listProductBean.arr.get(p).sessionId}"/>
                                                         <img class="first-img" src="${listProductBean.arr.get(p).avatar}" style="height: 208px" alt="${listProductBean.arr.get(p).productName}" />
                                                     </h:commandLink>
                                                 </h:form>
@@ -72,7 +74,8 @@
                                                         </div>
                                                     <div class="btn_quickview">
                                                         <h:form>
-                                                    <h:commandLink class="quickview" action="index.xhtml">
+                                                    <h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
+                                                        <f:param name="id" value="#{listProductBean.arr.get(p).sessionId}"/>
                                                         <i class="fa fa-eye"></i>
                                                     </h:commandLink>
                                                 </h:form>
@@ -82,8 +85,9 @@
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
                                                 <h:form>
-                                                    <h:commandLink action="${detailProduct_SessionBean.detail(p.sessionId)}" title="${listProductBean.arr.get(p).productName}">
-                                                        ${listProductBean.arr.get(p).productName}
+                                                    <h:commandLink action="${detailProduct_SessionBean.detail}" title="${listProductBean.arr.get(p).productName}">
+                                                        <f:param name="id" value="#{listProductBean.arr.get(p).sessionId}"/>
+                                                        ${listProductBean.arr.get(p).productName} ${listProductBean.arr.size()-1}
                                                     </h:commandLink>
                                                 </h:form>
                                                 </h3>
@@ -289,39 +293,28 @@
                                         for (var i = 0, max = a.length; i &lt; max; i++) {
                                             countDownDate.push(new Date(a[i].innerHTML).getTime());
                                     }
-
-
                                         // Update the count down every 1 second
                                         var x = setInterval(function() {
-
                                             // Get todays date and time
                                             var now = new Date().getTime();
-
                                             // Find the distance between now an the count down date
                                             for (var i = 0, max = a.length; i &lt; max; i++) {
                                                     var distance = countDownDate[i] - now;
-
                                                     // Time calculations for days, hours, minutes and seconds
                                                     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                                                     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                                                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                                                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
                                                     // Output the result in an element with id="demo"
                                                     document.getElementsByClassName('clock')[i].innerHTML = days + "d " + hours + "h "
                                                     + minutes + "m " + seconds + "s ";
-
                                                     // If the count down is over, write some text 
                                                     if (distance &lt; 0) {
                                                         clearInterval(x);
                                                         document.getElementsByClassName('clock')[i].innerHTML = "Đã Kết Thúc";
                                                     }
                                             }
-
                                         }, 1000);     
-
-
-
                                 </script>
                 <script type="text/javascript">
                     $(document).ready(function () {

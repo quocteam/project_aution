@@ -34,19 +34,23 @@ public class ListProductBean {
     public String UpcomingSession(){
         SessionProcess sp = new SessionProcess();
         arr = sp.getUpcomingProduct();
-        return "list_product.xhtml";
+        return "/list_product.xhtml";
     }
     
     public String CurrentSession(){
         SessionProcess sp = new SessionProcess();
         arr = sp.getSessionHappening();
-        return "list_product.xhtml";
+        return "/list_product.xhtml";
     }
     
     public String DoneSession(){
         SessionProcess sp = new SessionProcess();
         arr = sp.getSessionDone();
-        return "list_product.xhtml";
+        return "/list_product.xhtml";
+    }
+    
+    public String index(){
+        return "index.xhtml";
     }
     
 }

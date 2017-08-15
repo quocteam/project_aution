@@ -253,6 +253,35 @@ public class SessionProcess {
         }
        return null;
     }
+    // Lấy Phiên đấu giá theo id
+     public User getUserByID(String uID){
+         try {
+            String sql = "SELECT * FROM `tbl_user` WHERE userID=?";
+            
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uID);
+            ResultSet rs = prst.executeQuery();
+            User us = new User();
+            while (rs.next()) {
+                us.setUserID(uID);
+                us.setUserName(rs.getString(2));
+                us.setEmail(rs.getString(3));
+                us.setFullName(rs.getString(4));
+                us.setSex(rs.getString(5));
+                us.setDob(rs.getString(6));
+                us.setPhoneNumber(rs.getInt(7));
+                us.setAddress(rs.getString(8));
+                us.setStatus(rs.getString(9));
+                us.setAvatars(rs.getString(10));
+            }
+            rs.close();
+            return us;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return null;
+    } 
+     
     // Lấy Danh sách ảnh theo id
     public ArrayList<String> getImagesByID(String sID){
         ArrayList<String> arr = new ArrayList<>();
@@ -519,12 +548,9 @@ public class SessionProcess {
      
      public static void main(String[] args) {
        SessionProcess sp = new SessionProcess();
-       ArrayList<BetHistory> arr = sp.findBetByUId("uid00002");
-         for (int i = 0; i < arr.size(); i++) {
-             System.out.println(""+arr.get(i).getBetStatus());
-              System.out.println(""+arr.get(i).getUserStatus());
-              
-         }
+       User us = sp.getUserByID("uid00001");
+         System.out.println(""+us.getUserName());
+         
          
     }
     
