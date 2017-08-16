@@ -23,4 +23,9 @@
         <managed-bean-class>bean.ListProductBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>user_InfoBean</managed-bean-name>
+        <managed-bean-class>bean.User_InfoBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

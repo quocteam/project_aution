@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                <div class="main">
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-md-3">
+                                        <div class="menu-account">
+                                            <h3>
+                                                <span>
+                                                    Tài khoản
+                                                </span>
+                                            </h3>
+                                                <ul>
+                                                    <li class="active"><a href="#tab1" data-toggle="tab"><i class="glyphicon glyphicon-user"></i> Thông tin tài khoản</a></li>
+                                                    <li><a href="#tab2" data-toggle="tab"><i class="glyphicon glyphicon-list-alt"></i> Sản phẩm đã đăng</a></li>
+                                                    <li><a href="#tab3" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart"></i> Lịch sử đấu giá</a></li>
+                                                </ul>
+                                        </div>                    
+                                </div>
+                            <div class="tab-content">
+                                <div class="col-md-9 tab-pane fade in active" id="tab1">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Thông tin tài khoản</strong> </li>
+                                        </ul>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+                                    </script>
+                                  
+                                    <div class="register-content clearfix">
+                                        <h1 class="title"><span>Thông tin tài khoản</span></h1>
+                                        <p:messages id="messages" class="alert" showDetail="true" autoUpdate="true" closable="true" />
+                                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
+                                            <h:form class="form-horizontal">
+                                                <h2><span>Thông tin tài khoản</span></h2>
+                                                <div class="form-group">
+                                                    <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" readonly="true" value="#{user_InfoBean.userName}">
+                                                         
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email" class="col-sm-3 control-label">Email<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText a:type="email"  class="form-control" readonly="true" value="#{user_InfoBean.email}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <h2>Thông tin cá nhân</h2>
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-3 control-label">Họ và tên<span class="warning">(*)</span></label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" readonly="true" value="#{user_InfoBean.fullName}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Giới tính</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" readonly="true" value = "#{user_InfoBean.sex}"></h:inputText>                    
+                                                                              
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-inline">
+                                                    <label class="col-sm-3 control-label">Ngày sinh</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" readonly="true" value="#{user_InfoBean.dob}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Điện thoại</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="number" readonly="true" value="0#{user_InfoBean.phoneNumber}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-sm-3 control-label">Địa chỉ</label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText class="form-control" a:type="text" readonly="true" value="#{user_InfoBean.address}"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+<!--     tab2    -->
+                                <div class="col-md-9 tab-pane fade" id="tab2">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Sản phẩm đã đăng</strong> </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                    <div class="register-content clearfix" >
+                                        <h1 class="title"><span>Danh sách sản phẩm</span></h1>
+                                        <table class="table">
+                                        <thead class="thead-default">
+                                          <tr>
+                                            <th>Mã Phiên</th>
+                                            <th>Tên Sản Phẩm</th>
+                                            <th>Loại Sản Phẩm</th>
+                                            <th>Giá Khởi Điểm</th>
+                                            <th>Bước Giá</th>
+                                            <th>Thời Gian Bắt Đầu</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="p" items="${user_InfoBean.session}">
+                                            <tr>
+                                                <th scope="row">${p.sessionId}</th>
+                                                <td>${p.productName}</td>
+                                                <td>${p.productType}</td>
+                                                <td>${p.startPrice}</td>
+                                                <td>${p.stepPrice}</td>
+                                                <td>${p.startTime}</td>
+                                            </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                      </table>
+                                        
+                                    </div>
+                                </div>
+<!--     tab3    -->
+                                <div class="col-md-9 tab-pane fade" id="tab3">
+                                    <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Lịch sử đấu giá</strong> </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    
+                                    <div class="register-content clearfix" >
+                                        <h1 class="title"><span>Danh sách phiên tham gia</span></h1>
+                                        <table class="table">
+                                        <thead class="thead-default">
+                                          <tr>
+                                            <th>Mã Phiên</th>
+                                            <th>Tên Sản Phẩm</th>
+                                            <th>Giá Đặt</th>
+                                            <th>Tình Trạng</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="p" items="${user_InfoBean.arrBet}">
+                                            <tr>
+                                                <th scope="row">${p.sessionId}</th>
+                                                <td>${p.productName}</td>
+                                                <td>${p.value}</td>
+                                                <td>${p.betStatus}</td>
+                                                
+                                            </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                </div>                                
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

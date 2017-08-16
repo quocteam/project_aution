@@ -53,7 +53,17 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12 clearfix">
                                             <h1 class="name m-b-5 ng-binding">${detailProduct_SessionBean.session.productName}</h1>
-                                            <div class="product-code p-b-10 ng-binding">Người đăng : ${detailProduct_SessionBean.session.userCreateID}</div>
+                                            <div class="product-code p-b-10 ng-binding"> 
+                                                <h:form>
+                                                    <h:commandLink action="${user_InfoBean.UserInfo}" value="">
+                                                        <f:param name="uid" value="#{detailProduct_SessionBean.session.userCreateID}"/>
+                                                        Người đăng : ${detailProduct_SessionBean.userName}
+                                                    </h:commandLink>
+                                                </h:form>
+                                                
+                                            </div>
+                                            <div>Loại sản phẩm : <a>${detailProduct_SessionBean.session.productType}</a></div>
+                                            <br/>
                                             <div class="product_price p-b-10 ng-scope">
                                                <div class="ng-scope">
                                                     Giá gốc : <h:outputText value="${detailProduct_SessionBean.session.startPrice}">
@@ -66,9 +76,7 @@
                                                </div>
                                                 
                                             </div>
-                                            
                                             <div>Còn <strong><span class="clock">${detailProduct_SessionBean.session.endTime}</span></strong> cho đến khi kết thúc</div>
-                                            
                                             <div id="add-item-form" class="variants clearfix m-b-10 p-b-10">
                                                 <div class="call">
                                                     <p class="title">Đặt giá bạn muốn mua : </p>
@@ -224,13 +232,19 @@
                             <div id="menuverti" class="block_content navbar_menuvertical" style="position: static">
                                 <ul class='nav_verticalmenu' id="menu_left" style="width: 100%">
                                     <c:forEach var="p" items="${detailProduct_SessionBean.listBet}" >
-                                    <li class="has-child level0"><a class='' href='#'>
-                                            <span>${p.userBetId}</span></a>
-                                        <ul class='level1'>
-                                            <li class="level1"><a class='' href='#'><span><h:outputText value="${p.value}">
+                                    <li class="has-child level0">
+                                        
+                                        <a class='' href='#'>
+                                            <span>${p.userBetId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            <span><h:outputText value="${p.value}">
+                                                  <f:convertNumber pattern="#####,000 VND">
+                                                  </f:convertNumber></h:outputText></span>
+                                        </a>
+<!--                                        <ul class='level1'>
+                                            <li class="level1"><a class='' href='#'><span><h:outputText value="">
                                                                                                                         <f:convertNumber pattern="#####,000 VND">
                                                                                                                         </f:convertNumber></h:outputText></span></a></li>
-                                        </ul>
+                                        </ul>-->
                                     </li>
                                     </c:forEach>
                                 </ul>

@@ -28,6 +28,16 @@ public class DetailProduct_SessionBean {
     private Session session;
     private int price;
     private ArrayList<Bet> listBet;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
     FacesContext context =  FacesContext.getCurrentInstance();
     HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
     HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
@@ -110,7 +120,7 @@ public class DetailProduct_SessionBean {
         String  sid = request.getParameter("id");
        SessionProcess sp = new SessionProcess();
        this.session = sp.getSessionByID(sid);
-       
+       this.userName = sp.getUserByID(this.session.getUserCreateID()).getUserName();
         System.out.println("ok     :"+sid);
         ses.setAttribute("sid", sid);
        this.images = sp.getImagesByID(sid);

@@ -294,7 +294,7 @@ public class Login_Register_UserBean implements Serializable{
             context.addMessage(null, new FacesMessage("Thay đổi thành công-Bạn phải đăng nhập lại","") );
             context.getExternalContext().getSessionMap().remove("user");
             //return "dang-nhap";
-            return "user_page";
+            return "dang-nhap";
         }      
         else{
             context.addMessage(null, new FacesMessage("Thay đổi không thanh công! Thử lại","") );
