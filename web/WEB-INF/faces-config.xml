@@ -28,4 +28,14 @@
         <managed-bean-class>bean.User_InfoBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>categoryBean</managed-bean-name>
+        <managed-bean-class>bean.CategoryBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>verifyBean</managed-bean-name>
+        <managed-bean-class>bean.verifyBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

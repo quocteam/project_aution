@@ -17,10 +17,10 @@ public class Session {
     private String productName;
     private String productType;
     private String productInformation;
-    private float startPrice;
-    private float stepPrice;
+    private int startPrice;
+    private int stepPrice;
     private int bid;
-    private float lastPrice;
+    private int lastPrice;
     private String userWinID;
     private String startTime;
     private String endTime;
@@ -76,19 +76,19 @@ public class Session {
         this.productInformation = productInformation;
     }
 
-    public float getStartPrice() {
+    public int getStartPrice() {
         return startPrice;
     }
 
-    public void setStartPrice(float startPrice) {
+    public void setStartPrice(int startPrice) {
         this.startPrice = startPrice;
     }
 
-    public float getStepPrice() {
+    public int getStepPrice() {
         return stepPrice;
     }
 
-    public void setStepPrice(float stepPrice) {
+    public void setStepPrice(int stepPrice) {
         this.stepPrice = stepPrice;
     }
 
@@ -100,11 +100,11 @@ public class Session {
         this.bid = bid;
     }
 
-    public float getLastPrice() {
+    public int getLastPrice() {
         return lastPrice;
     }
 
-    public void setLastPrice(float lastPrice) {
+    public void setLastPrice(int lastPrice) {
         this.lastPrice = lastPrice;
     }
 
@@ -143,7 +143,7 @@ public class Session {
     public Session() {
     }
 
-    public Session(String sessionId, String userCreateID, String productName, String productType, String productInformation, float startPrice, float stepPrice, int bid, float lastPrice, String userWinID, String startTime, String endTime, String status,String avatar) {
+    public Session(String sessionId, String userCreateID, String productName, String productType, String productInformation, int startPrice, int stepPrice, int bid, int lastPrice, String userWinID, String startTime, String endTime, String status,String avatar) {
         this.sessionId = sessionId;
         this.userCreateID = userCreateID;
         this.productName = productName;

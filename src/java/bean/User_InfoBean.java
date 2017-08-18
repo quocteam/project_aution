@@ -7,6 +7,7 @@ package bean;
 
 import app.SessionProcess;
 import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import model.BetHistory;
@@ -137,8 +138,9 @@ public class User_InfoBean {
         
     }
     
-    public String UserInfo(){
-        FacesContext context =  FacesContext.getCurrentInstance();
+    @PostConstruct
+    public void init(){
+    FacesContext context =  FacesContext.getCurrentInstance();
     HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
     String  uid = request.getParameter("uid");
     SessionProcess sp = new SessionProcess();
@@ -155,7 +157,8 @@ public class User_InfoBean {
     this.avatar = us.getAvatars();
     this.session = sp.getSessionByUID(uid);
     this.arrBet = new SessionProcess().findBetByUId(uid);
-    return "user_info.xhtml";
     }
+    
+    
     
 }

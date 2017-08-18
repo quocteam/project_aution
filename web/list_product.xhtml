@@ -5,6 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
@@ -58,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="product_list grid clearfix">
-                                <c:forEach var="p" begin="0" end="7" step="1">
+                                <c:forEach var="p" begin="0" end="${listProductBean.arr.size()-1}" step="1">
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
                                         <div class="product-block product-resize m-b-20">
                                             <div class="product-image image-resize">
@@ -68,26 +69,29 @@
                                                         <img class="first-img" src="${listProductBean.arr.get(p).avatar}" style="height: 208px" alt="${listProductBean.arr.get(p).productName}" />
                                                     </h:commandLink>
                                                 </h:form>
+                                                <p>${p}</p>
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46493,1)">
                                                             <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <h:form>
-                                                    <h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
+                                                        
+                                                            <h:link class="quickview" outcome="product_detail">
                                                         <f:param name="id" value="#{listProductBean.arr.get(p).sessionId}"/>
                                                         <i class="fa fa-eye"></i>
-                                                    </h:commandLink>
-                                                </h:form>
+                                                    </h:link>
+                                             
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
                                                 <h:form>
+                                                    ${listProductBean.arr.get(p).sessionId}
                                                     <h:commandLink action="${detailProduct_SessionBean.detail}" title="${listProductBean.arr.get(p).productName}">
                                                         <f:param name="id" value="#{listProductBean.arr.get(p).sessionId}"/>
-                                                        ${listProductBean.arr.get(p).productName} ${listProductBean.arr.size()-1}
+                                                        ${listProductBean.arr.get(p).productName} ${listProductBean.arr.size()-1} ${listProductBean.arr.get(p).sessionId}
                                                     </h:commandLink>
                                                 </h:form>
                                                 </h3>
@@ -101,7 +105,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                               
+
                                 <div class="icon-loading" style="display: none;">
                                     <div class="uil-ring-css">
                                         <div></div>

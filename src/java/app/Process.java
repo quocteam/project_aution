@@ -7,9 +7,14 @@ package app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Category;
+import model.Session;
 
 /**
  *
@@ -21,7 +26,7 @@ public class Process {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String user="root";
-            String pass="aassdd";
+            String pass="";
             String url = "jdbc:mysql://localhost:3306/auction?characterEncoding=utf-8";
             try {
                 conn= (Connection) DriverManager.getConnection(url, user, pass);
@@ -34,4 +39,5 @@ public class Process {
         }
         return  conn;
 }
+    
 }
