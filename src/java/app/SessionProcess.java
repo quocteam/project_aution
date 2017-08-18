@@ -8,6 +8,8 @@ package app;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +28,7 @@ public class SessionProcess {
     
     public boolean AddNewSession(Session session){
          int result = 0;
-        String sql="INSERT INTO tbl_session VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="INSERT INTO tbl_session VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
@@ -35,14 +37,15 @@ public class SessionProcess {
             prst.setString(3, session.getProductName());
             prst.setString(4, session.getProductType());
             prst.setString(5, session.getProductInformation());
-            prst.setFloat(6, session.getStartPrice());
-            prst.setFloat(7, session.getStepPrice());
-            prst.setInt(8, session.getBid());
-            prst.setFloat(9, session.getLastPrice());
-            prst.setString(10, session.getUserWinID());
-            prst.setString(11, session.getStartTime());
-            prst.setString(12, session.getEndTime());
-            prst.setString(13, session.getStatus());
+            prst.setString(6, session.getAvatar());
+            prst.setFloat(7, session.getStartPrice());
+            prst.setFloat(8, session.getStepPrice());
+            prst.setInt(9, session.getBid());
+            prst.setFloat(10, session.getLastPrice());
+            prst.setString(11, session.getUserWinID());
+            prst.setString(12, session.getStartTime());
+            prst.setString(13, session.getEndTime());
+            prst.setString(14, session.getStatus());
             result=prst.executeUpdate();
             prst.close();
         } catch (SQLException e) {
@@ -52,8 +55,7 @@ public class SessionProcess {
         return result>0;
     }
     
-    public String GetLastID()
-{
+    public String GetLastID(){
             String sql = "SELECT sessionId FROM `tbl_session` ORDER by sessionId DESC LIMIT 1";
          try {
              PreparedStatement prst = Process.getConnection().prepareStatement(sql);
@@ -68,8 +70,7 @@ public class SessionProcess {
             
 }
     
-     public String NextID()
-        {
+     public String NextID(){
             String prefixID="sid";
             if(GetLastID().equals(""))
            {
@@ -109,22 +110,10 @@ public class SessionProcess {
                 ss.setSessionId(rs.getString(1));
                 ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStartTime(rs.getString(12));
                 arr.add(ss);
             }
             rs.close();
@@ -152,22 +141,11 @@ public class SessionProcess {
                 ss.setSessionId(rs.getString(1));
                 ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
                 arr.add(ss);
             }
             rs.close();
@@ -196,22 +174,12 @@ public class SessionProcess {
                 ss.setSessionId(rs.getString(1));
                 ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                
                 arr.add(ss);
             }
             rs.close();
@@ -238,12 +206,14 @@ public class SessionProcess {
                 ss.setProductName(rs.getString(3));
                 ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setUserWinID(rs.getString(11));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
                 return ss;
             }
             rs.close();
@@ -282,24 +252,8 @@ public class SessionProcess {
        return null;
     } 
      
-    // Lấy Danh sách ảnh theo id
-    public ArrayList<String> getImagesByID(String sID){
-        ArrayList<String> arr = new ArrayList<>();
-         try {
-            String sql = "SELECT * FROM `tbl_image` WHERE sid=?";
-            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
-            prst.setString(1, sID);
-            ResultSet rs = prst.executeQuery();
-            while (rs.next()) {
-                arr.add(rs.getString(3));
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-       return arr;
-    } 
+    
+   
     // Lấy 5 người trả giá cao nhất
     public ArrayList<Bet> topBet(String sID){
         ArrayList<Bet> arr = new ArrayList<>();
@@ -364,22 +318,7 @@ public class SessionProcess {
         return result>0;
     }
      
-    public boolean addImages(String sid,String link){
-         int result = 0;
-        String sql="INSERT INTO tbl_image(sid,link) VALUES(?,?)";
-        
-        try {
-            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
-            prst.setString(1,sid);
-            prst.setString(2, link);
-            result=prst.executeUpdate();
-            prst.close();
-        } catch (SQLException e) {
-            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
-        }
-       
-        return result>0;
-    }
+    
     
     // lịch sử đặt giá
     public ArrayList<BetHistory> findBetByUId(String uid){
@@ -435,20 +374,13 @@ public class SessionProcess {
                 ss.setProductName(rs.getString(3));
                 ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
                 arr.add(ss);
             }
             rs.close();
@@ -458,7 +390,7 @@ public class SessionProcess {
         }
        return arr;
     }
-     // Lấy 8phiên đấu giá đang diễn ra 
+     // Lấy phiên đấu giá đang diễn ra 
      public ArrayList<Session> getSessionHappening(){
         Date today=new Date(System.currentTimeMillis());
         SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -478,20 +410,13 @@ public class SessionProcess {
                 ss.setProductName(rs.getString(3));
                 ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
                 arr.add(ss);
             }
             rs.close();
@@ -522,20 +447,13 @@ public class SessionProcess {
                 ss.setProductName(rs.getString(3));
                 ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
                 arr.add(ss);
             }
             rs.close();
@@ -561,36 +479,123 @@ public class SessionProcess {
                 ss.setProductName(rs.getString(3));
                 ss.setProductType(rs.getString(4));
                 ss.setProductInformation(rs.getString(5));
-                ss.setStartPrice(rs.getFloat(6));
-                ss.setStepPrice(rs.getFloat(7));
-                ss.setBid(rs.getInt(8));
-                ss.setStartTime(rs.getString(11));
-                ss.setEndTime(rs.getString(12));
-                ss.setStatus(rs.getString(13));
-                String sql2 ="SELECT * FROM `tbl_image` WHERE sid=? LIMIT 1";
-                PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
-                prst2.setString(1, rs.getString(1));
-                ResultSet rs2 = prst2.executeQuery();
-                while (rs2.next()) {                    
-                    ss.setAvatar(rs2.getString(3));
-                }
-                rs2.close();
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
                 arr.add(ss);
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
-            
         }
        return arr;
     }
      
+     // kiểm tra phiên đấu giá kết thúc chưa kết thúc rồi thì update
+    public String updateSession(String sid){
+        String message = "";
+        try {
+            Session s = getSessionByID(sid);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = format.parse(s.getStartTime());
+            Date end = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+            Date today=new Date(System.currentTimeMillis());
+            if(today.before(date))
+                message = "Chưa diễn ra";
+            else if(today.after(end)){
+                if(s.getUserWinID()==null){
+                    Bet b = top1Bet(sid);
+                    if(b.getUserBetId()==null)
+                        message = "Đã kết thúc , không có người đấu giá";
+                    else{
+                          if(updateUserWin(sid, b.getUserBetId()))
+                          message = b.getUserBetId();
+                          else
+                              message ="fail";
+                    }
+                }
+                else
+                    message=s.getUserWinID();
+
+            }
+            else
+                message = "Đang diễn ra";
+        } catch (ParseException ex) {
+            Logger.getLogger(SessionProcess.class.getName()).log(Level.SEVERE, null, ex);
+            message = "";
+        }
+        return message;
+    }
+    // Cập nhật người chiến thắng
+    public boolean updateUserWin(String sid,String uid){
+         int result = 0;
+        String sql="Update tbl_session set userWinID = ? where sessionId = ?";
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uid);
+            prst.setString(2, sid);
+            result=prst.executeUpdate();
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+        return result>0;
+    }
+     // Danh sách sản phẩm đã đăng cho trang user
+    public  ArrayList<Session> arrSessionForUser(String uid){
+        ArrayList<Session> ar = getSessionByUID(uid);
+        for (int i = 0; i < ar.size(); i++) {
+            String a = updateSession(ar.get(i).getSessionId());
+            System.out.println(""+a);
+            if(a.equals("Đang diễn ra")){
+                ar.get(i).setStatus("Đang diễn ra");
+            }else if("Chưa diễn ra".equals(a)){
+                ar.get(i).setStatus("Chưa diễn ra");
+            }else if("Đã kết thúc , không có người đấu giá".equals(a)){
+                ar.get(i).setStatus("Đã kết thúc");
+                ar.get(i).setUserWinID("Không có người đấu giá");
+            }else{
+                ar.get(i).setStatus("Đã kết thúc");
+                ar.get(i).setUserWinID(a);
+            }
+        }
+        return ar;
+    }
+    
+    public boolean reUP(String sid,int startPrice,int stepPrice,String startTime){
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = format.parse(startTime);
+            Date end = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+            String endTime = format.format(end);
+            int result = 0;
+            String sql="Update tbl_session set startPrice = ?,stepPrice = ?, startTime = ?, endTime = ? where sessionId = ?";
+            try {
+                PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+                prst.setInt(1,startPrice );
+                prst.setInt(2, stepPrice);
+                prst.setString(3, startTime);
+                prst.setString(4, endTime);
+                prst.setString(5, sid);
+                result=prst.executeUpdate();
+                prst.close();
+            } catch (SQLException e) {
+                Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+            }
+            return result>0;
+        } catch (ParseException ex) {
+            Logger.getLogger(SessionProcess.class.getName()).log(Level.SEVERE,null, ex);
+        }
+        return false;
+    }
      public static void main(String[] args) {
        SessionProcess sp = new SessionProcess();
-       User us = sp.getUserByID("uid00001");
-         System.out.println(""+us.getUserName());
-         System.out.println(""+us.getDob());
-         
+         System.out.println(""+sp.updateSession("sid00018"));
+       
          
     }
     

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -35,15 +36,16 @@ public class Add_Product_SessionBean {
     private String productName;
     private String productType;
     private String productInformation;
-    private float startPrice;
-    private float stepPrice;
+    private int startPrice;
+    private int stepPrice;
     private int bid;
-    private float lastPrice;
+    private int lastPrice;
     private String userWinID;
     private String startTime;
     private String status;
     private Part images;
     private static final String  UPLOAD_DIR = "images";
+    
 
     public Part getImages() {
         return images;
@@ -95,19 +97,19 @@ public class Add_Product_SessionBean {
         this.productInformation = productInformation;
     }
 
-    public float getStartPrice() {
+    public int getStartPrice() {
         return startPrice;
     }
 
-    public void setStartPrice(float startPrice) {
+    public void setStartPrice(int startPrice) {
         this.startPrice = startPrice;
     }
 
-    public float getStepPrice() {
+    public int getStepPrice() {
         return stepPrice;
     }
 
-    public void setStepPrice(float stepPrice) {
+    public void setStepPrice(int stepPrice) {
         this.stepPrice = stepPrice;
     }
 
@@ -119,11 +121,11 @@ public class Add_Product_SessionBean {
         this.bid = bid;
     }
 
-    public float getLastPrice() {
+    public int getLastPrice() {
         return lastPrice;
     }
 
-    public void setLastPrice(float lastPrice) {
+    public void setLastPrice(int lastPrice) {
         this.lastPrice = lastPrice;
     }
 
@@ -188,7 +190,6 @@ public class Add_Product_SessionBean {
         session.setStartTime(this.startTime);
         session.setEndTime(a);
         session.setStatus("Inactive");
-        if(up.AddNewSession(session)){
             try{
             HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
             String fileName = getFileName(images);
@@ -205,7 +206,7 @@ public class Add_Product_SessionBean {
                 while((read = inputStream.read(bytes)) != -1){
                     outputStream.write(bytes, 0, read);
                 }
-                up.addImages(up.GetLastID(), "images/"+getFileName(images));
+                session.setAvatar("images/"+getFileName(images));
             } catch (Exception e) {
                 e.printStackTrace();
                 fileName = "";
@@ -221,11 +222,12 @@ public class Add_Product_SessionBean {
         }catch(Exception e){
             
         }
+            if(up.AddNewSession(session))
             return "index";
-        }
             
-        else
-            return "";
+      
+            
+       
     } catch (ParseException ex) {
         Logger.getLogger(Add_Product_SessionBean.class.getName()).log(Level.SEVERE, null, ex);
     }
