@@ -23,6 +23,8 @@ public class Process {
             String user="root";
             String pass="aassdd";
             String url = "jdbc:mysql://localhost:3306/auction?characterEncoding=utf-8";
+//            String pass="sa";
+//            String url = "jdbc:mysql://localhost:3306/sem4_auction?characterEncoding=utf-8";
             try {
                 conn= (Connection) DriverManager.getConnection(url, user, pass);
             } catch (SQLException ex) {
