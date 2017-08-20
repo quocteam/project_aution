@@ -114,10 +114,10 @@
                                 <li><i class="fa fa-phone"></i> <span>Hotline:0908 77 00 95</span></li>
                             </ul>
                                 <ul class="nav navbar-nav navbar-right topmenu  hidden-xs hidden-sm">
-                                    <li class="order-check"><a href="kiem-tra-don-hang.html"><i class="fa fa-pencil-square-o"></i> Kiểm tra đơn hàng</a></li>
-                                    <li class="order-cart"><a href="gio-hang.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                     <c:choose>
                                         <c:when test="${session.getAttribute('user')!=null}">
+                                            <li class="order-check"><a href="#"><i class="fa fa-pencil-square-o"></i> BookMark</a></li>
+                                            <li class="order-cart"><a href="#"><i class="fa fa-shopping-cart"></i> Đang tham gia</a></li>
                                             <li><h:form>
                                                 <h:commandLink class="pull-left" style="padding-top: 4px" action="${login_Register_UserBean.userPage()}" value="hi,${session.getAttribute('user').userName}"></h:commandLink>
                                                 <h:commandLink class="pull-left" style="padding-top: 4px" action="${login_Register_UserBean.LogOut()}" value="[Thoát]"></h:commandLink></h:form>
@@ -202,11 +202,11 @@
                             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                                 <!-- Cart -->
                                 <div class="cart_header">
-                                    <a href="gio-hang.html" title="Giỏ hàng">
+                                    <a href="#" title="Các phiên đấu giá đang tham gia">
                                         <span class="cart_header_icon"></span>
                                         <span class="box_text">
-                                            <strong class="cart_header_count">Giỏ hàng <span>(0)</span></strong>
-                                            <span class="cart_price">0₫</span>
+                                            <strong class="cart_header_count">Đang tham gia <span>(0)</span></strong>
+                                            <span class="cart_price">0</span>
                                         </span>
                                     </a>
                                     <div class="cart_clone_box">
@@ -223,7 +223,7 @@
                                         </div>
                                     </div>
                                         <div class="cart_header_top_box">
-                                            <div class="cart_empty">Giỏ hàng của bạn vẫn chưa có sản phẩm nào.</div>
+                                            <div class="cart_empty">Bạn không tham gia vào phiên đấu giá nào</div>
                                         </div>
                                 </div>
                                 <!-- End Cart -->
@@ -375,13 +375,22 @@
                             <div id="menuverti" class="block_content navbar_menuvertical">
                                 <ul class='nav_verticalmenu' id="menu_left">
                                     <c:forEach var="p" items="${categoryBean.arrType}">
-                                        <li class="has-child level0"><a class='' href='list_product.xhtml'><img class='icon-menu' src='Uploads/shop2005/images/icon/${p}.png' alt='Nghao - Sò - Ốc'/> 
-                                            <span>${p}</span></a>
+                                        <li class="has-child level0">
+                                            <h:link outcome="list_product" >
+                                                <f:param name="type" value="${p}"/>
+                                                <img class='icon-menu' src='Uploads/shop2005/images/icon/${p}.png' alt='${p}'/> 
+                                            <span>${p}</span>
+                                            </h:link>
                                         <ul class='level1'>
                                             <c:forEach var="x" items="${categoryBean.arrCate}">
                                                 <c:choose>
                                                     <c:when test="${x.categoryType == p}">
-                                                        <li class="level1"><a class='' href='list_product.xhtml'><span>${x.categoryName}</span></a></li>
+                                                        <li class="level1">
+                                                            <h:link outcome="list_product" >
+                                                                <f:param name="type" value="${x.categoryName}"/>
+                                                                <span>${x.categoryName}</span>
+                                                            </h:link>   
+                                                        </li>
                                                     </c:when>
                                                 </c:choose>
                                             </c:forEach>

@@ -5,6 +5,7 @@
  */
 package bean;
 
+import app.CategoryProcess;
 import app.SessionProcess;
 import app.UserProcess;
 import java.io.File;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Bet;
 import model.BetHistory;
+import model.Category;
 import model.Session;
 import model.User;
 
@@ -54,6 +56,15 @@ public class Login_Register_UserBean implements Serializable{
     private ArrayList<BetHistory> arrBet;
     private ArrayList<Session> arrSession;
     private String newPassWord;
+    private ArrayList<Category> cate = new CategoryProcess().getAllCategory();
+
+    public ArrayList<Category> getCate() {
+        return cate;
+    }
+
+    public void setCate(ArrayList<Category> cate) {
+        this.cate = cate;
+    }
 
     private String sessionId;
     private String userCreateID;
