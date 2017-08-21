@@ -47,28 +47,8 @@ public class ListProductBean {
             arr = sp.getUpcomingProduct();
         else if("Đã kết thúc".equals(a))
             arr = sp.getSessionDone();
+        else
+            arr=sp.getSessionByType(a);
     }
-    
-    public String UpcomingSession(){
-        SessionProcess sp = new SessionProcess();
-        arr = sp.getUpcomingProduct();
-        return "/list_product.xhtml";
-    }
-    
-    public String CurrentSession(){
-        SessionProcess sp = new SessionProcess();
-        arr = sp.getSessionHappening();
-        return "/list_product.xhtml";
-    }
-    
-    public String DoneSession(){
-        SessionProcess sp = new SessionProcess();
-        arr = sp.getSessionDone();
-        return "/list_product.xhtml";
-    }
-    
-    public String index(){
-        return "index.xhtml";
-    }
-    
+        
 }

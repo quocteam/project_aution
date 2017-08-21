@@ -21,25 +21,23 @@
                 <div class="homeslider">
                     <div id="owl-slider" class="owl-carousel owl-carousel-banner">
                             <div class="item">
-                                <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                         <f:param name="id" value="#{index_SessionBean.sessionHappening.get(0).sessionId}"/>
-                                                            <img src="${index_SessionBean.sessionHappening.get(0).avatar}" style="width: 100%;height: 400px" alt="1" />
-                                                            </h:commandLink>
-                                                    </h:form>
+                                <h:link  outcome="product_detail">
+                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(0).sessionId}"/>
+                                    <img src="${index_SessionBean.sessionHappening.get(0).avatar}" style="width: 100%;height: 400px" alt="1" />
+                                </h:link>
+                                
                             </div>
                             <div class="item">
-                                <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(1).sessionId}"/>
-                                                            <img src="${index_SessionBean.sessionHappening.get(1).avatar}" style="width: 100%;height: 400px" alt="1" />
-                                                            </h:commandLink>
-                                                    </h:form>
+                                <h:link  outcome="product_detail">
+                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(1).sessionId}"/>
+                                    <img src="${index_SessionBean.sessionHappening.get(1).avatar}" style="width: 100%;height: 400px" alt="1" />
+                                </h:link>
                             </div>
                             <div class="item">
-                                <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(2).sessionId}"/>
-                                                            <img src="${index_SessionBean.sessionHappening.get(2).avatar}" style="width: 100%;height: 400px" alt="1" />
-                                                            </h:commandLink>
-                                                    </h:form>
+                                <h:link  outcome="product_detail">
+                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(2).sessionId}"/>
+                                    <img src="${index_SessionBean.sessionHappening.get(2).avatar}" style="width: 100%;height: 400px" alt="1" />
+                                </h:link>
                             </div>
                     </div>
                 </div>
@@ -126,20 +124,19 @@
                                                     <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
                                                        <div class="article_item">
                                                             <div class="article_img">
-                                                                <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                                <h:link  outcome="product_detail">
+                                                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                         <img src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="${index_SessionBean.sessionHappening.get(p).productName}" title="${index_SessionBean.sessionHappening.get(p).productName}" />
-                                                                        </h:commandLink>
-                                                                </h:form>
+                                                                </h:link>
+                                                                
                                                             </div>
                                                             <div class="article_content clearfix">
                                                                 <div class="title">
                                                                     <h4 style="text-align: center;line-height: 46px">
-                                                                        <h:form><h:commandLink action="${detailProduct_SessionBean.detail}"  title="${index_SessionBean.sessionHappening.get(p).productName}">
-                                                                                <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                                        <h:link  outcome="product_detail" title="${index_SessionBean.sessionHappening.get(p).productName}">
+                                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                                 ${index_SessionBean.sessionHappening.get(p).productName}
-                                                                        </h:commandLink>
-                                                                </h:form>
+                                                                        </h:link>
                                                                     </h4>
                                                                 </div>
                                                                 <div class="article_meta">
@@ -151,10 +148,11 @@
                                                                     <p class="compact">${index_SessionBean.sessionHappening.get(p).productInformation}</p>
 
                                                                 </div>
-                                                                <h:form><h:commandLink class="readmore" action="${detailProduct_SessionBean.detail}">
-                                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                                <h:link  outcome="product_detail" class="readmore">
+                                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                                 Chi tiết<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                                                    </h:commandLink></h:form>
+                                                                </h:link>
+                                                                
                                                             </div>
                                                         </div>
                                                      </c:forEach>  
@@ -185,25 +183,21 @@
                                         <div class="product-block product-resize">
                                             <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
-                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
-                                                            </h:commandLink>
-                                                    </h:form>
-<!--                                                <a href="san-pham/tom-mu-ni-song.html">
-                                                    <img class="first-img" src="Uploads/shop2005/images/product/tom_mu_ni_new_1_master.jpg" alt="T&#244;m mũ ni sống"/>
-                                                </a>-->
+                                                    <h:link  outcome="product_detail" >
+                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                        <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
+                                                    </h:link>
+                                                    
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                            <a href="javascript:void(0);"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <h:form>
-                                                            <h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
-                                                                <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                               <i class="fa fa-eye"></i>
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        <h:link class="quickview" outcome="product_detail" >
+                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                            <i class="fa fa-eye"></i>
+                                                        </h:link>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,7 +219,11 @@
                             </div>
                         </div>
                         <div class="show_more">
-                            Mời bạn <a href="san-pham/tom-33806.html">Xem thêm các sản phẩm đang diễn ra đấu giá</a> khác
+                            Mời bạn 
+                            <h:link outcome="list_product" >
+                                                    <f:param name="type" value="Đang diễn ra"/>
+                                                    <span>Xem thêm các sản phẩm đang diễn ra đấu giá</span>
+                                                </h:link>khác
                         </div>
                     </div>
                                     <div class="product_home">
@@ -249,24 +247,23 @@
                                         <div class="product-block product-resize">
                                             <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
-                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
+                                                    <h:link outcome="product_detail" >
                                                             <f:param name="id" value="#{index_SessionBean.sessionUpComing.get(p).sessionId}"/>
                                                             <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionUpComing.get(p).avatar}" alt="" />
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        </h:link>
+                                                    
 <!--                                                <a href="san-pham/tom-mu-ni-song.html">
                                                     <img class="first-img" src="Uploads/shop2005/images/product/tom_mu_ni_new_1_master.jpg" alt="T&#244;m mũ ni sống"/>
                                                 </a>-->
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                            <a href="javascript:void(0);"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
-                                                                <f:param name="id" value="#{index_SessionBean.sessionUpComing.get(p).sessionId}"/>
+                                                        <h:link class="quickview" outcome="product_detail" >
+                                                            <f:param name="id" value="#{index_SessionBean.sessionUpComing.get(p).sessionId}"/>
                                                                <i class="fa fa-eye"></i>
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        </h:link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -288,7 +285,10 @@
                             </div>
                         </div>
                         <div class="show_more">
-                            Mời bạn <a href="san-pham/cua-nghe-33809.html">Xem thêm các sản phẩm sắp diễn ra đấu giá</a> khác
+                            Mời bạn <h:link outcome="list_product" >
+                                                    <f:param name="type" value="Sắp diễn ra"/>
+                                                    <span>Xem thêm các sản phẩm sắp diễn ra đấu giá</span>
+                                                </h:link>khác
                         </div>
                     </div>
                                     <div class="product_home">
@@ -312,21 +312,21 @@
                                         <div class="product-block product-resize">
                                             <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
-                                                    <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
+                                                    <h:link outcome="product_detail" >
                                                             <f:param name="id" value="#{index_SessionBean.sessionDone.get(p).sessionId}"/>
                                                             <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionDone.get(p).avatar}" alt="" />
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        </h:link>
+                                                    
                                                 <div class="product-actions hidden-xs">
                                                         <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                            <a href="javascript:void(0);"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
-                                                        <h:form><h:commandLink class="quickview" action="${detailProduct_SessionBean.detail}">
-                                                                <f:param name="id" value="#{index_SessionBean.sessionDone.get(p).sessionId}"/>
+                                                        <h:link class="quickview" outcome="product_detail" >
+                                                            <f:param name="id" value="#{index_SessionBean.sessionDone.get(p).sessionId}"/>
                                                                <i class="fa fa-eye"></i>
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        </h:link>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,7 +348,10 @@
                             </div>
                         </div>
                         <div class="show_more">
-                            Mời bạn <a href="san-pham/sua-33810.html">Xem thêm các sản phẩm đã kết thúc đấu giá</a> khác
+                            Mời bạn <h:link outcome="list_product" >
+                                                    <f:param name="type" value="Đang diễn ra"/>
+                                                    <span>Xem thêm các sản phẩm đã kết thúc đấu giá</span>
+                                                </h:link>khác
                         </div>
                     </div>
                                 </div>
@@ -379,21 +382,20 @@
                                             <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
                                                 <div class="article_item">
                                                     <div class="article_img">
-                                                        <h:form><h:commandLink action="${detailProduct_SessionBean.detail}">
-                                                                <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                        <h:link outcome="product_detail" >
+                                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                <img style="height: 280px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="${index_SessionBean.sessionHappening.get(p).productName}" title="${index_SessionBean.sessionHappening.get(p).productName}"/>
-                                                            </h:commandLink>
-                                                    </h:form>
+                                                        </h:link>
                                                         <div class="sold-out">Hot</div>
                                                     </div>
                                                     <div class="article_content clearfix">
                                                         <div class="title">
                                                             <h4 style="text-align: center;line-height: 46px">
-                                                                <h:form>
-                                                                    <h:commandLink action="${detailProduct_SessionBean.detail}" title="${index_SessionBean.sessionHappening.get(p).productName}">${index_SessionBean.sessionHappening.get(p).productName}
-                                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                                    </h:commandLink>
-                                                    </h:form>
+                                                                <h:link outcome="product_detail" title="${index_SessionBean.sessionHappening.get(p).productName}">
+                                                                    ${index_SessionBean.sessionHappening.get(p).productName}
+                                                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                                </h:link>
+                                                                
                                                             </h4>
                                                         </div>
                                                         <div class="article_meta">
@@ -405,12 +407,10 @@
                                                             <p class="compact">${index_SessionBean.sessionHappening.get(p).productInformation}</p>
 
                                                         </div>
-                                                        <h:form>
-                                                            <h:commandLink class="readmore" action="${detailProduct_SessionBean.detail}" title="${index_SessionBean.sessionHappening.get(p).productName}">
-                                                                <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                        <h:link class="readmore" outcome="product_detail" title="${index_SessionBean.sessionHappening.get(p).productName}">
+                                                                    <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
                                                                 Chi tiết <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                                            </h:commandLink>
-                                                        </h:form>
+                                                                </h:link>
                                                     </div>
                                                 </div>
                                             </c:forEach>

@@ -592,10 +592,74 @@ public class SessionProcess {
         }
         return false;
     }
+    
+    // lấy phiên đấu giá theo loại
+    public  ArrayList<Session> getSessionByType(String type){
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT categoryName FROM `tbl_category` WHERE categoryType= ?";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, type);
+            
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                String sql2 = "SELECT * FROM `tbl_session` WHERE productType = ?";
+            PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
+            prst2.setString(1, rs.getString(1));
+            
+            ResultSet rs2 = prst2.executeQuery();
+            while (rs2.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs2.getString(1));
+                ss.setUserCreateID(rs2.getString(2));
+                ss.setProductName(rs2.getString(3));
+                ss.setProductType(rs2.getString(4));
+                ss.setProductInformation(rs2.getString(5));
+                ss.setAvatar(rs2.getString(6));
+                ss.setStartPrice(rs2.getInt(7));
+                ss.setStepPrice(rs2.getInt(8));
+                ss.setBid(rs2.getInt(9));
+                ss.setStartTime(rs2.getString(12));
+                ss.setEndTime(rs2.getString(13));
+                ss.setStatus(rs2.getString(14));
+                arr.add(ss);
+            }
+            rs2.close();
+            }
+            if(arr.isEmpty()){
+             
+            sql = "SELECT * FROM `tbl_session` WHERE productType = ?";
+            prst= Process.getConnection().prepareStatement(sql);
+            prst.setString(1, type);
+            
+           rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setProductInformation(rs.getString(5));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setBid(rs.getInt(9));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                ss.setStatus(rs.getString(14));
+                arr.add(ss);
+            }
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return arr;
+    }
+    
      public static void main(String[] args) {
        SessionProcess sp = new SessionProcess();
-         System.out.println(""+sp.updateSession("sid00018"));
-       
+         System.out.println(""+sp.getSessionByType("Ô tô").size());
          
     }
     
