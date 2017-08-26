@@ -459,7 +459,7 @@
     });
 
     $.extend($.fn.bootstrapTable.defaults.icons, {
-        clear: 'glyphicon-trash icon-clear'
+        clear: 'mdi mdi-delete'
     });
 
     $.extend($.fn.bootstrapTable.locales, {

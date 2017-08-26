@@ -358,8 +358,8 @@
             paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
             paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
             refresh: 'glyphicon-refresh icon-refresh',
-            toggle: 'glyphicon-list-alt icon-list-alt',
-            columns: 'glyphicon-th icon-th',
+            toggle: 'mdi mdi-toggle-switch',
+            columns: 'mdi mdi-equal-box',
             detailOpen: 'glyphicon-plus icon-plus',
             detailClose: 'glyphicon-minus icon-minus'
         },

@@ -55,6 +55,37 @@ public class SessionProcess {
         return result>0;
     }
     
+    // Lấy tất cả các phiên đấu giá
+     public ArrayList<Session> getAll(){
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` ORDER BY status DESC";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setProductInformation(rs.getString(5));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStepPrice(rs.getInt(8));
+                ss.setUserWinID(rs.getString(11));
+                ss.setStartTime(rs.getString(12));
+                ss.setStatus(rs.getString(14));
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+    
     public String GetLastID(){
             String sql = "SELECT sessionId FROM `tbl_session` ORDER by sessionId DESC LIMIT 1";
          try {
@@ -655,6 +686,55 @@ public class SessionProcess {
             Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
        return arr;
+    }
+    
+    // Cập nhật tình trạng phiên đấu giá
+    public boolean updateStatus(String sid,String value){
+        int result = 0;
+        String sql="Update tbl_session set status = ? where sessionId = ?";
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1,value );
+            prst.setString(2, sid);
+            
+            result=prst.executeUpdate();
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+        return result>0;
+    }
+    
+    // Sửa phiên đấu giá
+    public boolean updateSess(Session session){
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = format.parse(session.getStartTime());
+            Date end = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+            String endTime = format.format(end);
+            int result = 0;
+            String sql="Update tbl_session set productName=?,productType=?,productInformation=?,startPrice = ?,stepPrice = ?, startTime = ?, endTime = ?,status=? where sessionId = ?";
+            try {
+                PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+                prst.setString(1,session.getProductName() );
+                prst.setString(2, session.getProductType());
+                prst.setString(3, session.getProductInformation());
+                prst.setInt(4, session.getStartPrice());
+                prst.setInt(5, session.getStepPrice());
+                prst.setString(6, session.getStartTime());
+                prst.setString(7, session.getEndTime());
+                prst.setString(8, session.getStatus());
+                prst.setString(9, session.getSessionId());
+                result=prst.executeUpdate();
+                prst.close();
+            } catch (SQLException e) {
+                Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+            }
+            return result>0;
+        } catch (ParseException ex) {
+            Logger.getLogger(SessionProcess.class.getName()).log(Level.SEVERE,null, ex);
+        }
+        return false;
     }
     
      public static void main(String[] args) {

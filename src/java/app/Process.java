@@ -26,7 +26,7 @@ public class Process {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String user="root";
-            String pass="aassdd";
+            String pass="";
             String url = "jdbc:mysql://localhost:3306/auction?characterEncoding=utf-8";
 //            String pass="sa";
 //            String url = "jdbc:mysql://localhost:3306/sem4_auction?characterEncoding=utf-8";

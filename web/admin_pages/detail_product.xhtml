@@ -1,0 +1,433 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+   
+    <link rel="icon" type="image/png" sizes="16x16" href="../admin_assets/images/favicon.png/"/>
+        <title>Material Pro Admin Template - The Most Complete &amp; Trusted Bootstrap 4 Admin Template</title>
+
+    <link href="../admin_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+  
+    <link href="../admin_assets/lite/css/style.css" rel="stylesheet"/>
+    
+    <link href="../admin_assets/lite/css/colors/blue.css" id="theme" rel="stylesheet"/>
+    
+    <script src="../admin_assets/plugins/jquery/jquery.min.js"></script>
+    <link href="../assets/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
+    <script src="../assets/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../assets/bootstrap-table/bootstrap-table-filter-control.js"></script>
+    <script src="../js/date.format.js"></script>
+    <style>
+        .dropdown-menu>li>a {
+             display: block; 
+             padding: 3px 20px; 
+             clear: both; 
+             font-weight: normal; 
+             line-height: 1.428571429; 
+             color: #333; 
+             white-space: nowrap; 
+        }
+        .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #428bca;
+            outline: 0;
+        }
+        .fixed-table-body{
+            height: 500px;
+        }
+        .col-centered{
+            float: none;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+    </style>
+   
+    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+  <script src="../js/moment.js"></script>
+  <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    </h:head>
+    <h:body>
+        <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../admin.html">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                           
+                            <!-- Light Logo icon -->
+                            <img src="../admin_assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text --><span>
+                         
+                         <!-- Light Logo text -->    
+                         <img src="../admin_assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <form class="app-search">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"/> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../admin_assets/images/users/1.jpg" alt="user" class="profile-pic m-r-10" />Markarn Doe</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="admin.xhtml" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Trang chính</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="pages-profile.xhtml" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Thông tin cá nhân</span></a>
+                        </li>
+                        <li class="active"> <a class="waves-effect waves-dark" href="table.xhtml" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Phiên đấu giá</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="users.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Users</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center m-t-30">
+                        <a href="https://wrappixel.com/templates/materialpro/" class="btn waves-effect waves-light btn-warning hidden-md-down"> Upgrade to Pro</a>
+                    </div>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+            <!-- Bottom points-->
+            <div class="sidebar-footer">
+                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+            <!-- End Bottom points-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Table</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Table</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-7 col-4 align-self-center">
+                        <a href="https://wrappixel.com/templates/materialpro/" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <h3 class="card-title">Phiên Đấu Giá</h3>
+                    <div class="col-lg-12">
+                        <h:form>
+                        <div class="col-xlg-6 col-md-5">
+                            <div class="form-group">
+                                <img id="anhDaiDien" src="http://localhost:8080/project_auction/faces/${productDetailBean.session.avatar}" style="height: 70px;width: 70px"/>
+                                <c:choose>
+                                    <c:when test="${productDetailBean.status == 'Đang diễn ra'}">
+                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Phiên đấu giá đang diễn ra</span>
+                                    </c:when>
+                                    <c:when test="${productDetailBean.status == 'Chưa diễn ra'}">
+                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Phiên đấu giá Chưa diễn ra</span>
+                                    </c:when>
+                                    <c:when test="${productDetailBean.status == 'Đã kết thúc , không có người đấu giá'}">
+                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Đã kết thúc , không có người đấu giá</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="margin-left: 30px;color: #0275d8;font-weight:bold">Đã kết thúc , người thắng <strong><h:link style="color: red">${productDetailBean.session.userWinID}</h:link></strong></span>
+                                    </c:otherwise>
+                                </c:choose>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label style="width: 100%">Mã Phiên Đấu Giá</label>
+                                <h:inputText class="form-control" readonly="true" value="${productDetailBean.session.sessionId}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Tên Sản Phẩm</label>
+                                <h:inputText class="form-control" value="${productDetailBean.session.productName}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá Khởi Điểm</label>
+                                <h:inputText a:type="number" class="form-control" value="${productDetailBean.session.startPrice}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Thời Gian Bắt Đầu</label>
+                                <h:inputText class="form-control datepicker1" value="${productDetailBean.session.startTime}" onchange="changeTime(this.value)"/>
+                            </div>
+                    </div>
+                            <div class="col-xlg-6 col-md-5">
+                                <div class="form-group">
+                                    <label style="width: 100%">Trạng Thái</label>
+                                    <c:choose>
+                                        <c:when test="${productDetailBean.session.status=='Inactive'}">
+                                            <h:inputText readonly="true" class="form-control" value="Phiên đấu giá chưa được duyệt"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.status}" >   
+                                                <f:selectItem itemValue = "active" itemLabel = "active" />
+                                                <f:selectItem itemValue = "deleted" itemLabel = "deleted" />
+                                    </h:selectOneMenu>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mã Người Tạo</label>
+                                    <h:inputText class="form-control" readonly="true" value="${productDetailBean.session.userCreateID}"/>
+                                </div>
+                                <div class="form-group" >
+                                    <label>Loại Sản Phẩm</label>
+                                    <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.productType}" >
+                                        <c:forEach var="p" items="${login_Register_UserBean.cate}">
+                                            <f:selectItem itemValue = "${p.categoryName}" itemLabel = "${p.categoryName}" />
+                                        </c:forEach>
+                                    </h:selectOneMenu>    
+                                </div>
+                                <div class="form-group" >
+                                    <label>Bước Giá</label>
+                                    <h:inputText class="form-control" value="${productDetailBean.session.stepPrice}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Thời Gian Kết Thúc</label>
+                                    <h:inputText  class="form-control clock" id="endTime" readonly="true" value="${productDetailBean.session.endTime}"/>
+                                   
+                                </div>
+                                    
+                                
+                            </div>
+                        <div class="col-xlg-12 col-md-12">
+                            <div class="form-group">
+                                    <label>Mô tả</label>
+                                    <h:inputTextarea cols="4"  class="form-control" value="${productDetailBean.session.productInformation}"/>
+                            </div>
+                            <center>
+                                
+                                <c:choose>
+                                    <c:when test="${productDetailBean.session.status=='Inactive'}">
+                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-primary" action="${productDetailBean.update()}">
+                                            <f:param name="status" value="active"/>
+                                            <f:param name="id" value="${productDetailBean.session.sessionId}"/>
+                                            Duyệt
+                                        </h:commandLink>
+                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-default" action="${productDetailBean.update()}">
+                                            <f:param name="status" value="deleted"/>
+                                            <f:param name="id" value="${productDetailBean.session.sessionId}"/>
+                                            Xóa
+                                        </h:commandLink>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-primary" action="${productDetailBean.update()}">
+                                            <f:param name="id" value="${productDetailBean.session.sessionId}"/>
+                                            Sửa
+                                        </h:commandLink>
+                                    </c:otherwise>
+                                </c:choose>
+                                </center>
+                                
+                        </div>
+                        </h:form>
+                        
+                        
+                        
+                        <div class="col-xlg-12 col-md-12" style="margin-top: 20px">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table id="table"
+                                           data-toggle="table"
+                                           data-pagination="true"
+                                           data-url="http://localhost:8080/project_auction/faces/AdminController?id=${productDetailBean.session.sessionId}"
+                                           data-show-refresh="true"
+                                           data-page-list="[5, 10,15]"
+                                           data-toolbar="#toolbar" 
+                                           data-select-item-name="toolbar1" 
+                                           data-click-to-select="true" 
+                                           data-page-size="10"
+                                           data-search="true"  
+                                           data-filter-control="true" 
+                                           data-filter-show-clear="true" 
+                                           data-sort-name="id" 
+                                           data-show-toggle="true"
+                                           data-sort-order="desc"
+                                           class="table table-hover"
+                                    >
+                                 <thead>
+                                 <tr>
+                                     <th data-field="sessionId" data-sortable="true" data-align="center">Mã Phiên</th>
+                                     <th data-field="userBetID" data-filter-control="select" data-sortable="true" data-align="center">Mã Người Đặt Giá</th>
+                                     <th data-field="value" data-sortable="true" data-align="center">Giá Trị</th>
+                                 </tr>
+                                 </thead>
+                             </table>
+                                    <script>
+                                           $( ".datepicker1" ).datetimepicker({
+                                                    format: 'YYYY-MM-DD HH:mm:ss',
+//                                                    minDate: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+ (new Date().getDate())
+                                          } );
+                                          
+                                          $('.datepicker1').on('dp.change', function(e){ 
+                                             
+                                                var now = e.date.add('days',1);
+                                                var day = now.date();
+                                                var month = now.month()+1;
+                                                
+                                                
+                                                
+                                                if(day &lt; 10){
+                                                    day = '0'+day; 
+                                                }
+                                                
+                                                if(month &lt; 10){
+                                                    month = '0'+month; 
+                                                }
+                                                
+                                                var hour = now.hour();
+                                                if(hour &lt; 10){
+                                                    hour = '0'+hour; 
+                                                }
+                                                var minute = now.minute();
+                                                if(minute &lt; 10){
+                                                    minute = '0'+minute; 
+                                                }
+                                                var second = now.second();
+                                                if(second &lt; 10){
+                                                    second = '0'+second; 
+                                                }
+                                                var a = now.year()+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+                                              document.getElementById('endTime').value= a;
+                                          })
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            
+          
+            
+            
+            
+            
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer">
+                © 2017 Material Pro Admin by wrappixel.com
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    
+    <script src="../admin_assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../admin_assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../admin_assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../admin_assets/lite/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../admin_assets/lite/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../admin_assets/lite/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../admin_assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../admin_assets/lite/js/custom.min.js"></script>
+    </h:body>
+</html>
+

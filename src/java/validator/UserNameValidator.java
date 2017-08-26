@@ -25,7 +25,7 @@ public class UserNameValidator implements Validator{
         String a = value.toString();
         UserProcess us = new UserProcess();
         if(us.checkExistUserName(a))
-            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"","UserName Existed"));
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Tên đăng nhập đã tồn tại !"));
         
     }
     

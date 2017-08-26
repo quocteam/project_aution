@@ -8,6 +8,7 @@ package app;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -149,24 +150,22 @@ public class UserProcess {
         return result>0;
     }
     
-    public String GetLastID()
-{
-            String sql = "SELECT userID FROM `tbl_user` ORDER by userID DESC LIMIT 1";
-         try {
-             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
-             ResultSet rs = prst.executeQuery();
-             while (rs.next()) {                 
-                 return rs.getString(1);
+    public String GetLastID(){
+                String sql = "SELECT userID FROM `tbl_user` ORDER by userID DESC LIMIT 1";
+             try {
+                 PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+                 ResultSet rs = prst.executeQuery();
+                 while (rs.next()) {                 
+                     return rs.getString(1);
+                 }
+             } catch (SQLException ex) {
+                 Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
              }
-         } catch (SQLException ex) {
-             Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         return "";
-            
-}
+             return "";
+
+    }
     
-     public String NextID()
-        {
+     public String NextID(){
             String prefixID="uid";
             if(GetLastID().equals(""))
            {
@@ -190,6 +189,65 @@ public class UserProcess {
  
         }
     
+     public ArrayList<User> allUser(){
+         ArrayList<User> arr = new ArrayList<>();
+         try {
+            String sql = "select * from tbl_user";
+            
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                User us = new User();
+             us.setUserID(rs.getString(1));
+             us.setUserName(rs.getString(2));
+             us.setPassWord(rs.getString(3));
+             us.setEmail(rs.getString(4));
+             us.setFullName(rs.getString(5));
+             us.setSex(rs.getString(6));
+             us.setDob(rs.getString(7));
+             us.setPhoneNumber(rs.getInt(8));
+             us.setAddress(rs.getString(9));
+             us.setStatus(rs.getString(10));
+             us.setAvatars(rs.getString(11));
+             arr.add(us);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+     }
+     
+     public User getByID(String uid){
+        User us = new User();
+         try {
+            String sql = "select * from tbl_user where userID = ?";
+            
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uid);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+             us.setUserID(rs.getString(1));
+             us.setUserName(rs.getString(2));
+             us.setPassWord(rs.getString(3));
+             us.setEmail(rs.getString(4));
+             us.setFullName(rs.getString(5));
+             us.setSex(rs.getString(6));
+             us.setDob(rs.getString(7));
+             us.setPhoneNumber(rs.getInt(8));
+             us.setAddress(rs.getString(9));
+             us.setStatus(rs.getString(10));
+             us.setAvatars(rs.getString(11));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return us;
+    }
+     
     public static void main(String[] args) {
         UserProcess us = new UserProcess();
         User user= new User("uid00003", "phongdt", "123456", "phongdt@gmail.com", "Dương Tuấn Phong", 967810291, "Nam", "1995-06-06", "Vĩnh Hưng, Hai Bà Trưng, Hà Nội", "Inactive", "...");
