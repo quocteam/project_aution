@@ -51,6 +51,13 @@
             margin: 0 auto;
             margin-top: 150px;
         }
+        @media only screen and (max-width: 320px) {
+            .font-res{
+                font-size: 
+            }
+    
+
+        }
     </style>
    
     <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
@@ -146,9 +153,7 @@
                         <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
                         </li>
                     </ul>
-                    <div class="text-center m-t-30">
-                        <a href="https://wrappixel.com/templates/materialpro/" class="btn waves-effect waves-light btn-warning hidden-md-down"> Upgrade to Pro</a>
-                    </div>
+                    
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -182,9 +187,7 @@
                             <li class="breadcrumb-item active">Table</li>
                         </ol>
                     </div>
-                    <div class="col-md-7 col-4 align-self-center">
-                        <a href="https://wrappixel.com/templates/materialpro/" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> Upgrade to Pro</a>
-                    </div>
+                   
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -197,26 +200,31 @@
                     <h3 class="card-title">Phiên Đấu Giá</h3>
                     <div class="col-lg-12">
                         <h:form>
-                        <div class="col-xlg-6 col-md-5">
+                            <div class="col-xlg-6 col-md-5" style="float: left">
                             <div class="form-group">
-                                <img id="anhDaiDien" src="http://localhost:8080/project_auction/faces/${productDetailBean.session.avatar}" style="height: 70px;width: 70px"/>
-                                <c:choose>
+                                <div style="float: left" class="col-xlg-6 col-md-5">
+                                    <img id="anhDaiDien" src="http://localhost:44690/project_aution/faces/${productDetailBean.session.avatar}" style="height: 70px;width: 70px"/>
+                                </div>
+                                <div style="float: left" class="col-xlg-6 col-md-7">
+                                    <c:choose>
                                     <c:when test="${productDetailBean.status == 'Đang diễn ra'}">
-                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Phiên đấu giá đang diễn ra</span>
+                                        <span class="font-ress" style="margin-left: 10px;color: #0275d8;font-size: 16px">Phiên đấu giá đang diễn ra</span>
                                     </c:when>
                                     <c:when test="${productDetailBean.status == 'Chưa diễn ra'}">
-                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Phiên đấu giá Chưa diễn ra</span>
+                                        <span style="margin-left: 10px;color: #0275d8;font-size: 16px">Phiên đấu giá Chưa diễn ra</span>
                                     </c:when>
                                     <c:when test="${productDetailBean.status == 'Đã kết thúc , không có người đấu giá'}">
-                                        <span style="margin-left: 10px;color: #0275d8;font-weight:bold">Đã kết thúc , không có người đấu giá</span>
+                                        <span style="margin-left: 10px;color: #0275d8;font-size: 16px">Đã kết thúc , không có người đấu giá</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span style="margin-left: 30px;color: #0275d8;font-weight:bold">Đã kết thúc , người thắng <strong><h:link style="color: red">${productDetailBean.session.userWinID}</h:link></strong></span>
+                                        <p style="margin-left: 10px;color: #0275d8;font-size: 16px">Đã kết thúc , người thắng <strong><h:link style="color: red">${productDetailBean.session.userWinID}</h:link></strong></p>
                                     </c:otherwise>
                                 </c:choose>
+                                </div>
+                                
                                 
                             </div>
-                            <div class="form-group">
+                                <div class="form-group" style="padding-top: 70px;">
                                 <label style="width: 100%">Mã Phiên Đấu Giá</label>
                                 <h:inputText class="form-control" readonly="true" value="${productDetailBean.session.sessionId}"/>
                             </div>
@@ -233,7 +241,7 @@
                                 <h:inputText class="form-control datepicker1" value="${productDetailBean.session.startTime}" onchange="changeTime(this.value)"/>
                             </div>
                     </div>
-                            <div class="col-xlg-6 col-md-5">
+                            <div class="col-xlg-6 col-md-5" style="float: left">
                                 <div class="form-group">
                                     <label style="width: 100%">Trạng Thái</label>
                                     <c:choose>
@@ -241,7 +249,7 @@
                                             <h:inputText readonly="true" class="form-control" value="Phiên đấu giá chưa được duyệt"/>
                                         </c:when>
                                         <c:otherwise>
-                                            <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.status}" >   
+                                            <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.status}" style="height: 38px">   
                                                 <f:selectItem itemValue = "active" itemLabel = "active" />
                                                 <f:selectItem itemValue = "deleted" itemLabel = "deleted" />
                                     </h:selectOneMenu>
@@ -254,7 +262,7 @@
                                 </div>
                                 <div class="form-group" >
                                     <label>Loại Sản Phẩm</label>
-                                    <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.productType}" >
+                                    <h:selectOneMenu class="form-control" value = "#{productDetailBean.session.productType}" style="height: 38px" >
                                         <c:forEach var="p" items="${login_Register_UserBean.cate}">
                                             <f:selectItem itemValue = "${p.categoryName}" itemLabel = "${p.categoryName}" />
                                         </c:forEach>
@@ -266,13 +274,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Thời Gian Kết Thúc</label>
-                                    <h:inputText  class="form-control clock" id="endTime" readonly="true" value="${productDetailBean.session.endTime}"/>
+                                    <h:inputText  class="form-control endTime" readonly="true" value="${productDetailBean.session.endTime}"/>
                                    
                                 </div>
                                     
                                 
                             </div>
-                        <div class="col-xlg-12 col-md-12">
+                        <div class="col-xlg-12 col-md-12" style="float: none;clear: both">
                             <div class="form-group">
                                     <label>Mô tả</label>
                                     <h:inputTextarea cols="4"  class="form-control" value="${productDetailBean.session.productInformation}"/>
@@ -281,62 +289,27 @@
                                 
                                 <c:choose>
                                     <c:when test="${productDetailBean.session.status=='Inactive'}">
-                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-primary" action="${productDetailBean.update()}">
+                                        <h:commandButton type="submit" a:name="Submit" style="width: 150px" value="Duyệt" class="btn btn-primary" action="${productDetailBean.update()}">
                                             <f:param name="status" value="active"/>
                                             <f:param name="id" value="${productDetailBean.session.sessionId}"/>
-                                            Duyệt
-                                        </h:commandLink>
-                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-default" action="${productDetailBean.update()}">
+                                           
+                                        </h:commandButton>
+                                        <h:commandButton type="submit" a:name="Submit" style="width: 150px" value="Xoá" class="btn btn-default" action="${productDetailBean.update()}">
                                             <f:param name="status" value="deleted"/>
                                             <f:param name="id" value="${productDetailBean.session.sessionId}"/>
-                                            Xóa
-                                        </h:commandLink>
+                                        </h:commandButton>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandLink type="submit" a:name="Submit" style="width: 150px" class="btn btn-primary" action="${productDetailBean.update()}">
+                                        <h:commandButton type="submit" a:name="Submit" style="width: 150px;background-color: #0275d8;color: #fff" value="Sửa" class="btn" action="${productDetailBean.update()}">
                                             <f:param name="id" value="${productDetailBean.session.sessionId}"/>
-                                            Sửa
-                                        </h:commandLink>
+                                        </h:commandButton>
                                     </c:otherwise>
                                 </c:choose>
                                 </center>
                                 
                         </div>
                         </h:form>
-                        
-                        
-                        
-                        <div class="col-xlg-12 col-md-12" style="margin-top: 20px">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="table-responsive">
-                                    <table id="table"
-                                           data-toggle="table"
-                                           data-pagination="true"
-                                           data-url="http://localhost:8080/project_auction/faces/AdminController?id=${productDetailBean.session.sessionId}"
-                                           data-show-refresh="true"
-                                           data-page-list="[5, 10,15]"
-                                           data-toolbar="#toolbar" 
-                                           data-select-item-name="toolbar1" 
-                                           data-click-to-select="true" 
-                                           data-page-size="10"
-                                           data-search="true"  
-                                           data-filter-control="true" 
-                                           data-filter-show-clear="true" 
-                                           data-sort-name="id" 
-                                           data-show-toggle="true"
-                                           data-sort-order="desc"
-                                           class="table table-hover"
-                                    >
-                                 <thead>
-                                 <tr>
-                                     <th data-field="sessionId" data-sortable="true" data-align="center">Mã Phiên</th>
-                                     <th data-field="userBetID" data-filter-control="select" data-sortable="true" data-align="center">Mã Người Đặt Giá</th>
-                                     <th data-field="value" data-sortable="true" data-align="center">Giá Trị</th>
-                                 </tr>
-                                 </thead>
-                             </table>
-                                    <script>
+                        <script>
                                            $( ".datepicker1" ).datetimepicker({
                                                     format: 'YYYY-MM-DD HH:mm:ss',
 //                                                    minDate: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+ (new Date().getDate())
@@ -371,9 +344,41 @@
                                                     second = '0'+second; 
                                                 }
                                                 var a = now.year()+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
-                                              document.getElementById('endTime').value= a;
+                                              document.getElementsByClassName('endTime')[0].value= a ;
                                           })
                                     </script>
+                        
+                        
+                        <div class="col-xlg-12 col-md-12" style="margin-top: 20px">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table id="table"
+                                           data-toggle="table"
+                                           data-pagination="true"
+                                           data-url="http://localhost:44690/project_aution/faces/AdminController?id=${productDetailBean.session.sessionId}"
+                                           data-show-refresh="true"
+                                           data-page-list="[5, 10,15]"
+                                           data-toolbar="#toolbar" 
+                                           data-select-item-name="toolbar1" 
+                                           data-click-to-select="true" 
+                                           data-page-size="10"
+                                           data-search="true"  
+                                           data-filter-control="true" 
+                                           data-filter-show-clear="true" 
+                                           data-sort-name="id" 
+                                           data-show-toggle="true"
+                                           data-sort-order="desc"
+                                           class="table table-hover"
+                                    >
+                                 <thead>
+                                 <tr>
+                                     <th data-field="sessionId" data-sortable="true" data-align="center">Mã Phiên</th>
+                                     <th data-field="userBetID" data-filter-control="select" data-sortable="true" data-align="center">Mã Người Đặt Giá</th>
+                                     <th data-field="value" data-sortable="true" data-align="center">Giá Trị</th>
+                                 </tr>
+                                 </thead>
+                             </table>
                                 </div>
                             </div>
                         </div>
