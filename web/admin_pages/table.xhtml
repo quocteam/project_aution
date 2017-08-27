@@ -186,7 +186,7 @@
                                     <table id="table"
                                            data-toggle="table"
                                            data-pagination="true"
-                                           data-url="http://localhost:8080/project_auction/faces/AdminController"
+                                           data-url="http://localhost:44690/project_aution/faces/AdminController"
                                            data-show-refresh="true"
                                            data-page-list="[10, 20,all]"
                                            data-toolbar="#toolbar" 
@@ -220,14 +220,14 @@
                                          var $table = $('#table');
                                         window.operateEvents = {
                                             'click .chiTiet': function (e, value, row){
-                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/detail_product.xhtml?id="+row.sessionId);
+                                                window.open("http://localhost:8080/project_aution/faces/admin_pages/detail_product.xhtml?id="+row.sessionId);
                                             },
                                             'click .active': function (e, value, row) {
                                                 var r= confirm('Bạn Có Chắc Muốn duyệt tin mà không xem chi tiết ?');
                                                 if (r === true) {
                                                     
                                                     $.ajax({
-                                                        url : "http://localhost:8080/project_auction/faces/AdminController",
+                                                        url : "http://localhost:8080/project_aution/faces/AdminController",
                                                         type : "post",
                                                         dateType:"text",
                                                         data : {
@@ -245,14 +245,18 @@
                                                 if (r === true) {
                                                     
                                                     $.ajax({
-                                                        url : "http://localhost:8080/project_auction/faces/AdminController",
+                                                        url : "http://localhost:8080/project_aution/faces/AdminController",
                                                         type : "post",
                                                         dateType:"text",
                                                         data : {
                                                             deleteId : row.sessionId
                                                         },
                                                         success : function (){
+
                                                             $table.bootstrapTable('refresh', {url: 'http://localhost:8080/project_auction/faces/AdminController'});
+
+                                                            window.location.href = "http://localhost:44690/project_aution/faces/admin_pages/table.xhtml";
+
                                                         }
                                                     });
                                                     
@@ -312,7 +316,7 @@
                                         
                                         window.operateEventsUserCreateID = {
                                             'click .chiTiet': function (e, value, row){
-                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/table.xhtml");
+                                                window.open("http://localhost:44690/project_aution/faces/admin_pages/table.xhtml");
                                             }
                                         };
                                         
@@ -335,7 +339,7 @@
                                         
                                         window.operateEventsUserWinID = {
                                             'click .chiTiet': function (e, value, row){
-                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/detail_user.xhtml?id="+row.userWinID);
+                                                window.open("http://localhost:44690/project_aution/faces/admin_pages/detail_user.xhtml?id="+row.userWinID);
                                             }
                                         };
                                     </script>
