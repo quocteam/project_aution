@@ -737,9 +737,87 @@ public class SessionProcess {
         return false;
     }
     
+    public ArrayList<Session> Search(String name){
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' limit 6";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                arr.add(ss);
+            }
+             if (arr.isEmpty()) {
+                sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' limit 6";
+                prst = Process.getConnection().prepareStatement(sql);
+                rs = prst.executeQuery();
+                while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                arr.add(ss);
+                }
+             }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+    
+    public ArrayList<Session> SearchAllResult(String name){
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%'";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                arr.add(ss);
+            }
+             if (arr.isEmpty()) {
+                sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%'";
+                prst = Process.getConnection().prepareStatement(sql);
+                rs = prst.executeQuery();
+                while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setStartTime(rs.getString(12));
+                ss.setEndTime(rs.getString(13));
+                arr.add(ss);
+                }
+             }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+    
      public static void main(String[] args) {
        SessionProcess sp = new SessionProcess();
-         System.out.println(""+sp.getSessionByType("Ô tô").size());
+         System.out.println(""+sp.Search("s").get(0).getProductType());
          
     }
     

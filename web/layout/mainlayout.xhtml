@@ -76,6 +76,17 @@
                 height: 3em;
                 overflow: hidden;
             }
+            .contentSearchName{
+               padding-top: 16px;
+               font-size: 20px;
+            }
+            .contentSearchType{
+               padding-top: 16px;
+               font-size: 15px;
+            }
+            .searchHover:hover{
+                color: black;
+            }
     </style>
 <!--CSS-->
   <script>
@@ -102,6 +113,7 @@
   <link href="assets/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
   <script src="assets/bootstrap-table/bootstrap-table.js"></script>
   <script src="assets/bootstrap-table/bootstrap-table-filter-control.js"></script>
+  <script src="../js/accouting.js"></script>
     </h:head>
     <h:body>
        <div class="header">
@@ -192,11 +204,81 @@
                                 <!-- Search -->
                                 <div class="search_box">
                                     <div class="search_wrapper">
-                                        <input type="text" name="search" class="index_input_search" id="txtsearch" onblur="if(this.value=='')this.value='Nhập từ khóa tìm kiếm...'"
-                                               onfocus="if(this.value=='Nhập từ khóa tìm kiếm...')this.value=''" value="Nhập từ kh&#243;a t&#236;m kiếm..." />
-                                        <button class="btn_search_submit btn " type="button" id="btnsearch"><span>Tìm ngay</span></button>
+                                            <input type="text" name="search" class="index_input_search" id="txtsearch" onkeyup="changeText(this.value)" onblur="clearResult()"/>
+                                            <button class="btn_search_submit btn" type="button" id="btnsearch" onclick="searchClick()"><span>Tìm ngay</span></button>
                                     </div>
                                 </div>
+                                <div class="result" style="margin-top: 10px;position: absolute;z-index: +10;display: none">
+                                    <table id="table"
+                                           data-toggle="table"
+                                           data-show-header="false"
+                                           data-url="http://localhost:8080/project_auction/faces/SearchController"
+                                           class="table table-hover table-no-bordered" style="background-color: #fff;width: 585px"
+                                    >
+                                 <thead>
+                                 <tr>
+                                     <th data-field="image" data-align="center" data-formatter="imageFormatter">Ảnh</th>
+                                     <th data-field="productName" data-formatter="contentFormatter">Tên Sản Phẩm</th>
+                                     <th data-field="startPrice" data-formatter="priceFormatter" data-align="center">Giá</th>
+                                 </tr>
+                                 </thead>
+                             </table>
+                                </div>
+                                <script>
+                                    
+                                    
+                                    var $table = $('#table');
+                                    function changeText(ok){
+                                        $table.bootstrapTable('refresh', {url: 'http://localhost:8080/project_auction/faces/SearchController?name='+ok});
+                                        document.getElementsByClassName('result')[0].style.display='block';
+                                    }
+                                    var hover_off = false;
+                                    $table.mouseover(function() {
+                                        hover_off = false;
+                                    });
+                                    $table.mouseout(function() {
+                                        hover_off = true;
+                                    });
+                                    function clearResult(){
+                                        if(hover_off){
+                                           document.getElementsByClassName('result')[0].style.display='none'; 
+                                        }
+                                    }
+                                    function contentFormatter(value, row, index) {
+                                        return [
+                                                '<a class="searchHover" href="http://localhost:8080/project_auction/faces/product_detail.xhtml?id='+row.sessionId+'" title="Chi Tiết">',
+                                                '<div class="contentSearchName">',
+                                                row.productName,
+                                                '</div>',
+                                                '<div class="contentSearchType">',
+                                                row.productType,
+                                                '</div>',
+                                                '</a>'
+                                                ].join('');
+                                    }
+                                    function imageFormatter(value, row, index) {
+                                        return [
+                                                '<a class="searchHover" href="http://localhost:8080/project_auction/faces/product_detail.xhtml?id='+row.sessionId+'" title="Chi Tiết">',
+                                                '<img src="'+row.image+'" style="height: 100px;width: 100px"/>',
+                                                '</a>'
+                                                ].join('');
+                                       
+                                    }
+                                    function priceFormatter(value, row, index) {
+                                        return [
+                                                '<a class="searchHover" href="http://localhost:8080/project_auction/faces/product_detail.xhtml?id='+row.sessionId+'" title="Chi Tiết">',
+                                                '<div class="contentSearchName">',
+                                                accounting.formatMoney(row.startPrice,'',0,'.',','),
+                                                '</div>',
+                                                '<div class="contentSearchType">VND</div>',
+                                                '</a>'
+                                                ].join('');
+                                    }
+                                    function searchClick(){
+                                       var a =  document.getElementById('txtsearch').value;
+                                       window.location = 'http://localhost:8080/project_auction/faces/list_product.xhtml?name='+a;
+                                    }
+                                </script>
                                 <!-- End Search -->
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -326,40 +408,7 @@
                 </div>
             </header>
         <!-- End header -->
-    <script type="text/javascript">
-        $("#btnsearch").click(function () {
-            SearchProduct();
-        });
-        $("#btnsearch2").click(function () {
-            SearchProduct2();
-        });
-        $("#txtsearch").keydown(function (event) {
-            if (event.keyCode == 13) {
-                SearchProduct();
-            }
-        });
-        $("#txtsearch2").keydown(function (event) {
-            if (event.keyCode == 13) {
-                SearchProduct2();
-            }
-        });
-        function SearchProduct() {
-            var key = $('#txtsearch').val();
-            if (key == '' || key == 'Tìm kiếm...') {
-                $('#txtsearch').focus();
-                return;
-            }
-            window.location = 'tim-kiem08e2.html?key=' + key;
-        }
-        function SearchProduct2() {
-            var key = $('#txtsearch2').val();
-            if (key == '' || key == 'Tìm kiếm...') {
-                $('#txtsearch2').focus();
-                return;
-            }
-            window.location = 'tim-kiem08e2.html?key=' + key;
-        }
-    </script>
+    
 
 
     <!-- Main menu -->

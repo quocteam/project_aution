@@ -13,6 +13,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>bean.admin.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>bean.admin.SearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -20,6 +24,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/SearchController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

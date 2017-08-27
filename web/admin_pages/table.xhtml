@@ -217,7 +217,7 @@
                                  </thead>
                              </table>
                                     <script>
-                                        
+                                         var $table = $('#table');
                                         window.operateEvents = {
                                             'click .chiTiet': function (e, value, row){
                                                 window.open("http://localhost:8080/project_auction/faces/admin_pages/detail_product.xhtml?id="+row.sessionId);
@@ -234,7 +234,7 @@
                                                             activeId : row.sessionId
                                                         },
                                                         success : function (){
-                                                            window.location.href = "http://localhost:8080/project_auction/faces/admin_pages/table.xhtml";
+                                                            $table.bootstrapTable('refresh', {url: 'http://localhost:8080/project_auction/faces/AdminController'});
                                                         }
                                                     });
                                                     
@@ -252,7 +252,7 @@
                                                             deleteId : row.sessionId
                                                         },
                                                         success : function (){
-                                                            window.location.href = "http://localhost:8080/project_auction/faces/admin_pages/table.xhtml";
+                                                            $table.bootstrapTable('refresh', {url: 'http://localhost:8080/project_auction/faces/AdminController'});
                                                         }
                                                     });
                                                     

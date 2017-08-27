@@ -41,7 +41,12 @@ public class ListProductBean {
         FacesContext context =  FacesContext.getCurrentInstance();
         HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
         String a  = request.getParameter("type");
-        if("Đang diễn ra".equals(a))
+        String b = request.getParameter("name");
+        if(b!=null){
+            arr = sp.SearchAllResult(b);
+        }else{ 
+            
+            if("Đang diễn ra".equals(a))
             arr = sp.getSessionHappening();
         else if("Sắp diễn ra".equals(a))
             arr = sp.getUpcomingProduct();
@@ -49,6 +54,7 @@ public class ListProductBean {
             arr = sp.getSessionDone();
         else
             arr=sp.getSessionByType(a);
+        }
     }
         
 }
