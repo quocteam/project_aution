@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+                 <div class="main">
+      <div class="container">
+            <div class="row">
+                    <div class="col-md-9">
+
+<div class="breadcrumb clearfix">
+    <ul>
+                    <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
+                        <a title="Đến trang chủ" href="../index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                    </li>
+                    <li class="icon-li"><strong>T&#224;i khoản giao dịch</strong> </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(".link-site-more").hover(function () { $(this).find(".s-c-n").show(); }, function () { $(this).find(".s-c-n").hide(); });
+</script>
+<div class="page-option">
+    <h1 class="title">
+        <span>T&#224;i khoản giao dịch</span>
+    </h1>
+    <div class="page-option-block">
+        <p style="border: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 16px; color: rgb(51, 51, 51); font-family: Arial, Tahoma, Verdana; line-height: 20px;">
+	<strong style="border: 0px; margin: 0px; padding: 0px;">1. Tài khoản Vietcombank</strong></p>
+<p style="border: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 14px; color: rgb(51, 51, 51); font-family: Arial, Tahoma, Verdana; line-height: 20px;">
+	Chủ TK: Trần Thanh Tú, 0251001769087, Chi nhánh Bình Tây</p>
+<p style="border: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 16px; color: rgb(51, 51, 51); font-family: Arial, Tahoma, Verdana; line-height: 20px;">
+	<strong style="border: 0px; margin: 0px; padding: 0px;">2. Tài khoản Agribank</strong></p>
+<p style="border: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 14px; color: rgb(51, 51, 51); font-family: Arial, Tahoma, Verdana; line-height: 20px;">
+	Chủ TK: Bùi Thị Ánh, 1603205278210, Chi nhánh Lý Thường Kiệt</p>
+
+    </div>
+</div>                    </div>
+                    <div class="col-md-3">
+
+<script src="../app/services/moduleServices.js"></script>
+<script src="../app/controllers/moduleController.js"></script>
+    <!--Begin-->
+    <div class="box-support-online" ng-controller="moduleController" ng-init="initSupportOnlineController('Shop','SupportOnlines')">
+        <h3><span>Hỗ trợ trực tuyến</span></h3>
+        <div class="support-online-block">
+            <div class="support-hotline">
+                HOTLINE  <br/><span>016.699.666</span>
+            </div>
+            
+        </div>
+    </div>
+    <!--End-->
+<script type="text/javascript">
+    window.Shop = {"Name":"CÔNG TY TNHH PHÁT TRIỂN CÔNG NGHỆ RUNTIME","Email":"runecom04@runtime.vn","Phone":"(08) 66 85 85 38","Logo":"/Uploads/shop2005/images/logo.png","Fax":"(08) 66 85 85 38","Website":"http://www.runtime.vn","Hotline":"0908 77 00 95","Address":"5/12A Quang Trung, P.14, Q.Gò Vấp, Tp.HCM","Fanpage":"https://www.facebook.com/runtime.vn","Google":null,"Facebook":null,"Youtube":null,"Twitter":null,"IsBanner":false,"IsFixed":false,"BannerImage":""};
+    window.SupportOnlines = [];
+</script>                    </div>
+            </div>
+        </div>
+</div> 
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                    });
+                </script> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
