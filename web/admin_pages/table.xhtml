@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -46,6 +47,13 @@
     </style>
     </h:head>
     <h:body>
+        <c:choose>
+            <c:when test="${session.getAttribute('admin')==null}">
+              <script type="text/javascript">
+                window.location = "login.xhtml";
+              </script>
+            </c:when>
+        </c:choose>
         <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -129,10 +137,14 @@
                         </li>
                         <li class="active"> <a class="waves-effect waves-dark" href="table.xhtml" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Phiên đấu giá</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="users.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Users</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${adminBean.admin.type=='administrator'}">
+                                <li> <a class="waves-effect waves-dark" href="users.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Users</span></a>
+                                </li>
+                                <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                    
                 </nav>
@@ -141,9 +153,13 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+                <!-- item--><a href="#"></a>
+                <!-- item-->
+                <h:form>
+                    <h:commandLink class="link" title="Logout" action="${adminBean.logout()}"><i class="mdi mdi-power"></i></h:commandLink>
+                </h:form>
+                <!-- item--><a href="#"></a>
+            </div>
             <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->
@@ -207,10 +223,8 @@
                                      <th data-field="userCreateID" data-formatter="operateFormatterUserCreateID" data-filter-control="select" 
                                          data-sortable="true" data-events="operateEventsUserCreateID" data-align="center" >Mã Người Tạo</th>
                                      <th data-field="productName" data-sortable="true" data-align="center">Tên Sản Phẩm</th>
-                                     <th data-field="productType" data-filter-control="select" data-sortable="true" data-align="center">Loại Sản Phẩm</th>
+                                     <th data-field="startTime" data-sortable="true" data-align="center">Bắt Đầu</th>
                                      <th data-field="userWinID" data-formatter="operateFormatterUserWinID" data-events="operateEventsUserWinID" data-filter-control="select" data-sortable="true" data-align="center">Người Thắng</th>
-                                     <th data-field="startPrice" data-sortable="true" data-align="center">Giá Khởi Điểm</th>
-                                     <th data-field="startTime" data-sortable="true" data-align="center">Thời gian bắt đầu</th>
                                      <th data-field="status" data-filter-control="select" data-sortable="true" data-align="center">Tình Trạng</th>
                                      <th data-formatter="operateFormatter" data-events="operateEvents" data-align="center" >Tùy Chọn</th>
                                  </tr>
@@ -314,7 +328,7 @@
                                         
                                         window.operateEventsUserCreateID = {
                                             'click .chiTiet': function (e, value, row){
-                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/table.xhtml");
+                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/user-profile.xhtml?id="+row.userCreateID);
                                             }
                                         };
                                         
@@ -337,7 +351,7 @@
                                         
                                         window.operateEventsUserWinID = {
                                             'click .chiTiet': function (e, value, row){
-                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/detail_user.xhtml?id="+row.userWinID);
+                                                window.open("http://localhost:8080/project_auction/faces/admin_pages/user-profile.xhtml?id="+row.userWinID);
                                             }
                                         };
                                     </script>

@@ -8,6 +8,7 @@ package bean.admin;
 import app.CategoryProcess;
 import app.SessionProcess;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -71,7 +72,10 @@ public class ProductDetailBean {
         String  stt = request.getParameter("status");
         if(stt!=null)
             session.setStatus(stt);
-        sp.updateSess(session);
+        if(sp.updateSess(session))
+            context.addMessage(null, new FacesMessage("Thay đổi thành công!","") );
+        else
+            context.addMessage(null, new FacesMessage("Thay đổi không thành công!","") );
     }
     
 }

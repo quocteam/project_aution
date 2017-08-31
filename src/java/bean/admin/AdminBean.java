@@ -116,10 +116,16 @@ public class AdminBean {
         AdminProcess ap= new AdminProcess();
         if(ap.CheckLogin(userName, passWord)){
             try {
-                HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
+                Admin ad = ap.getAdminByUserName(userName);
+                if(ad.getStatus().equals("Inactive"))
+                    context.getExternalContext().redirect("login.xhtml?message=Inactive");
+                else{
+                    HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", userName);
                 context.getExternalContext().redirect("admin.xhtml");
+                }
+                
             } catch (IOException ex) {
                 Logger.getLogger(AdminBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -133,7 +139,20 @@ public class AdminBean {
             }
             
         }
-    }    
+    }  
+    public void logout(){
+        FacesContext context =  FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().remove("admin");
+        try {
+            context.getExternalContext().redirect("login.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AdminBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+        
+    }
+    
     
     public void updateAccount(){
         FacesContext context =  FacesContext.getCurrentInstance();

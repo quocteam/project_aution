@@ -36,21 +36,22 @@
   <script src="js/bootstrap-datetimepicker.min.js"></script>
  
 <!--CSS-->
-  <script>
-  $( function() {
-    $( ".datepicker" ).datepicker({ changeMonth: true,
-            changeYear: true,
-            yearRange: '1950:2013',
-            dateFormat: 'yy-mm-dd',
-            defaultDate: '1950-01-01' });
-        $( ".datepicker1" ).datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            minDate: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+ (new Date().getDate()+1)
-            
-           
-});
-  } );
-  </script>
+<style>
+    .w3-display-bottomleft{position:absolute;left:0;bottom:0}
+    .w3-large{font-size:18px!important}
+    .w3-container{padding:0.01em 16px}
+    .w3-padding-16{padding-top:16px!important;padding-bottom:16px!important}
+    .w3-black{color:#fff!important;background-color:#000!important}
+    .compact{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 16px;     /* fallback */
+        max-height: 32px;      /* fallback */
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+</style>
 
 <!--  bootstrap table-->
   <link href="assets/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
@@ -305,7 +306,6 @@
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đang diễn ra</span></h:link></li>
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Sắp diễn ra</span></h:link></li>
                                         <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Đã kết thúc</span></h:link></li>
-                                        <li class="level0"><h:link outcome="dang-ky.xhtml"><span>Thắng nhiều nhất</span></h:link></li>
                                         <li class="level0">
                                             <h:link outcome="dang-ky.xhtml"><span>Liên hệ</span></h:link>
                                             <h:form><h:commandLink action="${login_Register_UserBean.LogOut()}" ><span>[Thoát]</span></h:commandLink></h:form>
@@ -420,7 +420,7 @@
                                                 </h:link>
                                             
                                         </li>
-                                        <li class="level0"><h:link ><span>Thắng nhiều nhất</span></h:link></li>
+                                      
                                         
                                         
                                        
@@ -452,11 +452,6 @@
         
         <ui:insert name="main">
         </ui:insert>
-        <div id="loader-wrapper">
-			<div id="loader"></div>
-			<div class="loader-section section-left"></div>
-            <div class="loader-section section-right"></div>
-        </div>
         <ui:insert name="partner">
         </ui:insert>
 

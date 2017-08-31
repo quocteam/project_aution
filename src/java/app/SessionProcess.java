@@ -128,7 +128,7 @@ public class SessionProcess {
      public ArrayList<Session> gethighlightproductindex(){
         ArrayList<Session> arr = new ArrayList<>();
          try {
-            String sql = "SELECT * FROM `tbl_session` WHERE STATUS = 'active' ORDER by startPrice DESC LIMIT 7";
+            String sql = "SELECT * FROM `tbl_session` WHERE STATUS = 'active' ORDER by startPrice DESC LIMIT 8";
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             ResultSet rs = prst.executeQuery();
             while (rs.next()) {
@@ -785,7 +785,7 @@ public class SessionProcess {
                 prst.setInt(4, session.getStartPrice());
                 prst.setInt(5, session.getStepPrice());
                 prst.setString(6, session.getStartTime());
-                prst.setString(7, session.getEndTime());
+                prst.setString(7, endTime);
                 prst.setString(8, session.getStatus());
                 prst.setString(9, session.getSessionId());
                 result=prst.executeUpdate();

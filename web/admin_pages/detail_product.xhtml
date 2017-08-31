@@ -4,7 +4,8 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -65,6 +66,13 @@
   <script src="../js/bootstrap-datetimepicker.min.js"></script>
     </h:head>
     <h:body>
+        <c:choose>
+            <c:when test="${session.getAttribute('admin')==null}">
+              <script type="text/javascript">
+                window.location = "login.xhtml";
+              </script>
+            </c:when>
+        </c:choose>
         <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -148,10 +156,14 @@
                         </li>
                         <li class="active"> <a class="waves-effect waves-dark" href="table.xhtml" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Phiên đấu giá</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="users.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Users</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${adminBean.admin.type=='administrator'}">
+                                <li> <a class="waves-effect waves-dark" href="users.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Users</span></a>
+                                </li>
+                                <li> <a class="waves-effect waves-dark" href="admins.xhtml" aria-expanded="false"><i class="mdi mdi-emoticon"></i><span class="hide-menu">Admins</span></a>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                     
                 </nav>
@@ -160,9 +172,13 @@
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
             <div class="sidebar-footer">
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item--><a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+                <!-- item--><a href="#"></a>
+                <!-- item-->
+                <h:form>
+                    <h:commandLink class="link" title="Logout" action="${adminBean.logout()}"><i class="mdi mdi-power"></i></h:commandLink>
+                </h:form>
+                <!-- item--><a href="#"></a>
+            </div>
             <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->
@@ -198,12 +214,13 @@
                 <div class="row">
                     <!-- column -->
                     <h3 class="card-title">Phiên Đấu Giá</h3>
+                    <div class="col-lg-12"><p:messages id="messages" class="alert" showDetail="true" autoUpdate="true" closable="true" /></div>
                     <div class="col-lg-12">
                         <h:form>
                             <div class="col-xlg-6 col-md-5" style="float: left">
                             <div class="form-group">
                                 <div style="float: left" class="col-xlg-6 col-md-5">
-                                    <img id="anhDaiDien" src="http://localhost:44690/project_aution/faces/${productDetailBean.session.avatar}" style="height: 70px;width: 70px"/>
+                                    <img id="anhDaiDien" src="../${productDetailBean.session.avatar}" style="height: 70px;width: 70px"/>
                                 </div>
                                 <div style="float: left" class="col-xlg-6 col-md-7">
                                     <c:choose>
@@ -356,7 +373,7 @@
                                     <table id="table"
                                            data-toggle="table"
                                            data-pagination="true"
-                                           data-url="http://localhost:44690/project_aution/faces/AdminController?id=${productDetailBean.session.sessionId}"
+                                           data-url="http://localhost:8080/project_auction/faces/AdminController?id=${productDetailBean.session.sessionId}"
                                            data-show-refresh="true"
                                            data-page-list="[5, 10,15]"
                                            data-toolbar="#toolbar" 

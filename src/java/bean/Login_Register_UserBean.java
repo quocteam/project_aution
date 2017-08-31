@@ -362,7 +362,11 @@ public class Login_Register_UserBean implements Serializable{
         SessionProcess sp = new SessionProcess();
         if(userProcess.CheckLogin(this.userName, this.passWord)){
             User user = userProcess.getByUserName(this.userName);
-            this.userID = user.getUserID();
+            if(user.getStatus().equals("Inactive")){
+                context.addMessage(null, new FacesMessage("Tài khoản của bạn đang bị khóa, Liên hệ assmin !!","") );
+                return "dang-nhap";
+            }else{
+                this.userID = user.getUserID();
             this.userName = user.getUserName();
             this.passWord = user.getPassWord();
             this.email = user.getEmail();
@@ -407,6 +411,9 @@ public class Login_Register_UserBean implements Serializable{
                         }
             }
             return "user_page";
+            }
+                
+            
         }else{
             context.addMessage(null, new FacesMessage("Sai tên đăng nhập hoặc mật khẩu !!","") );
             return "dang-nhap";
@@ -425,7 +432,7 @@ public class Login_Register_UserBean implements Serializable{
         user.setPhoneNumber(this.phoneNumber);
         user.setFullName(this.fullName);
         user.setAddress(this.address);
-        user.setStatus("Inactive");
+        user.setStatus("active");
         user.setAvatars("...");
         if(up.addNewUser(user)){
         UserProcess userProcess = new UserProcess();

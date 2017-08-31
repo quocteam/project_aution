@@ -11,15 +11,18 @@
     
     <h:head>
         <title>Facelet Title</title>
-                <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-                <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
-                <script>
-                    var $j = jQuery.noConflict();
-                </script>
+              
     </h:head>
     <h:body>
         <ui:composition template="layout/mainlayout.xhtml">
             <ui:define name="main">
+                <c:choose>
+                    <c:when test="${session.getAttribute('user')==null}">
+                      <script type="text/javascript">
+                        window.location = "dang-nhap.xhtml";
+                      </script>
+                    </c:when>
+                </c:choose>
                 <div class="main">
                     <div class="container">
                         <div class="row">
@@ -418,17 +421,30 @@
                         </div>
                     </div>
                 </div>
+              
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $(".menu-quick-select ul").hide();
                         $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
-                        setTimeout(function () {
-                        PrimeFaces.ab({s: 'id_from_editor', p: 'id_from_editor', u: 'id_from_editor'});
-                        }, 1000);
+                        
                     });
                    
                 </script> 
-                
+                <script>
+                var currentDate = new Date();
+                currentDate.setDate(currentDate.getDate() + 1);
+                    $( function() {
+                      $( ".datepicker" ).datepicker({ changeMonth: true,
+                              changeYear: true,
+                              yearRange: '1950:2013',
+                              dateFormat: 'yy-mm-dd',
+                              defaultDate: '1950-01-01' });
+                          $( ".datepicker1" ).datetimepicker({
+                              format: 'YYYY-MM-DD HH:mm:ss',
+                              minDate: currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+ currentDate.getDate()
+                  });
+                    } );
+                    </script>
             </ui:define>
         </ui:composition>
     </h:body>

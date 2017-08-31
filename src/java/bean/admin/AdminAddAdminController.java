@@ -18,7 +18,7 @@ import model.Admin;
  *
  * @author quoc9
  */
-public class AdminUpdateAdminController extends HttpServlet {
+public class AdminAddAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,23 +40,18 @@ public class AdminUpdateAdminController extends HttpServlet {
         String type = request.getParameter("type");
         String status = request.getParameter("status");
         AdminProcess ap = new AdminProcess();
-        Admin ad = ap.getAdminByUserName(userName);
-        if(fullName!=null)
+        Admin ad = new Admin();
+        ad.setUserName(userName);
         ad.setFullName(fullName);
-        if(email!=null)
         ad.setEmail(email);
-        if(pass!=null)
         ad.setPassWord(pass);
-        if(phone!=null)
         ad.setPhone(Integer.parseInt(phone));
-        if(type!=null)
         ad.setType(type);
-        if(status!=null)
         ad.setStatus(status);
-        if(ap.updateAdminInfomation(ad))
-            response.getWriter().write("Cập Nhật Thành Công !!");
+        if(ap.AddNewAdmin(ad))
+            response.getWriter().write("Thêm Thành Công !!");
         else
-            response.getWriter().write("Cập Nhật Thất Bại !!");
+            response.getWriter().write("Thêm Thất Bại !!");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

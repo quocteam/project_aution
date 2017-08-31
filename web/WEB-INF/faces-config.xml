@@ -48,4 +48,9 @@
         <managed-bean-class>bean.admin.ProductDetailBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>detailUserBean</managed-bean-name>
+        <managed-bean-class>bean.admin.DetailUserBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

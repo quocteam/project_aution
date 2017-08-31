@@ -41,6 +41,10 @@
         <servlet-name>AdminUpdateAdminController</servlet-name>
         <servlet-class>bean.admin.AdminUpdateAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAddAdminController</servlet-name>
+        <servlet-class>bean.admin.AdminAddAdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -76,6 +80,10 @@
     <servlet-mapping>
         <servlet-name>AdminUpdateAdminController</servlet-name>
         <url-pattern>/AdminUpdateAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAddAdminController</servlet-name>
+        <url-pattern>/AdminAddAdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

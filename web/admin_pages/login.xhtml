@@ -38,7 +38,13 @@
     </style>
     </h:head>
     <h:body>
-        
+        <c:choose>
+            <c:when test="${session.getAttribute('admin')!=null}">
+              <script type="text/javascript">
+                window.location = "admin.xhtml";
+              </script>
+            </c:when>
+        </c:choose>
         <div class="col-lg-6 col-xlg-6 col-md-7 col-centered">
                         <div class="card">
                             <div class="card-block">
@@ -46,12 +52,15 @@
                                     <c:when test="${param.message=='WrongPass'}">
                                         <p id="message" class="alert alert-danger" >Sai tên đăng nhập hoặc mật khẩu !</p>
                                     </c:when>
+                                    <c:when test="${param.message=='Inactive'}">
+                                        <p id="message" class="alert alert-danger" >Tài khoản của bạn đã bị khóa liên hệ assmin !</p>
+                                    </c:when>
                                 </c:choose>
                                 <h:form class="form-horizontal form-material">
                                     <div class="form-group">
                                         <label class="col-md-12">Tên đăng nhập</label>
                                         <div class="col-md-12">
-                                            <h:inputText a:placeholder="xxxxxx" class="form-control form-control-line" value="${adminBean.userName}"/>
+                                            <h:inputText a:placeholder="UserName" class="form-control form-control-line" value="${adminBean.userName}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">

@@ -280,4 +280,26 @@ public class AdminProcess {
         }
        return ad;
     }
+    
+    public boolean AddNewAdmin(Admin admin){
+         int result = 0;
+        String sql="INSERT INTO tbl_admin VALUES(?,?,?,?,?,?,?)";
+        
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, admin.getUserName());
+            prst.setString(2, admin.getPassWord());
+            prst.setString(3, admin.getFullName());
+            prst.setString(4, admin.getEmail());
+            prst.setInt(5, admin.getPhone());
+            prst.setString(6, admin.getType());
+            prst.setString(7, admin.getStatus());
+            result=prst.executeUpdate();
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+       
+        return result>0;
+    }
 }
