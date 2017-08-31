@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Bookmark;
+import model.Session;
 import model.User;
 
 /**
@@ -246,6 +248,67 @@ public class UserProcess {
             
         }
        return us;
+    }
+     public boolean bookmark(Bookmark bookmark){
+         int result = 0;
+        String sql="INSERT INTO tbl_bookmark(sessionID,userID) VALUES(?,?)";
+        
+        try {
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, bookmark.getSessionID());
+            prst.setString(2, bookmark.getUserID());
+            result=prst.executeUpdate();
+            prst.close();
+        } catch (SQLException e) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE,null, e);
+        }
+       
+        return result>0;
+     }
+     
+     public ArrayList<Session> getBookmarkByID(String uid){
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "select tbl_session.sessionId,tbl_session.userCreateID,tbl_session.productName,tbl_session.productType,tbl_session.image "
+                    + "from tbl_session,tbl_bookmark WHERE tbl_session.sessionId=tbl_bookmark.sessionID and tbl_bookmark.userID=?";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uid);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(2));
+                ss.setProductName(rs.getString(3));
+                ss.setProductType(rs.getString(4));
+                ss.setAvatar(rs.getString(5));
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+     
+     public boolean CheckBookmark(Bookmark bookmark){
+        try {
+            String sql = "select * from tbl_bookmark where sessionID = ? and userID = ?";
+            
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, bookmark.getSessionID());
+            prst.setString(2, bookmark.getUserID());
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return false;
     }
      
     public static void main(String[] args) {

@@ -34,60 +34,7 @@
   <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
   <script src="js/moment.js"></script>
   <script src="js/bootstrap-datetimepicker.min.js"></script>
-  <style>
-        .loader_overlay {
-            position: fixed;
-            z-index: 9999;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            background-color: #fff;
-            -webkit-transition: all .1s ease;
-            -o-transition: all .1s ease;
-            transition: all .1s ease;
-            opacity: 1;
-            visibility: visible;
-        }
-
-            .loader_overlay.loaded {
-                opacity: 0;
-                visibility: hidden;
-                z-index: -2;
-            }
-           
-            .kv-file-upload{
-            display: none;
-
-            }
-            .file-drop-zone{
-                overflow: scroll;
-                height: 300px;
-
-            }
-            .fileinput-upload-button{
-                display: none;
-            }
-            .kv-main{
-                width: 100%;
-            }
-            .compact{
-                line-height: 1.5em;
-                height: 3em;
-                overflow: hidden;
-            }
-            .contentSearchName{
-               padding-top: 16px;
-               font-size: 20px;
-            }
-            .contentSearchType{
-               padding-top: 16px;
-               font-size: 15px;
-            }
-            .searchHover:hover{
-                color: black;
-            }
-    </style>
+ 
 <!--CSS-->
   <script>
   $( function() {
@@ -104,11 +51,7 @@
 });
   } );
   </script>
-<!--  upload image-->
-<!--  <link href="css/fileinput.css" rel="stylesheet" type="text/css" />
-  <link href="css/theme.css" rel="stylesheet" type="text/css" />
-  <script src="js/fileinput.js"></script>
-  <script src="js/theme.js"></script>-->
+
 <!--  bootstrap table-->
   <link href="assets/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css" />
   <script src="assets/bootstrap-table/bootstrap-table.js"></script>
@@ -509,7 +452,11 @@
         
         <ui:insert name="main">
         </ui:insert>
-        
+        <div id="loader-wrapper">
+			<div id="loader"></div>
+			<div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
         <ui:insert name="partner">
         </ui:insert>
 
@@ -655,22 +602,5 @@
                 </footer>
                     </div>
     </h:body>
-    <script type="text/javascript">
-        $(".header-content").css({ "background": '' });
-        $("html").addClass('');
-//        $("#kv-explorer").fileinput({
-//                'theme': 'explorer',
-//                'uploadUrl': '#',
-//                overwriteInitial: false,
-//                initialPreviewAsData: false,
-//                initialPreview: [
-//
-//                ],
-//                initialPreviewConfig: [
-//                      
-//                ],
-//                dropZoneTitle: 'Ấn Browse Để Chọn Ảnh Cần Upload .....'
-//            });
-    </script>
 </html>
     

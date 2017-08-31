@@ -124,6 +124,30 @@ public class SessionProcess {
             return prefixID + nextID;
  
         }
+     // Lấy 7 phiên đấu giá nổi bật cho trang chủ
+     public ArrayList<Session> gethighlightproductindex(){
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE STATUS = 'active' ORDER by startPrice DESC LIMIT 7";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setProductInformation(rs.getString(5));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setEndTime(rs.getString(13));
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
      // Lấy 8 phiên đấu giá mới nhất cho trang chủ
      public ArrayList<Session> getUpcomingProductIndex(){
         Date today=new Date(System.currentTimeMillis());
@@ -139,9 +163,7 @@ public class SessionProcess {
             while (rs.next()) {
                 Session ss = new Session();
                 ss.setSessionId(rs.getString(1));
-                ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductInformation(rs.getString(5));
                 ss.setAvatar(rs.getString(6));
                 ss.setStartPrice(rs.getInt(7));
                 ss.setStartTime(rs.getString(12));
@@ -170,12 +192,9 @@ public class SessionProcess {
             while (rs.next()) {
                 Session ss = new Session();
                 ss.setSessionId(rs.getString(1));
-                ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductInformation(rs.getString(5));
                 ss.setAvatar(rs.getString(6));
                 ss.setStartPrice(rs.getInt(7));
-                ss.setStartTime(rs.getString(12));
                 ss.setEndTime(rs.getString(13));
                 arr.add(ss);
             }
@@ -203,12 +222,9 @@ public class SessionProcess {
             while (rs.next()) {
                 Session ss = new Session();
                 ss.setSessionId(rs.getString(1));
-                ss.setUserCreateID(rs.getString(2));
                 ss.setProductName(rs.getString(3));
-                ss.setProductInformation(rs.getString(5));
                 ss.setAvatar(rs.getString(6));
                 ss.setStartPrice(rs.getInt(7));
-                ss.setStartTime(rs.getString(12));
                 ss.setEndTime(rs.getString(13));
                 
                 arr.add(ss);
@@ -289,7 +305,8 @@ public class SessionProcess {
     public ArrayList<Bet> topBet(String sID){
         ArrayList<Bet> arr = new ArrayList<>();
          try {
-            String sql = "SELECT * FROM `tbl_bet`  where sessionId=? ORDER BY value DESC LIMIT 5";
+            String sql = "SELECT tbl_bet.id,tbl_bet.sessionId,tbl_bet.userBetId,tbl_bet.value,tbl_user.userName "
+                    + "FROM `tbl_bet`,tbl_user where tbl_user.userID=tbl_bet.userBetId and sessionId=? ORDER BY value DESC LIMIT 5";
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             prst.setString(1, sID);
             ResultSet rs = prst.executeQuery();
@@ -299,6 +316,7 @@ public class SessionProcess {
                 bet.setSessionId(rs.getString(2));
                 bet.setUserBetId(rs.getString(3));
                 bet.setValue(rs.getInt(4));
+                bet.setUserName(rs.getString(5));
                 arr.add(bet);
             }
             rs.close();
@@ -387,7 +405,7 @@ public class SessionProcess {
     }
     
     // Lấy phiên đấu giá mới nhất
-     public ArrayList<Session> getUpcomingProduct(){
+     public ArrayList<Session> getUpcomingProduct(String sort){
         Date today=new Date(System.currentTimeMillis());
         SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s=timeFormat.format(today.getTime());
@@ -395,6 +413,15 @@ public class SessionProcess {
         ArrayList<Session> arr = new ArrayList<>();
          try {
             String sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' ORDER by sessionId DESC";
+            if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE startTime > ? AND STATUS = 'active' order by productName desc";
+             }
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             prst.setString(1, s);
             ResultSet rs = prst.executeQuery();
@@ -422,7 +449,7 @@ public class SessionProcess {
        return arr;
     }
      // Lấy phiên đấu giá đang diễn ra 
-     public ArrayList<Session> getSessionHappening(){
+     public ArrayList<Session> getSessionHappening(String sort){
         Date today=new Date(System.currentTimeMillis());
         SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s=timeFormat.format(today.getTime());
@@ -430,6 +457,15 @@ public class SessionProcess {
         ArrayList<Session> arr = new ArrayList<>();
          try {
             String sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' ORDER by sessionId DESC";
+            if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE ? BETWEEN startTime AND endTime AND STATUS = 'active' order by productName desc";
+             }
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             prst.setString(1, s);
             
@@ -459,7 +495,7 @@ public class SessionProcess {
     }
      
      // Lấy phiên đấu giá mới kết thúc 
-     public ArrayList<Session> getSessionDone(){
+     public ArrayList<Session> getSessionDone(String sort){
         Date today=new Date(System.currentTimeMillis());
         SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s=timeFormat.format(today.getTime());
@@ -467,6 +503,15 @@ public class SessionProcess {
         ArrayList<Session> arr = new ArrayList<>();
          try {
             String sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' ORDER by sessionId DESC";
+            if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE endTime < ? AND STATUS = 'active' order by productName desc";
+             }
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             prst.setString(1, s);
             
@@ -625,7 +670,7 @@ public class SessionProcess {
     }
     
     // lấy phiên đấu giá theo loại
-    public  ArrayList<Session> getSessionByType(String type){
+    public  ArrayList<Session> getSessionByType(String type,String sort){
         ArrayList<Session> arr = new ArrayList<>();
          try {
             String sql = "SELECT categoryName FROM `tbl_category` WHERE categoryType= ?";
@@ -634,7 +679,16 @@ public class SessionProcess {
             
             ResultSet rs = prst.executeQuery();
             while (rs.next()) {
-                String sql2 = "SELECT * FROM `tbl_session` WHERE productType = ?";
+                String sql2 = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active'";
+                if(sort.equals("asc")){
+                 sql2 = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql2 = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql2 = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql2 = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by productName desc";
+             }
             PreparedStatement prst2 = Process.getConnection().prepareStatement(sql2);
             prst2.setString(1, rs.getString(1));
             
@@ -659,7 +713,16 @@ public class SessionProcess {
             }
             if(arr.isEmpty()){
              
-            sql = "SELECT * FROM `tbl_session` WHERE productType = ?";
+            sql = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active'";
+            if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType = ? and status='active' order by productName desc";
+             }
             prst= Process.getConnection().prepareStatement(sql);
             prst.setString(1, type);
             
@@ -774,10 +837,21 @@ public class SessionProcess {
        return arr;
     }
     
-    public ArrayList<Session> SearchAllResult(String name){
+    public ArrayList<Session> SearchAllResult(String name,String sort){
         ArrayList<Session> arr = new ArrayList<>();
          try {
-            String sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%'";
+             
+                 String sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' and status='active'";
+            if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' and status='active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' and status='active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' and status='active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productName LIKE '%" + name + "%' and status='active' order by productName desc";
+             }
+            
             PreparedStatement prst = Process.getConnection().prepareStatement(sql);
             ResultSet rs = prst.executeQuery();
             while (rs.next()) {
@@ -792,7 +866,16 @@ public class SessionProcess {
                 arr.add(ss);
             }
              if (arr.isEmpty()) {
-                sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%'";
+                sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' and status='active'";
+                if(sort.equals("asc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' and status='active' order by startPrice asc";
+             }else if(sort.equals("desc")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' and status='active' order by startPrice desc";
+             }else if(sort.equals("a-z")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' and status='active' order by productName asc";
+             }else if(sort.equals("z-a")){
+                 sql = "SELECT * FROM `tbl_session` WHERE productType LIKE '%" + name + "%' and status='active' order by productName desc";
+             }
                 prst = Process.getConnection().prepareStatement(sql);
                 rs = prst.executeQuery();
                 while (rs.next()) {
@@ -813,6 +896,85 @@ public class SessionProcess {
             
         }
        return arr;
+    }
+    // lấy phiên đấu giá user đang tham gia
+        public ArrayList<Session> getSessionUserJoining(String userId){
+        Date today=new Date(System.currentTimeMillis());
+        SimpleDateFormat timeFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s=timeFormat.format(today.getTime());
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT tbl_session.sessionId,tbl_session.productName,tbl_session.productType,tbl_session.image,tbl_session.userCreateID FROM"
+                    + " `tbl_bet`,tbl_session WHERE tbl_session.sessionId=tbl_bet.sessionId and ? BETWEEN startTime AND endTime AND STATUS = 'active' and userBetId=? GROUP BY tbl_bet.sessionId";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, s);
+            prst.setString(2, userId);
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setUserCreateID(rs.getString(5));
+                ss.setProductName(rs.getString(2));
+                ss.setProductType(rs.getString(3));
+                ss.setAvatar(rs.getString(4));
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+    
+    
+    
+    // Lấy 8 sản phẩm liên quan
+    public ArrayList<Session> getProductByType(String type){
+       
+        
+        ArrayList<Session> arr = new ArrayList<>();
+         try {
+            String sql = "SELECT * FROM `tbl_session` WHERE productType=? AND STATUS = 'active' ORDER BY sessionId DESC LIMIT 8";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, type);
+            
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+                Session ss = new Session();
+                ss.setSessionId(rs.getString(1));
+                ss.setProductName(rs.getString(3));
+                ss.setAvatar(rs.getString(6));
+                ss.setStartPrice(rs.getInt(7));
+                ss.setEndTime(rs.getString(13));
+                arr.add(ss);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return arr;
+    }
+    // lấy username qua uid
+    public String getUserNameByUID(String uid){
+
+         try {
+            String sql = "SELECT * FROM `tbl_user` WHERE userID=?";
+            PreparedStatement prst = Process.getConnection().prepareStatement(sql);
+            prst.setString(1, uid);
+            
+            ResultSet rs = prst.executeQuery();
+            while (rs.next()) {
+               return rs.getString(2);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserProcess.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+       return null;
     }
     
      public static void main(String[] args) {

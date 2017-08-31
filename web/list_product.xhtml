@@ -21,11 +21,11 @@
                         <div class="breadcrumb clearfix">
                             <ul>
                                 <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="home">
-                                    <a title="Đến trang chủ" href="../index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                    <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
                                 </li>
                                 <li itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="" class="category17 icon-li">
                                     <div class="link-site-more">
-                                        <a title="" href="nghao-so-oc-33804.html" itemprop="url">
+                                        <a title="" href="#" itemprop="url">
                                             <span itemprop="title">Sản Phẩm</span>
                                         </a>
                                     </div>
@@ -38,7 +38,7 @@
 
                         <div class="product-content">
                             <h1 title="products" class="page_heading ">
-                                Sản Phẩm
+                                Danh Sách Sản Phẩm
                             </h1>
                             <div class="sortPagibar m-b-15 clearfix">
                                
@@ -47,13 +47,64 @@
                                     <div class="browse-tags">
                                         <span class="sort-view">Sắp xếp:</span>
                                         <span class="custom-dropdown custom-dropdown--white">
-                                            <select class="selectProductSort sort-by custom-dropdown__select custom-dropdown__select--white" id="lbsort">
-                                                        <option selected="selected" value=" ?sort=index&amp;order =asc">Mặc định</option>
-                                                        <option value=" ?sort=price&amp;order =asc">Giá tăng dần</option>
-                                                        <option value=" ?sort=price&amp;order =desc">Giá giảm dần</option>
-                                                        <option value=" ?sort=name&amp;order =asc">Tên sản phẩm: A to Z</option>
-                                                        <option value=" ?sort=name&amp;order =desc">Tên sản phẩm: Z to A</option>
+                                            <select class="selectProductSort sort-by custom-dropdown__select custom-dropdown__select--white" onchange="selectChange(this.value)" id="lbsort">
+                                                <c:choose>
+                                                    <c:when test="${request.getParameter('sort')=='default'}">
+                                                        <option selected="selected" value="default">Mặc định</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="default">Mặc định</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${request.getParameter('sort')=='asc'}">
+                                                        <option selected="selected" value="asc">Giá tăng dần</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="asc">Giá tăng dần</option>>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${request.getParameter('sort')=='desc'}">
+                                                        <option selected="selected" value="desc">Giá giảm dần</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="desc">Giá giảm dần</option>
+                                                    </c:otherwise>
+                                                </c:choose>        
+                                                <c:choose>
+                                                    <c:when test="${request.getParameter('sort')=='a-z'}">
+                                                        <option selected="selected" value="a-z">Tên sản phẩm: A->Z</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="a-z">Tên sản phẩm: A to Z</option>
+                                                    </c:otherwise>
+                                                </c:choose>        
+                                                <c:choose>
+                                                    <c:when test="${request.getParameter('sort')=='z-a'}">
+                                                        <option selected="selected" value="z-a">Tên sản phẩm: Z->A</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="z-a">Tên sản phẩm: Z to A</option>
+                                                    </c:otherwise>
+                                                </c:choose>        
+                                                        
                                             </select>
+                                            <script>
+                                                
+                                                function selectChange(val){
+                                                    var type = '';
+                                                    var value = '';
+                                                    if('${request.getParameter('name')}'){
+                                                        type = 'name';
+                                                        value = '${request.getParameter('name')}';
+                                                    }else{
+                                                        type = 'type';
+                                                        value = '${request.getParameter('type')}';
+                                                    }
+                                                    window.location = 'http://localhost:8080/project_auction/faces/list_product.xhtml?'+type+'='+value+'&amp;sort='+val;
+                                                }
+                                            </script>
                                         </span>
                                     </div>
                                 </div>
@@ -69,8 +120,8 @@
                                                     </h:link>
                                                 
                                                 <div class="product-actions hidden-xs">
-                                                        <div class="btn-add-to-cart" onclick="AddToCard(46493,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
+                                                        <div class="btn-add-to-cart" onclick="AddToBookMark('#{listProductBean.arr.get(p).sessionId}')">
+                                                            <a><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
                                                         
@@ -112,19 +163,6 @@
 
                     </div>
                     <div class="col-md-3">
-
-<div class="menu-product menu-product-group">
-    <h3>
-        <span>
-            Nghao - S&#242; - Ốc
-        </span>
-    </h3>
-    <ul class='level0'><li><span><a href='ngao-33820.html'><i class='fa fa-check'></i> Ngao</a></span></li>
-        <li><span><a href='so-33821.html'><i class='fa fa-check'></i> Sò</a></span></li>
-        <li><span><a href='oc-33822.html'><i class='fa fa-check'></i> Ốc</a></span></li>
-        <li><span><a href='hau-33823.html'><i class='fa fa-check'></i> Hàu</a></span></li>
-    </ul>
-</div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.menu-product-group li.child .open-close').on('click', function () {
@@ -146,29 +184,20 @@
 <div class="menu-product">
     <h3>
         <span>
-            Sản phẩm
+            Danh mục sản phẩm
         </span>
     </h3>
-    <ul class='level0'><li class="child"><span><a class='active' href='nghao-so-oc-33804.html'><i class='fa fa-arrow-circle-right'></i> Nghao - Sò - Ốc</a></span><span class='open-close'><i class='fa fa-angle-down'></i></span><ul class='level1 hidden-xs'><li><span><a href='ngao-33820.html'><i class='fa fa-check'></i> Ngao</a></span></li>
-<li><span><a href='so-33821.html'><i class='fa fa-check'></i> Sò</a></span></li>
-<li><span><a href='oc-33822.html'><i class='fa fa-check'></i> Ốc</a></span></li>
-<li><span><a href='hau-33823.html'><i class='fa fa-check'></i> Hàu</a></span></li>
-</ul></li>
-<li><span><a href='bao-ngu-33805.html'><i class='fa fa-arrow-circle-right'></i> Bào ngư</a></span></li>
-<li><span><a href='tom-33806.html'><i class='fa fa-arrow-circle-right'></i> Tôm</a></span></li>
-<li><span><a href='muc-33807.html'><i class='fa fa-arrow-circle-right'></i> Mực</a></span></li>
-<li class="child"><span><a href='ca-33808.html'><i class='fa fa-arrow-circle-right'></i> Cá</a></span><span class='open-close'><i class='fa fa-angle-down'></i></span><ul class='level1 hidden-xs'><li><span><a href='ca-ngu-dai-duong-33824.html'><i class='fa fa-check'></i> Cá ngừ đại dương</a></span></li>
-<li><span><a href='ca-hoi-33825.html'><i class='fa fa-check'></i> Cá hồi</a></span></li>
-</ul></li>
-<li class="child"><span><a href='cua-nghe-33809.html'><i class='fa fa-arrow-circle-right'></i> Cua nghẹ</a></span><span class='open-close'><i class='fa fa-angle-down'></i></span><ul class='level1 hidden-xs'><li><span><a href='cua-33826.html'><i class='fa fa-check'></i> Cua</a></span></li>
-<li><span><a href='nghe-33827.html'><i class='fa fa-check'></i> Nghẹ</a></span></li>
-</ul></li>
-<li><span><a href='sua-33810.html'><i class='fa fa-arrow-circle-right'></i> Sứa</a></span></li>
-<li><span><a href='hai-san-dong-hop-che-bien-33811.html'><i class='fa fa-arrow-circle-right'></i> Hải sản đóng hộp - chế biến</a></span></li>
-<li class="child"><span><a href='hai-san-kho-33812.html'><i class='fa fa-arrow-circle-right'></i> Hải sản khô</a></span><span class='open-close'><i class='fa fa-angle-down'></i></span><ul class='level1 hidden-xs'><li><span><a href='hai-san-kho-33828.html'><i class='fa fa-check'></i> Hải sản khô</a></span></li>
-</ul></li>
-<li><span><a href='san-pham-khac-33813.html'><i class='fa fa-arrow-circle-right'></i> Sản phẩm khác</a></span></li>
-</ul>
+    <ul class='level0'>
+        <c:forEach var="p" items="${categoryBean.arrCate}">
+            <li><span>
+                    <h:link outcome="list_product" >
+                                                <f:param name="type" value="${p.categoryName}"/>
+                                               <i class='fa fa-check'></i>
+                                            <span>${p.categoryName}</span>
+                                            </h:link>
+            </span></li>
+        </c:forEach>
+    </ul>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -193,92 +222,32 @@
         </h3>
     </div>
     <ul class="list_product_related widget_list_sidebar clearfix">
+        <c:forEach var="p" items="${index_SessionBean.sessionHighlight}">
             <li class="pro-loop clearfix">
                 <div class="col-md-5 col-sm-5 col-xs-5">
-                    <a href="coi-so-diep.html" title="Cồi s&#242; điệp">
-                        <img src="../Uploads/shop2005/images/product/coi-so-diep-1_master.jpg" alt="Cồi s&#242; điệp"/>
-                    </a>
+                    <h:link outcome="product_detail" >
+                        <f:param name="id" value="#{p.sessionId}"/>
+                            <img style="height: 103px" src="${p.avatar}"/>
+                    </h:link>
                 </div>
                 <div class="col-md-7 col-sm-7 col-xs-7">
-                    <a href="coi-so-diep.html" title="Cồi s&#242; điệp">
-                        <h3 class="product_related_name">
-                            Cồi s&#242; điệp
+                    <h:link outcome="product_detail" >
+                        <f:param name="id" value="#{p.sessionId}"/>
+                            <h3 class="product_related_name">
+                            ${p.productName}
                         </h3>
                                 <p class="product_related_price">
-                                        <span class="product_related_price">160.000&nbsp;₫</span>
+                                        <span class="product_related_price"><h:outputText value="${p.startPrice}">
+                                            <f:convertNumber pattern="#####,000 VND">
+                                            </f:convertNumber></h:outputText></span>
                                 </p>
-                    </a>
+                    </h:link>
+                    
                 </div>
             </li>
-            <li class="pro-loop clearfix">
-                <div class="col-md-5 col-sm-5 col-xs-5">
-                    <a href="hau-sua.html" title="H&#224;u sữa">
-                        <img src="../Uploads/shop2005/images/product/hau-sua-1_master.jpg" alt="H&#224;u sữa"/>
-                    </a>
-                </div>
-                <div class="col-md-7 col-sm-7 col-xs-7">
-                    <a href="hau-sua.html" title="H&#224;u sữa">
-                        <h3 class="product_related_name">
-                            H&#224;u sữa
-                        </h3>
-                                <p class="product_related_price">
-                                        <span class="product_related_price">120.000&nbsp;₫</span>
-                                </p>
-                    </a>
-                </div>
-            </li>
-            <li class="pro-loop clearfix">
-                <div class="col-md-5 col-sm-5 col-xs-5">
-                    <a href="ngao-2-coi.html" title="Ngao 2 cồi">
-                        <img src="../Uploads/shop2005/images/product/ngao-2-coi-1_master.jpg" alt="Ngao 2 cồi"/>
-                    </a>
-                </div>
-                <div class="col-md-7 col-sm-7 col-xs-7">
-                    <a href="ngao-2-coi.html" title="Ngao 2 cồi">
-                        <h3 class="product_related_name">
-                            Ngao 2 cồi
-                        </h3>
-                                <p class="product_related_price">
-                                        <span class="product_related_price">190.000&nbsp;₫</span>
-                                </p>
-                    </a>
-                </div>
-            </li>
-            <li class="pro-loop clearfix">
-                <div class="col-md-5 col-sm-5 col-xs-5">
-                    <a href="oc-mong-tay.html" title="Ốc m&#243;ng tay">
-                        <img src="../Uploads/shop2005/images/product/oc-mong-tay-1_master.jpg" alt="Ốc m&#243;ng tay"/>
-                    </a>
-                </div>
-                <div class="col-md-7 col-sm-7 col-xs-7">
-                    <a href="oc-mong-tay.html" title="Ốc m&#243;ng tay">
-                        <h3 class="product_related_name">
-                            Ốc m&#243;ng tay
-                        </h3>
-                                <p class="product_related_price">
-                                        <span class="product_related_price">370.000&nbsp;₫</span>
-                                </p>
-                    </a>
-                </div>
-            </li>
-            <li class="pro-loop clearfix">
-                <div class="col-md-5 col-sm-5 col-xs-5">
-                    <a href="so-diep.html" title="S&#242; điệp">
-                        <img src="../Uploads/shop2005/images/product/so-diep-1_master.jpg" alt="S&#242; điệp"/>
-                    </a>
-                </div>
-                <div class="col-md-7 col-sm-7 col-xs-7">
-                    <a href="so-diep.html" title="S&#242; điệp">
-                        <h3 class="product_related_name">
-                            S&#242; điệp
-                        </h3>
-                                <p class="product_related_price">
-                                        <span class="product_related_price">100.000&nbsp;₫</span>
-                                        <span class="product_related_old_price">150.000&nbsp;₫</span>
-                                </p>
-                    </a>
-                </div>
-            </li>
+        </c:forEach>
+            
+          
     </ul>
 </div>
                     </div>
@@ -310,7 +279,6 @@
                                                     + minutes + "m " + seconds + "s ";
                                                     // If the count down is over, write some text 
                                                     if (distance &lt; 0) {
-                                                        clearInterval(x);
                                                         document.getElementsByClassName('clock')[i].innerHTML = "Đã Kết Thúc";
                                                     }
                                             }

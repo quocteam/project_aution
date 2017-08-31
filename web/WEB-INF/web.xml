@@ -17,6 +17,30 @@
         <servlet-name>SearchController</servlet-name>
         <servlet-class>bean.admin.SearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookmarkController</servlet-name>
+        <servlet-class>bean.BookmarkController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessionJoiningController</servlet-name>
+        <servlet-class>bean.SessionJoiningController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CountVisitorController</servlet-name>
+        <servlet-class>bean.CountVisitorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateUserController</servlet-name>
+        <servlet-class>bean.admin.AdminUpdateUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAccountController</servlet-name>
+        <servlet-class>bean.admin.AdminAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateAdminController</servlet-name>
+        <servlet-class>bean.admin.AdminUpdateAdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -28,6 +52,30 @@
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/SearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookmarkController</servlet-name>
+        <url-pattern>/BookmarkController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionJoiningController</servlet-name>
+        <url-pattern>/SessionJoiningController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CountVisitorController</servlet-name>
+        <url-pattern>/CountVisitorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateUserController</servlet-name>
+        <url-pattern>/AdminUpdateUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAccountController</servlet-name>
+        <url-pattern>/AdminAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateAdminController</servlet-name>
+        <url-pattern>/AdminUpdateAdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

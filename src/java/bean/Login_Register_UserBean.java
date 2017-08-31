@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,6 +45,7 @@ public class Login_Register_UserBean implements Serializable{
      private String userID;
     private String userName;
     private String passWord;
+    private String rePass;
     private String email;
     private String fullName;
     private int phoneNumber;
@@ -57,7 +59,25 @@ public class Login_Register_UserBean implements Serializable{
     private ArrayList<Session> arrSession;
     private String newPassWord;
     private ArrayList<Category> cate = new CategoryProcess().getAllCategory();
+    private boolean savePass;
+    
 
+    public String getRePass() {
+        return rePass;
+    }
+
+    public void setRePass(String rePass) {
+        this.rePass = rePass;
+    }
+
+    public boolean isSavePass() {
+        return savePass;
+    }
+
+    public void setSavePass(boolean savePass) {
+        this.savePass = savePass;
+    }
+    
     public ArrayList<Category> getCate() {
         return cate;
     }
@@ -318,9 +338,26 @@ public class Login_Register_UserBean implements Serializable{
     
     
     public Login_Register_UserBean() {
-    }
+        FacesContext context =  FacesContext.getCurrentInstance();
+            HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
+            Cookie[] cookies = request.getCookies();
+    if (cookies != null)
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("user"))
+            {
+                this.userName = cookie.getValue();
+                this.savePass=true;
+            }
+            if(cookie.getName().equals("pass"))
+            {
+                this.passWord = cookie.getValue();
+            }
+            
+        }
+           }
     
     public String Login(){
+        FacesContext context =  FacesContext.getCurrentInstance();
         UserProcess userProcess = new UserProcess();
         SessionProcess sp = new SessionProcess();
         if(userProcess.CheckLogin(this.userName, this.passWord)){
@@ -336,16 +373,42 @@ public class Login_Register_UserBean implements Serializable{
             this.address = user.getAddress();
             this.status = user.getStatus();
             this.avatars = user.getAvatars();
-            FacesContext context =  FacesContext.getCurrentInstance();
             HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
             HttpServletResponse response  = (HttpServletResponse) context.getExternalContext().getResponse();
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             arrBet = sp.findBetByUId(userID);
             this.arrSession = sp.arrSessionForUser(userID);
+            session.setAttribute("countSessionJoin", sp.getSessionUserJoining(user.getUserID()).size());
+            if(this.savePass){
+                System.out.println("ok");
+                String[] cookiesNames = {"user","pass"};
+                String[] cookiesValues = {this.userName,this.passWord};
+                for(int i = 0;i<cookiesNames.length;++i){
+                    Cookie cookie = new Cookie(cookiesNames[i],cookiesValues[i]);
+                    cookie.setMaxAge(30*24*60*60);
+                    response.addCookie(cookie);
+                }
+            }else{
+                Cookie[] cookies = request.getCookies();
+            
+                    for (Cookie cookie : cookies) {
+                        if(cookie.getName().equals("user"))
+                        {
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                        if(cookie.getName().equals("pass"))
+                        {
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                     
+                        }
+            }
             return "user_page";
         }else{
-            this.showAlert = true;
+            context.addMessage(null, new FacesMessage("Sai tên đăng nhập hoặc mật khẩu !!","") );
             return "dang-nhap";
         }
             

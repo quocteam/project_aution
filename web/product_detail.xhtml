@@ -106,20 +106,21 @@
                                                     <div>Còn <strong><span class="clock">${detailProduct_SessionBean.session.startTime}</span></strong> cho đến khi bắt đầu</div>
                                                 </c:when>
                                                 <c:when test="${detailProduct_SessionBean.status == 'Đã kết thúc , không có người đấu giá'}">
-                                                    <div><strong><span>Đã kết thúc , không có người đấu giá</span></strong></div>
+                                                    <div style="margin-top: 30px"><h2><span>Đã kết thúc , không có người đấu giá</span></h2></div>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <h:link outcome="user_info">
+                                                    <h2 style="margin-top: 30px">Phiên đấu giá đã kết thúc</h2>
+                                                    Người thắng cuộc : <strong style="font-size: 24px"><h:link outcome="user_info">
                                                         <f:param name="uid" value="#{detailProduct_SessionBean.status}"/>
-                                                        Người thắng : ${detailProduct_SessionBean.status}
-                                                    </h:link>
+                                                        ${detailProduct_SessionBean.userNameWin}
+                                                        </h:link></strong>
                                                 </c:otherwise>
                                             </c:choose>
+                                            <hr/>
                                             
                                             
                                             
-                                            
-                                            <div class="social">
+                                            <div class="social" style="margin-top: 30px">
                                                 <div class="addthis_toolbox addthis_default_style">
                                                     <a class="addthis_button_facebook_like at300b" style="float: left">
                                                         <div class="fb-like fb_iframe_widget" data-layout="button_count" data-show_faces="false" data-share="true" data-action="like"
@@ -181,7 +182,7 @@
                                 <h4 class="modal-title">Thông Báo</h4>
                               </div>
                               <div class="modal-body">
-                                  <p><h:outputText id="outputMessage" value="#{detailProduct_SessionBean.message}"></h:outputText></p>
+                                  <p><h:outputText class="betResult" id="outputMessage" value="#{detailProduct_SessionBean.message}"></h:outputText></p>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
@@ -190,28 +191,33 @@
 
                           </div>
                         </div>
+                        <script>
+                                      $( "#myModal" ).on('shown.bs.modal', function(e){
+                                            alert("I want this to appear after the modal has opened!");
+                                        });
+                                  </script>
                         <div class="product-content product-other">
                             <h1 title="products" class="page_heading ">
                                 Sản phẩm liên quan
                             </h1>
                             <div class="product_list grid clearfix">
-                                   <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                                <c:forEach var="p" items="${detailProduct_SessionBean.relateSession}">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
                                         <div class="product-block product-resize">
                                             <div class="product-image image-resize">
                                                     <div class="sold-out">Hot</div>
                                                     <h:link outcome="product_detail">
-                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                            <img class="first-img" style="height: 212px" src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="" />
+                                                        <f:param name="id" value="#{p.sessionId}"/>
+                                                            <img class="first-img" style="height: 212px" src="${p.avatar}" alt="" />
                                                     </h:link>
                                                     
                                                 <div class="product-actions hidden-xs">
-                                                        <div class="btn-add-to-cart" onclick="AddToCard(46490,1)">
-                                                            <a href="javascript:void(0);"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
+                                                        <div class="btn-add-to-cart" onclick="AddToBookMark('#{p.sessionId}')">
+                                                            <a><i class="fa fa-bookmark-o" aria-hidden="true"></i></a>
                                                         </div>
                                                     <div class="btn_quickview">
                                                         <h:link class="quickview" outcome="product_detail">
-                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                                        <f:param name="id" value="#{p.sessionId}"/>
                                                                <i class="fa fa-eye"></i>
                                                     </h:link>
                                                     </div>
@@ -219,14 +225,14 @@
                                             </div>
                                             <div class="product-info text-center m-t-xxs-20">
                                                 <h3 class="pro-name">
-                                                    <h:link title="${index_SessionBean.sessionHappening.get(p).productName}" style="line-height: 37px" outcome="product_detail">
-                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                               ${index_SessionBean.sessionHappening.get(p).productName}
+                                                    <h:link title="${p.productName}" style="line-height: 37px" outcome="product_detail">
+                                                        <f:param name="id" value="#{p.sessionId}"/>
+                                                               ${p.productName}
                                                     </h:link>
                                                 </h3>
-                                                <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
+                                                <p class="clock">${p.endTime}</p>
                                                         <div class="pro-prices">
-                                                                <span class="pro-price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                                <span class="pro-price"><h:outputText value="${p.startPrice}">
                                                                                                                         <f:convertNumber pattern="#####,000 VND">
                                                                                                                         </f:convertNumber></h:outputText></span>
                                                         </div>
@@ -250,8 +256,8 @@
                                     <li class="has-child level0">
                                         <h:link outcome="user_info">
                                             <f:param name="uid" value="#{p.userBetId}"/>
-                                                        <span>${p.userBetId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                            <span><h:outputText value="${p.value}">
+                                            <span>${p.userName}</span>
+                                            <span style="float: right"><h:outputText value="${p.value}">
                                                   <f:convertNumber pattern="#####,000 VND">
                                                   </f:convertNumber></h:outputText></span>
                                                     </h:link>
@@ -324,27 +330,27 @@
                             </h3>
                         </div>
                         <ul class="list_product_related widget_list_sidebar clearfix">
-                            <c:forEach var="p" begin="0" end="${index_SessionBean.sessionHappening.size()-1}" step="1">
+                            <c:forEach var="p" items="${index_SessionBean.sessionHighlight}">
                                     
                                   <li class="pro-loop clearfix">
                                     <div class="col-md-5 col-sm-5 col-xs-5">
-                                        <h:link title="${index_SessionBean.sessionHappening.get(p).productName}" outcome="product_detail">
-                                                        <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
-                                                               <img src="${index_SessionBean.sessionHappening.get(p).avatar}" alt="${index_SessionBean.sessionHappening.get(p).productName}"/>
+                                        <h:link title="${p.productName}" outcome="product_detail">
+                                                        <f:param name="id" value="#{p.sessionId}"/>
+                                                        <img src="${p.avatar}" style="height: 103px"/>
                                                     </h:link>
                                     </div>
                                     <div class="col-md-7 col-sm-7 col-xs-7">
-                                        <h:link title="${index_SessionBean.sessionHappening.get(p).productName}" outcome="product_detail">
-                                            <f:param name="id" value="#{index_SessionBean.sessionHappening.get(p).sessionId}"/>
+                                        <h:link title="${p.productName}" outcome="product_detail">
+                                            <f:param name="id" value="#{p.sessionId}"/>
                                             <h3 class="product_related_name">
-                                                ${index_SessionBean.sessionHappening.get(p).productName}
+                                                ${p.productName}
                                             </h3>                   
                                         </h:link>
                                         
                                             
-                                            <p class="clock" >${index_SessionBean.sessionHappening.get(p).endTime}</p>
+                                            <p class="clock" >${p.endTime}</p>
                                                     <p class="product_related_price">
-                                                            <span class="product_related_price"><h:outputText value="${index_SessionBean.sessionHappening.get(p).startPrice}">
+                                                            <span class="product_related_price"><h:outputText value="${p.startPrice}">
                                                                                                                         <f:convertNumber pattern="#####,000 VND">
                                                                                                                         </f:convertNumber></h:outputText></span>
                                                     </p>
@@ -398,7 +404,6 @@
 
                                                     // If the count down is over, write some text 
                                                     if (distance &lt; 0) {
-                                                        clearInterval(x);
                                                         document.getElementsByClassName('clock')[i].innerHTML = "Đã Kết Thúc";
                                                     }
                                             }

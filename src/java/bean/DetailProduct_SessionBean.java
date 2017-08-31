@@ -32,6 +32,25 @@ public class DetailProduct_SessionBean {
     private String userName;
     private String message;
     private String status;
+    private ArrayList<Session> relateSession;
+    private String userNameWin;
+
+    public String getUserNameWin() {
+        return userNameWin;
+    }
+
+    public void setUserNameWin(String userNameWin) {
+        this.userNameWin = userNameWin;
+    }
+    
+
+    public ArrayList<Session> getRelateSession() {
+        return relateSession;
+    }
+
+    public void setRelateSession(ArrayList<Session> relateSession) {
+        this.relateSession = relateSession;
+    }
    
     
 
@@ -95,22 +114,22 @@ public class DetailProduct_SessionBean {
     
     public DetailProduct_SessionBean() {
         FacesContext context =  FacesContext.getCurrentInstance();
-    HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
-    HttpSession ses = request.getSession();
-    
+        HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpSession ses = request.getSession();
         String  sid = request.getParameter("id");
-        System.out.println("okok         :"+sid);
         ses.setAttribute("id", sid);
-       SessionProcess sp = new SessionProcess();
-       this.session = sp.getSessionByID(sid);
-       Session s = sp.getSessionByID(sid);
-       userName = sp.getUserByID(s.getUserCreateID()).getUserName();
-        
-           this.listBet = sp.topBet(sid);
-       this.status = sp.updateSession(s.getSessionId());
-       if(!this.listBet.isEmpty())
+        SessionProcess sp = new SessionProcess();
+        this.session = sp.getSessionByID(sid);
+        Session s = sp.getSessionByID(sid);
+        userName = sp.getUserByID(s.getUserCreateID()).getUserName();
+        this.relateSession = sp.getProductByType(s.getProductType());
+        this.listBet = sp.topBet(sid);
+        this.status = sp.updateSession(s.getSessionId());
+        if(this.status.startsWith("uid"))
+            this.userNameWin=sp.getUserNameByUID(this.status);
+        if(!this.listBet.isEmpty())
            this.price = (int) (this.listBet.get(0).getValue()+this.session.getStepPrice());
-       else
+        else
            this.price = s.getStartPrice();
     }
     
@@ -118,8 +137,8 @@ public class DetailProduct_SessionBean {
     
     public void Verify(){
         FacesContext context =  FacesContext.getCurrentInstance();
-    HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
-    HttpSession ses = request.getSession();
+        HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpSession ses = request.getSession();
         SessionProcess sp = new SessionProcess();
         User us = (User) ses.getAttribute("user");
         String sid = (String) ses.getAttribute("id");
@@ -143,8 +162,11 @@ public class DetailProduct_SessionBean {
             bet.setUserBetId(us.getUserID());
             bet.setValue(this.price);
                 System.out.println("done");
-            if(sp.AddNewBet(bet))
+            if(sp.AddNewBet(bet)){
                 message= "Đặt Giá Thành Công";
+                ses.setAttribute("countSessionJoin", sp.getSessionUserJoining(us.getUserID()).size());
+            }
+                
             else
                 message= "Có lỗi xảy ra";
                 }
@@ -155,8 +177,10 @@ public class DetailProduct_SessionBean {
             bet.setUserBetId(us.getUserID());
             bet.setValue(this.price);
                 System.out.println("done");
-            if(sp.AddNewBet(bet))
+            if(sp.AddNewBet(bet)){
                 message= "Đặt Giá Thành Công";
+                ses.setAttribute("countSessionJoin", sp.getSessionUserJoining(us.getUserID()).size());
+            }
             else
                 message= "Có lỗi xảy ra";
             }

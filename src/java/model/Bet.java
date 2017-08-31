@@ -13,7 +13,16 @@ public class Bet {
     private int id;
     private String sessionId;
     private String userBetId;
+    private String userName;
     private int value;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public int getId() {
         return id;
@@ -47,11 +56,12 @@ public class Bet {
         this.value = value;
     }
 
-    public Bet(int id, String sessionId, String userBetId, int value) {
+    public Bet(int id, String sessionId, String userBetId, int value,String username) {
         this.id = id;
         this.sessionId = sessionId;
         this.userBetId = userBetId;
         this.value = value;
+        this.userName=username;
     }
 
     public Bet() {

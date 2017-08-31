@@ -24,7 +24,6 @@
                                             <ul>
                                                 <li><h:link outcome="dang-nhap.xhtml"><i class="fa fa-sign-in"></i> Đăng nhập</h:link></li>
                                                 <li><h:link outcome="dang-ky.xhtml"><i class="fa fa-key"></i> Đăng ký</h:link></li>
-                                                <li><h:link outcome="index.xhtml"><i class="fa fa-key"></i> Quên mật khẩu</h:link></li>
                                             </ul>
                                         </div>                    
                                 </div>
@@ -43,64 +42,44 @@
                                    
                                     <div class="register-content clearfix" ng-controller="accountController" ng-init="initRegisterController()">
                                         <h1 class="title"><span>Đăng ký tài khoản</span></h1>
-<!--                                        <div ng-if="IsError" class="alert alert-danger fade in">
-                                            <button data-dismiss="alert" class="close"></button>
-                                            <i class="fa-fw fa fa-times"></i>
-                                            <strong>Error!</strong>
-                                            <span ng-bind-html="Message"></span>
-                                        </div>
-                                        <div ng-if="IsSuccess" class="alert alert-success fade in">
-                                            <button data-dismiss="alert" class="close"></button>
-                                            <i class="fa-fw fa fa-check"></i>
-                                            <strong>Success!</strong> Đăng ký thành công.
-                                        </div>
-                                        <div ng-if="InValid" class="alert alert-danger fade in">
-                                            <button data-dismiss="alert" class="close"></button>
-                                            <i class="fa-fw fa fa-times"></i>
-                                            <strong>Error!</strong>
-                                            <span ng-bind-html="Message"></span>
-                                        </div>-->
-                                        <p:messages id="messages" class="alert" showDetail="true" autoUpdate="true" closable="true" />
+                                        <p:messages id="messages" class="alert" showDetail="true" showSummary="false" autoUpdate="true" closable="true" />
                                         <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
                                             <h:form class="form-horizontal">
                                                 <h2><span>Thông tin tài khoản</span></h2>
                                                 <div class="form-group">
                                                     <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder="Enter your username"  value="#{login_Register_UserBean.userName}">
+                                                        <h:inputText class="form-control" a:placeholder="Tên đăng nhập" required="true" value="#{login_Register_UserBean.userName}">
                                                             <f:validator validatorId="userNameValidator"/>
                                                         </h:inputText>
-<!--                                                        <input type="text" class="form-control" ng-model="Code" required="true" />-->
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="Email" class="col-sm-3 control-label">Email<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText a:type="email" class="form-control" a:placeholder="Enter your email"  value="#{login_Register_UserBean.email}"></h:inputText>
-<!--                                                        <input type="email" class="form-control" ng-model="Email" required="true" />-->
+                                                        <h:inputText a:type="email" class="form-control" a:placeholder="email"  value="#{login_Register_UserBean.email}"></h:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="Password" class="col-sm-3 control-label">Mật khẩu<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText a:type="password" class="form-control" a:placeholder="Enter your password"  value="#{login_Register_UserBean.passWord}">
+                                                        <p:password a:type="password" class="form-control" match="pw" validatorMessage="Mật khẩu không trùng khớp"
+                                                                    a:placeholder="Mật khẩu"  value="#{login_Register_UserBean.passWord}">
                                                             <f:validator validatorId="PassWordValidator"/>
-                                                        </h:inputText>
-<!--                                                        <input type="password" class="form-control" ng-model="Password" required="true" />-->
+                                                        </p:password>
                                                     </div>
                                                 </div>
-<!--                                                <div class="form-group">
-                                                    <label for="RePassword" class="col-sm-3 control-label">Nhập lại mật khẩu<span class="warning">(*)</span></label>
+                                                <div class="form-group">
+                                                    <label for="Password" class="col-sm-3 control-label">Mật khẩu<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <input type="password" class="form-control" ng-model="RePassword" />
+                                                        <p:password a:type="password" id="pw" class="form-control" a:placeholder="Nhập Lại Mật khẩu"  value="#{login_Register_UserBean.rePass}" />
                                                     </div>
-                                                </div>-->
+                                                </div>
                                                 <h2>Thông tin cá nhân</h2>
                                                 <div class="form-group">
                                                     <label for="Name" class="col-sm-3 control-label">Họ và tên<span class="warning">(*)</span></label>
                                                     <div class="col-sm-9">
-                                                        <h:inputText class="form-control" a:placeholder="Enter your fullname"  value="#{login_Register_UserBean.fullName}"></h:inputText>
-<!--                                                        <input type="text" class="form-control" ng-model="Name" required="true" />-->
+                                                        <h:inputText class="form-control" required="true" a:placeholder="Enter your fullname"  value="#{login_Register_UserBean.fullName}"></h:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

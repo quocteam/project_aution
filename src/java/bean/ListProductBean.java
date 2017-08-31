@@ -42,18 +42,22 @@ public class ListProductBean {
         HttpServletRequest request  = (HttpServletRequest) context.getExternalContext().getRequest();
         String a  = request.getParameter("type");
         String b = request.getParameter("name");
+        String sort = request.getParameter("sort");
+        if(sort==null){
+            sort = "default";
+        }
         if(b!=null){
-            arr = sp.SearchAllResult(b);
+            arr = sp.SearchAllResult(b,sort);
         }else{ 
             
             if("Đang diễn ra".equals(a))
-            arr = sp.getSessionHappening();
+            arr = sp.getSessionHappening(sort);
         else if("Sắp diễn ra".equals(a))
-            arr = sp.getUpcomingProduct();
+            arr = sp.getUpcomingProduct(sort);
         else if("Đã kết thúc".equals(a))
-            arr = sp.getSessionDone();
+            arr = sp.getSessionDone(sort);
         else
-            arr=sp.getSessionByType(a);
+            arr=sp.getSessionByType(a,sort);
         }
     }
         

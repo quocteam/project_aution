@@ -9,6 +9,8 @@ import app.SessionProcess;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import model.Session;
 
 /**
@@ -25,6 +27,15 @@ public class Index_SessionBean {
     private ArrayList<Session> sessionUpComing = new SessionProcess().getUpcomingProductIndex();
     private ArrayList<Session> sessionHappening = new SessionProcess().getSessionHappeningIndex();
     private ArrayList<Session> sessionDone = new SessionProcess().getSessionDoneIndex();
+    private ArrayList<Session> sessionHighlight = new SessionProcess().gethighlightproductindex();
+
+    public ArrayList<Session> getSessionHighlight() {
+        return sessionHighlight;
+    }
+
+    public void setSessionHighlight(ArrayList<Session> sessionHighlight) {
+        this.sessionHighlight = sessionHighlight;
+    }
 
     public ArrayList<Session> getSessionDone() {
         return sessionDone;
@@ -57,7 +68,7 @@ public class Index_SessionBean {
     
     
     public Index_SessionBean() {
-        
+       
     }
     
 }

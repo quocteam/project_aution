@@ -215,17 +215,15 @@
                                     <table id="table"
                                     data-toggle="table"
                                     data-pagination="true"
-                                    data-url="http://localhost:44690/project_aution/faces/AdminController?user=all">
+                                    data-url="../AdminAccountController">
                                  <thead>
                                  <tr>
-                                     <th data-field="userID">ID</th>
                                      <th data-field="userName" data-sortable="true" data-align="center">Tên Đăng Nhập</th>
-                                     <th data-field="email" data-sortable="true" data-align="center">Email</th>
+                                     <th data-field="passWord" data-sortable="true" data-align="center">Giới tính</th>
                                      <th data-field="fullName" data-sortable="true" data-align="center">Tên Đầy Đủ</th>
-                                     <th data-field="sex" data-sortable="true" data-align="center">Giới tính</th>
-                                     <th data-field="dob" data-sortable="true" data-align="center">Ngày Sinh</th>
+                                     <th data-field="email" data-sortable="true" data-align="center">Email</th>
                                      <th data-field="phoneNumber" data-sortable="true" data-align="center">Số Điện Thoại</th>
-                                     <th data-field="address" data-sortable="true" data-align="center">Địa Chỉ</th>
+                                     <th data-field="type" data-sortable="true" data-align="center">Địa Chỉ</th>
                                      <th data-field="status" data-sortable="true" data-align="center">Trạng Thái</th>
                                      <th data-formatter="operateFormatter" data-events="operateEvents" data-align="center" >Tùy Chọn</th>
                                  </tr>
@@ -235,69 +233,49 @@
                                         window.operateEvents = {
                                             'click .chiTiet': function (e, value, row){
                                                 document.getElementById('userName').innerHTML=row.userName;
-                                                document.getElementById('userDOB').innerHTML=row.dob;
+                                                document.getElementById('userDOB').innerHTML=row.type;
                                                 document.getElementById('fullName').value=row.fullName;
                                                 document.getElementById('email').value=row.email;
                                                 document.getElementById('passWord').value=row.passWord;
                                                 document.getElementById('phoneNo').value=row.phoneNumber;
-                                                document.getElementById('address').value=row.address;
+                                                document.getElementById('type').value=row.type;
+                                                document.getElementById('status').value=row.status;
                                                 $('#myModal').modal('show')
                                             },
                                             'click .active': function (e, value, row) {
-                                                var r= confirm('Bạn Có Chắc Muốn duyệt tin mà không xem chi tiết ?');
-                                                if (r === true) {
-                                                    
-                                                    $.ajax({
-                                                        url : "http://localhost:44690/project_aution/faces/AdminController",
+                                                $.ajax({
+                                                        url : "../AdminUpdateAdminController",
                                                         type : "post",
                                                         dateType:"text",
                                                         data : {
-                                                            activeId : row.sessionId
+                                                            userName : row.userName,
+                                                            status : 'active'
                                                         },
-                                                        success : function (){
-                                                            window.location.href = "http://localhost:44690/project_aution/faces/admin_pages/table.xhtml";
+                                                        success : function (result){
+                                                            alert(result)
+                                                            window.location.href = "http://localhost:8080/project_auction/faces/admin_pages/admins.xhtml";
                                                         }
                                                     });
-                                                    
-                                                }
                                             },
-                                            'click .xoa': function (e, value, row) {
-                                                var r= confirm('Bạn Có Chắc Muốn xoá ?');
-                                                if (r === true) {
-                                                    
-                                                    $.ajax({
-                                                        url : "http://localhost:44690/project_aution/faces/AdminController",
+                                            'click .Inactive': function (e, value, row) {
+                                               $.ajax({
+                                                        url : "../AdminUpdateAdminController",
                                                         type : "post",
                                                         dateType:"text",
                                                         data : {
-                                                            deleteId : row.sessionId
+                                                            userName : row.userName,
+                                                            status : 'Inactive'
                                                         },
-                                                        success : function (){
-                                                            window.location.href = "http://localhost:44690/project_aution/faces/admin_pages/table.xhtml";
+                                                        success : function (result){
+                                                            alert(result)
+                                                            window.location.href = "http://localhost:8080/project_auction/faces/admin_pages/admins.xhtml";
                                                         }
                                                     });
-                                                    
-                                                }
 
                                             }
                                         };
                                         function operateFormatter(value, row, index) {
                                             if(row.status==='Inactive'){
-                                                return [
-                                                   '<div class="center-block">',
-                                                '<a class="chiTiet" href="javascript:void(0)" title="Chi Tiết">',
-                                                '<i class="mdi mdi-search-web"></i>',
-                                                '</a>  ',
-                                                '<a class="active" href="javascript:void(0)" title="Duyệt">',
-                                                '<i class="mdi mdi-checkbox-marked-circle"></i>',
-                                                '</a>  ',
-                                                '<a class="xoa" href="javascript:void(0)" title="Xóa">',
-                                                '<i class="mdi mdi-close-circle"></i>',
-                                                '</a>  ',
-                                                '</div>'
-                                                ].join('');
-                                            }
-                                            if(row.status==='deleted'){
                                                 return [
                                                    '<div class="center-block">',
                                                 '<a class="chiTiet" href="javascript:void(0)" title="Chi Tiết">',
@@ -314,7 +292,7 @@
                                                 '<a class="chiTiet" href="javascript:void(0)" title="Chi Tiết">',
                                                 '<i class="mdi mdi-search-web"></i>',
                                                 '</a>  ',
-                                                '<a class="xoa" href="javascript:void(0)" title="Xóa">',
+                                                '<a class="Inactive" href="javascript:void(0)" title="InActive">',
                                                 '<i class="mdi mdi-close-circle"></i>',
                                                 '</a>',
                                                 '</div>'
@@ -387,9 +365,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Address</label>
+                                        <label class="col-md-12">Type</label>
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Địa Chỉ" id="address" class="form-control form-control-line"/>
+                                            <select id="type" class="form-control form-control-line">
+                                                <option>administrator</option>
+                                                <option>staff</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Status</label>
+                                        <div class="col-md-12">
+                                            <select id="status" class="form-control form-control-line">
+                                                <option>active</option>
+                                                <option>Inactive</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </form>
@@ -401,13 +391,35 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                          <button type="button" class="btn btn-primary">Lưu</button>
+                          <button type="button" class="btn btn-primary" onclick="updateAdmin()">Lưu</button>
                         </div>
                       </div>
                     </div>
                   </div>
             <!--end modal-->
-          
+            <script>
+                function updateAdmin(){
+                   $.ajax({
+                                    url : "../AdminUpdateAdminController",
+                                    type : "post",
+                                    dateType:"text",
+                                    data : {
+                                        userName:   document.getElementById('userName').innerHTML,
+                                        fullName : document.getElementById('fullName').value,
+                                        email : document.getElementById('email').value,
+                                        pass : document.getElementById('passWord').value,
+                                        phone : document.getElementById('phoneNo').value,
+                                        type : document.getElementById('type').value,
+                                        status : document.getElementById('status').value
+                                    },
+                                    success : function (result){
+                                        $('#myModal').modal('hide')
+                                        alert(result);
+                                        window.location.href = "http://localhost:8080/project_auction/faces/admin_pages/admins.xhtml";
+                                    }
+                                });
+                }
+            </script>
             
             
             

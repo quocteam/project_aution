@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    
+    <h:head>
+        <title>Facelet Title</title>
+                <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+                <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+                <script>
+                    var $j = jQuery.noConflict();
+                </script>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout/mainlayout.xhtml">
+            <ui:define name="main">
+            <c:choose>
+                <c:when test="${session.getAttribute('user')==null}">
+                  <script type="text/javascript">
+                    window.location = "dang-nhap.xhtml";
+                  </script>
+                </c:when>
+            </c:choose>
+                <div class="main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="breadcrumb clearfix">
+                                        <ul>
+                                                        <li itemscope="" class="home">
+                                                            <a title="Đến trang chủ" href="index.xhtml" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                                                        </li>
+                                                        <li class="icon-li"><strong>Bookmark</strong> </li>
+                                        </ul>
+                                    </div>
+                            <h1 class="title"><span>Các phiên đấu giá đã lưu đã lưu</span></h1>
+                           <table id="table"
+                                           data-toggle="table"
+                                           data-pagination="true"
+                                           data-url="BookmarkController"
+                                           data-show-refresh="true"
+                                           data-page-list="[10, 20,all]"
+                                           data-select-item-name="toolbar1" 
+                                           data-click-to-select="true" 
+                                           data-page-size="10"
+                                           data-search="true"  
+                                           data-filter-control="true" 
+                                           data-sort-name="id" 
+                                           data-sort-order="desc"
+                                           class="table table-hover"
+                                    >
+                                 <thead>
+                                 <tr>
+                                     <th data-field="image" data-formatter="imageFormatter" data-align="center">#</th>
+                                     <th data-field="sessionId" data-formatter="idFormatter" data-sortable="true" data-align="center">Mã Phiên</th>
+                                     <th data-field="productName" data-formatter="nameFormatter"  data-sortable="true" data-align="center">Tên Sản Phẩm</th>
+                                     <th data-field="productType" data-formatter="typeFormatter" data-filter-control="select" data-sortable="true" data-align="center">Loại Sản Phẩm</th>
+                                     <th data-field="userCreateID" data-formatter="userFormatter" data-sortable="true" data-align="center">Mã Người Tạo</th>
+                                 </tr>
+                                 </thead>
+                             </table>
+                    
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".menu-quick-select ul").hide();
+                        $(".menu-quick-select").hover(function () { $(".menu-quick-select ul").show(); }, function () { $(".menu-quick-select ul").hide(); });
+                        setTimeout(function () {
+                        PrimeFaces.ab({s: 'id_from_editor', p: 'id_from_editor', u: 'id_from_editor'});
+                        }, 1000);
+                    });
+                    
+                   function imageFormatter(value, row, index) {
+                                        return [
+                                                '<a class="searchHover" href="product_detail.xhtml?id='+row.sessionId+'" title="Chi Tiết">',
+                                                '<img src="'+row.image+'" style="height: 100px;width: 100px"/>',
+                                                '</a>'
+                                                ].join('');
+                                       
+                                    }
+                    function idFormatter(value, row, index) {
+                                        return [
+                                                '<div class="contentBookmark">',
+                                                row.sessionId,
+                                                '</div>'
+                                                ].join('');
+                                    }  
+                    function nameFormatter(value, row, index) {
+                                        return [
+                                                '<div class="contentBookmark">',
+                                                row.productName,
+                                                '</div>'
+                                                ].join('');
+                                    }
+                    function typeFormatter(value, row, index) {
+                                        return [
+                                                '<div class="contentBookmark">',
+                                                row.productType,
+                                                '</div>'
+                                                ].join('');
+                                    }
+                    function userFormatter(value, row, index) {
+                                        return [
+                                                '<a href="user_info.xhtml?uid='+row.userCreateID+'" title="Chi Tiết">',
+                                                '<div class="contentBookmark">',
+                                                row.userCreateID,
+                                                '</div>',
+                                                '</a>'
+                                                ].join('');
+                                    }                
+                </script> 
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
